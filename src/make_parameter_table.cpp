@@ -61,7 +61,7 @@ void add_bounds(const std::vector<std::string>& equations,
         equation_elements eq_elem = split_string_once(eq, c_for);
 
         bool was_found = false;
-        for(int i = 0; i < pt.modifier.size(); i++){
+        for(unsigned int i = 0; i < pt.modifier.size(); i++){
 
           if(pt.modifier.at(i).compare(eq_elem.lhs) == 0){
             was_found = true;
@@ -121,8 +121,10 @@ parameter_table make_parameter_table(const std::string& syntax,
 //'
 //' creates a parameter table from a lavaan like syntax
 //' @param syntax lavaan like syntax
-//' @param add_intercepts should intercepts for manifest variables be automatically added?
+//' @param add_intercept should intercepts for manifest variables be automatically added?
 //' @param add_variance should variances for all variables be automatically added?
+//' @param scale_latent_variance should variances of latent variables be set to 1?
+//' @param scale_loading should the first loading of each latent variable be set to 1?
 //' @return parameter table
 // [[Rcpp::export]]
 Rcpp::List parameter_table_rcpp(const std::string& syntax,

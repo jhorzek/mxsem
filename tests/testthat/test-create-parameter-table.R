@@ -1,5 +1,5 @@
 test_that("parameter_table_to_Rcpp works", {
-  library(xsem)
+  library(mxsem)
 
   model <- '
   # latent variable definitions
@@ -32,7 +32,7 @@ a <  1
 x1 ~ .5*1
 '
 
-  parameter_table <- xsem:::parameter_table_rcpp(model,
+  parameter_table <- mxsem:::parameter_table_rcpp(model,
                                                  add_intercept = TRUE,
                                                  add_variance = TRUE,
                                                  scale_latent_variance = TRUE,

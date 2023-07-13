@@ -7,13 +7,13 @@ void add_variances(parameter_table& pt){
   add_unique(variables, pt.rhs);
 
   bool has_variance = false;
-  for(int i = 0; i < variables.size(); i++){
+  for(unsigned int i = 0; i < variables.size(); i++){
     // skip intercepts:
     if(variables.at(i).compare("1") == 0)
       continue;
     has_variance = false;
 
-    for(int j = 0; j < pt.lhs.size(); j++){
+    for(unsigned int j = 0; j < pt.lhs.size(); j++){
       // check if variable was found
       if(pt.lhs.at(j).compare(variables.at(i)) == 0){
 
