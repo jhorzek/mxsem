@@ -8,7 +8,7 @@
 #' @param str string
 #' @return bool: true if char is in string
 char_in_string <- function(c, str) {
-    .Call(`_xsem_char_in_string`, c, str)
+    .Call(`_mxsem_char_in_string`, c, str)
 }
 
 #' clean_syntax
@@ -16,9 +16,8 @@ char_in_string <- function(c, str) {
 #' takes in a lavaan style syntax and removes comments, white space, etc.
 #' @param syntax lavaan style syntax
 #' @return vector of strings with cleaned syntax
-#' @export
 clean_syntax <- function(syntax) {
-    .Call(`_xsem_clean_syntax`, syntax)
+    .Call(`_mxsem_clean_syntax`, syntax)
 }
 
 #' parameter_table_rcpp
@@ -29,7 +28,7 @@ clean_syntax <- function(syntax) {
 #' @param add_variance should variances for all variables be automatically added?
 #' @return parameter table
 parameter_table_rcpp <- function(syntax, add_intercept, add_variance, scale_latent_variance, scale_loading) {
-    .Call(`_xsem_parameter_table_rcpp`, syntax, add_intercept, add_variance, scale_latent_variance, scale_loading)
+    .Call(`_mxsem_parameter_table_rcpp`, syntax, add_intercept, add_variance, scale_latent_variance, scale_loading)
 }
 
 #' split_string_all
@@ -40,6 +39,6 @@ parameter_table_rcpp <- function(syntax, add_intercept, add_variance, scale_late
 #' @return vector of strings
 #' @export
 split_string_all <- function(str, at) {
-    .Call(`_xsem_split_string_all`, str, at)
+    .Call(`_mxsem_split_string_all`, str, at)
 }
 

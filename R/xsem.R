@@ -1,8 +1,8 @@
-#' @useDynLib xsem, .registration = TRUE
+#' @useDynLib mxsem, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
-#' xsem
+#' mxsem
 #'
 #' create an extended SEM with OpenMx using a lavaan like syntax.
 #'
@@ -36,7 +36,7 @@ NULL
 #'     y6 ~~ y8
 #' '
 #'
-#' fit <- xsem(model = model,
+#' fit <- mxsem(model = model,
 #'             data  = OpenMx::Bollen) |>
 #'   mxTryHard()
 #' omxGetParameters(fit)
@@ -70,11 +70,11 @@ NULL
 #' b2 := b1 + delta_b
 #' '
 #'
-#' fit <- xsem(model = model_transformations,
+#' fit <- mxsem(model = model_transformations,
 #'             data  = OpenMx::Bollen) |>
 #'   mxTryHard()
 #' omxGetParameters(fit)
-xsem <- function(model,
+mxsem <- function(model,
                  data,
                  scale_loadings = TRUE,
                  scale_latent_variances = FALSE,
@@ -198,14 +198,14 @@ parse_modifier <- function(modifier, free){
     return(parameter_setting)
   }
 
-  if(grepl(pattern = "^data\\.+[a-zA-Z0-9\\.-]+$", x = modifier)){
+  if(grepl(pattern = "^data\\.+[a-zA-Z0-9\\.-_]+$", x = modifier)){
     # the modifier is a definition variable
     parameter_setting$label <- modifier
     parameter_setting$free  <- FALSE
     return(parameter_setting)
   }
 
-  if(grepl(pattern = "^[a-zA-Z]+[0-9\\.-]*$", x = modifier)){
+  if(grepl(pattern = "^[a-zA-Z]+[0-9\\.-_]*$", x = modifier)){
     # the modifier is a label
     parameter_setting$label <- modifier
     return(parameter_setting)

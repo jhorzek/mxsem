@@ -1,0 +1,172 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+library(mxsem)
+```
+
+# mxsem
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+**mxsem** provides a **lavaan**-like syntax to implement structural equation models (SEM)
+with **OpenMx**. The objective is to simplify fitting basic SEM with **OpenMx** and
+to allow users to easily switch between **lavaan** and **OpenMx**. The latter can
+be useful if one of the two packages reports non-convergence or other issues.
+
+Additionally, **mxsem** allows for parameter transformations and definition
+variables.
+
+## Installation
+
+The newest version of the package can be installed from GitHub using the following commands in R:
+
+```{r,  eval = FALSE}
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("jhorzek/mxsem", 
+                         ref = "main")
+```
+
+## Example
+
+The following example is directly adapted from **lavaan**:
+
+```{r, eval = FALSE}
+library(mxsem)
+model <- '
+  # latent variable definitions
+     ind60 =~ x1 + x2 + x3
+     dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
+     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
+
+  # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+
+  # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+'
+
+mxsem(model = model,
+      data  = OpenMx::Bollen) |>
+  mxTryHard() |>
+  summary()
+```
+
+## Adding bounds
+
+Lower and upper bounds can be added to any of the parameters in the model. 
+The following demonstrates bounds on a loading:
+```{r example, eval = FALSE}
+library(mxsem)
+model <- '
+  # latent variable definitions
+     ind60 =~ x1 + x2 + x3
+     dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
+     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
+     
+     # lower bound on a1
+     a1 > 0
+     # upper bound on a2
+     a2 < 10.123
+'
+
+mxsem(model = model,
+      data  = OpenMx::Bollen, 
+      # use latent variances to scale the model
+      scale_loadings = FALSE, 
+      scale_latent_variances = TRUE) |>
+  mxTryHard() |>
+  summary()
+```
+
+**mxsem** adds lower bounds to any of the variances by default. To remove these
+lower bounds, set `lbound_variances = FALSE` when calling `mxsem()`.
+
+## Definition Variables
+
+Definition variables are, for instance, used in latent growth curve models when
+the time intervals between observations are different for the subjects
+in the data set. Here is an example, where the variables `t_1`-`t_5` indicate
+the person-specific times of observation:
+
+```{r}
+library(mxsem)
+set.seed(3489)
+dataset <- simulate_latent_growth_curve(N = 100)
+head(dataset)
+```
+
+In **OpenMx**, parameters can be set to the values found in the columns of
+the data set with the `data.` prefix. This is used in the following to fix
+the loadings of a latent slope variable on the observations to the times 
+recorded in `t_1`-`t_5`:
+```{r, eval = FALSE}
+library(mxsem)
+model <- "
+  I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+  S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+
+  I ~ int*1
+  S ~ slp*1
+  "
+
+mxsem(model = model,
+      data = dataset,
+      add_intercepts = FALSE) |>
+  mxTryHard() |>
+  summary()
+```
+
+
+## Transformations
+
+Sometimes, one may want to express one parameter as a function of other parameters.
+For instance, in moderated non-linear factor analysis, model parameters are often 
+expressed in terms of a covariate k. For instance, the effect $a$ of $\xi$ on $\eta$ 
+could be expressed as $a = a_0 + a_1\times k$.
+
+```{r}
+library(mxsem)
+set.seed(9820)
+dataset <- simulate_moderated_nonlinear_factor_analysis(N = 100)
+head(dataset)
+```
+
+```{r, eval = FALSE}
+model <- "
+xi =~ x1 + x2 + x3
+eta =~ y1 + y2 + y3
+eta ~ a*xi
+
+# we need two new parameters: a0 and a1. These are created as follows:
++a0
++a1
+# Now, we redefine a to be a0 + k*a1, where k is found in the data
+a := a0 + data.k*a1
+"
+
+mxsem(model = model,
+      data = dataset) |>
+  mxTryHard() |>
+  summary()
+```
+
+## Adapting the Model
+
+`mxsem` returns an `mxModel` object that can be adapted further by users familiar
+with **OpenMx**.

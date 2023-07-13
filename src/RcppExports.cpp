@@ -12,7 +12,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // char_in_string
 bool char_in_string(const char c, const std::string& str);
-RcppExport SEXP _xsem_char_in_string(SEXP cSEXP, SEXP strSEXP) {
+RcppExport SEXP _mxsem_char_in_string(SEXP cSEXP, SEXP strSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -24,7 +24,7 @@ END_RCPP
 }
 // clean_syntax
 std::vector<std::string> clean_syntax(const std::string& syntax);
-RcppExport SEXP _xsem_clean_syntax(SEXP syntaxSEXP) {
+RcppExport SEXP _mxsem_clean_syntax(SEXP syntaxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -35,7 +35,7 @@ END_RCPP
 }
 // parameter_table_rcpp
 Rcpp::List parameter_table_rcpp(const std::string& syntax, bool add_intercept, bool add_variance, bool scale_latent_variance, bool scale_loading);
-RcppExport SEXP _xsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
+RcppExport SEXP _mxsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -50,7 +50,7 @@ END_RCPP
 }
 // split_string_all
 std::vector<std::string> split_string_all(const std::string& str, const std::string& at);
-RcppExport SEXP _xsem_split_string_all(SEXP strSEXP, SEXP atSEXP) {
+RcppExport SEXP _mxsem_split_string_all(SEXP strSEXP, SEXP atSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -62,14 +62,14 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_xsem_char_in_string", (DL_FUNC) &_xsem_char_in_string, 2},
-    {"_xsem_clean_syntax", (DL_FUNC) &_xsem_clean_syntax, 1},
-    {"_xsem_parameter_table_rcpp", (DL_FUNC) &_xsem_parameter_table_rcpp, 5},
-    {"_xsem_split_string_all", (DL_FUNC) &_xsem_split_string_all, 2},
+    {"_mxsem_char_in_string", (DL_FUNC) &_mxsem_char_in_string, 2},
+    {"_mxsem_clean_syntax", (DL_FUNC) &_mxsem_clean_syntax, 1},
+    {"_mxsem_parameter_table_rcpp", (DL_FUNC) &_mxsem_parameter_table_rcpp, 5},
+    {"_mxsem_split_string_all", (DL_FUNC) &_mxsem_split_string_all, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_xsem(DllInfo *dll) {
+RcppExport void R_init_mxsem(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

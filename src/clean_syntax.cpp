@@ -7,7 +7,6 @@
 //' takes in a lavaan style syntax and removes comments, white space, etc.
 //' @param syntax lavaan style syntax
 //' @return vector of strings with cleaned syntax
-//' @export
 // [[Rcpp::export]]
 std::vector<std::string> clean_syntax(const std::string& syntax) {
   std::vector<std::string> cleaned_synatx;

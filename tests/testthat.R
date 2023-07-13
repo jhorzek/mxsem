@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(xsem)
+library(mxsem)
 
-test_check("xsem")
+test_check("mxsem")

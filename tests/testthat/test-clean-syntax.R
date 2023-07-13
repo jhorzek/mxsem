@@ -1,5 +1,5 @@
 test_that("cleaning syntax works", {
-  library(xsem)
+  library(mxsem)
   # the following syntax is adapted from lavaan
   model <- '
   # latent variable definitions
@@ -23,7 +23,7 @@ test_that("cleaning syntax works", {
 
     b := exp(c)'
 
-  cleaned <- xsem::clean_syntax(model)
+  cleaned <- mxsem:::clean_syntax(model)
   expected <- c('ind60=~x1+x2+x3',
                 'dem60=~y1+a*y2+b*y3+c*y4',
                 'dem65=~y5+a*y6+b*y7+c*y8',
