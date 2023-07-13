@@ -1,5 +1,6 @@
 #include <Rcpp.h>
-#include "helpers.h"
+#include "string_operations.h"
+#include "clean_syntax.h"
 
 //' clean_syntax
 //'

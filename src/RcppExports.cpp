@@ -10,17 +10,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// clean_syntax
-std::vector<std::string> clean_syntax(const std::string& syntax);
-RcppExport SEXP _xsem_clean_syntax(SEXP syntaxSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::string& >::type syntax(syntaxSEXP);
-    rcpp_result_gen = Rcpp::wrap(clean_syntax(syntax));
-    return rcpp_result_gen;
-END_RCPP
-}
 // char_in_string
 bool char_in_string(const char c, const std::string& str);
 RcppExport SEXP _xsem_char_in_string(SEXP cSEXP, SEXP strSEXP) {
@@ -33,14 +22,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// parameter_table_to_Rcpp
-Rcpp::DataFrame parameter_table_to_Rcpp(const std::vector<std::string>& equations);
-RcppExport SEXP _xsem_parameter_table_to_Rcpp(SEXP equationsSEXP) {
+// clean_syntax
+std::vector<std::string> clean_syntax(const std::string& syntax);
+RcppExport SEXP _xsem_clean_syntax(SEXP syntaxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type equations(equationsSEXP);
-    rcpp_result_gen = Rcpp::wrap(parameter_table_to_Rcpp(equations));
+    Rcpp::traits::input_parameter< const std::string& >::type syntax(syntaxSEXP);
+    rcpp_result_gen = Rcpp::wrap(clean_syntax(syntax));
+    return rcpp_result_gen;
+END_RCPP
+}
+// parameter_table_rcpp
+Rcpp::List parameter_table_rcpp(const std::string& syntax, bool add_intercept, bool add_variance, bool scale_latent_variance, bool scale_loading);
+RcppExport SEXP _xsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type syntax(syntaxSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_intercept(add_interceptSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_variance(add_varianceSEXP);
+    Rcpp::traits::input_parameter< bool >::type scale_latent_variance(scale_latent_varianceSEXP);
+    Rcpp::traits::input_parameter< bool >::type scale_loading(scale_loadingSEXP);
+    rcpp_result_gen = Rcpp::wrap(parameter_table_rcpp(syntax, add_intercept, add_variance, scale_latent_variance, scale_loading));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -58,9 +62,9 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_xsem_clean_syntax", (DL_FUNC) &_xsem_clean_syntax, 1},
     {"_xsem_char_in_string", (DL_FUNC) &_xsem_char_in_string, 2},
-    {"_xsem_parameter_table_to_Rcpp", (DL_FUNC) &_xsem_parameter_table_to_Rcpp, 1},
+    {"_xsem_clean_syntax", (DL_FUNC) &_xsem_clean_syntax, 1},
+    {"_xsem_parameter_table_rcpp", (DL_FUNC) &_xsem_parameter_table_rcpp, 5},
     {"_xsem_split_string_all", (DL_FUNC) &_xsem_split_string_all, 2},
     {NULL, NULL, 0}
 };

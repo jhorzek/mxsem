@@ -14,6 +14,8 @@ test_that("parameter_table_to_Rcpp works", {
       dem60 ~ data.y*ind60
     dem65 ~ ind60 + dem60
 
+    dem60 ~~ .5*dem60
+
   # residual correlations
     y1 ~~ y5
     y2 ~~ y4 + y6;  y3 ~
@@ -21,12 +23,20 @@ test_that("parameter_table_to_Rcpp works", {
     y4 ~~ y8
     y6 ~~ y8
 
-    b := exp(c)
+    + d; + e; +f
+    b := exp(d)
+    c := a*b-d+e
 a >-2
 a <  1
+
+x1 ~ .5*1
 '
-  cleaned <- xsem::clean_syntax(model)
-  o <- xsem::parameter_table_to_Rcpp(cleaned)
-  o
+
+  parameter_table <- xsem:::parameter_table_rcpp(model,
+                                                 add_intercept = TRUE,
+                                                 add_variance = TRUE,
+                                                 scale_latent_variance = TRUE,
+                                                 scale_loading = TRUE)
+  parameter_table
 
 })

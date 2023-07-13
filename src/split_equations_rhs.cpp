@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "split_string.h"
+#include "string_operations.h"
 
 std::vector<str_rhs_elem> split_eqation_rhs(std::string rhs){
 

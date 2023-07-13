@@ -1,6 +1,5 @@
 #include <Rcpp.h>
-#include "helpers.h"
-using namespace Rcpp;
+#include "string_operations.h"
 
 //' char_in_string
 //'
