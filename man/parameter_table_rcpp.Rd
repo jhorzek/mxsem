@@ -15,9 +15,13 @@ parameter_table_rcpp(
 \arguments{
 \item{syntax}{lavaan like syntax}
 
+\item{add_intercept}{should intercepts for manifest variables be automatically added?}
+
 \item{add_variance}{should variances for all variables be automatically added?}
 
-\item{add_intercepts}{should intercepts for manifest variables be automatically added?}
+\item{scale_latent_variance}{should variances of latent variables be set to 1?}
+
+\item{scale_loading}{should the first loading of each latent variable be set to 1?}
 }
 \value{
 parameter table

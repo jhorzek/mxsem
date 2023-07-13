@@ -12,7 +12,9 @@ Description: Provides a lavaan-like syntax for OpenMx models. Supports
   definition variables, bounds, and parameter transformations.
 License: GPL (>= 2)
 Depends: OpenMx
-Imports: Rcpp (>= 1.0.10)
+Imports: 
+  Rcpp (>= 1.0.10), 
+  stats
 LinkingTo: Rcpp
 RoxygenNote: 7.2.3
 Encoding: UTF-8

@@ -5,7 +5,7 @@ void scale_latent_variances(parameter_table& pt){
 
   for(std::string& latent: latents){
 
-    for(int i = 0; i < pt.lhs.size(); i++){
+    for(unsigned int i = 0; i < pt.lhs.size(); i++){
       if((pt.lhs.at(i).compare(latent) == 0) &&
          (pt.op.at(i).compare("~~") == 0) &&
          (pt.rhs.at(i).compare(latent) == 0) &&
@@ -23,7 +23,7 @@ void scale_loadings(parameter_table& pt){
 
   for(std::string& latent: latents){
 
-    for(int i = 0; i < pt.lhs.size(); i++){
+    for(unsigned int i = 0; i < pt.lhs.size(); i++){
       if((pt.lhs.at(i).compare(latent) == 0) &&
          (pt.op.at(i).compare("=~") == 0) &&
          (pt.modifier.at(i).compare("") == 0)

@@ -39,11 +39,11 @@ void make_algebras(const std::vector<std::string>& equations,
         alg.rhs.push_back(eq_elem.rhs);
 
         // If an element is on the left hand side of an equation, it is no longer free:
-        for(int i = 0; i < pt.modifier.size(); i++){
+        for(unsigned int i = 0; i < pt.modifier.size(); i++){
           if(pt.modifier.at(i).compare(eq_elem.lhs) == 0)
             pt.free.at(i) = "FALSE";
         }
-        for(int i = 0; i < alg.new_parameters_free.size(); i++){
+        for(unsigned int i = 0; i < alg.new_parameters_free.size(); i++){
           if(alg.new_parameters.at(i).compare(eq_elem.lhs) == 0)
             alg.new_parameters_free.at(i) = "FALSE";
         }

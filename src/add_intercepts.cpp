@@ -7,11 +7,11 @@ void add_intercepts(parameter_table& pt){
   std::vector<std::string> manifests = pt.vars.manifests;
 
   bool has_intercept = false;
-  for(int i = 0; i < manifests.size(); i++){
+  for(unsigned int i = 0; i < manifests.size(); i++){
     // skip intercepts:
     has_intercept = false;
 
-    for(int j = 0; j < pt.lhs.size(); j++){
+    for(unsigned int j = 0; j < pt.lhs.size(); j++){
       // check if variable was found
       if(pt.lhs.at(j).compare(manifests.at(i)) == 0){
 

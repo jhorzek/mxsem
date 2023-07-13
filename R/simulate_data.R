@@ -7,6 +7,8 @@
 #' @return data set with columns y1-y5 (observations) and t_1-t_5 (time of
 #' observation)
 #' @export
+#' @importFrom stats rnorm
+#' @importFrom stats runif
 #' @examples
 #' set.seed(123)
 #' dataset <- simulate_latent_growth_curve(N = 100)
@@ -51,6 +53,7 @@ simulate_latent_growth_curve <- function(N = 100){
 #' of an affect measure. It is assumed that the autoregressive effect is different
 #' depending on covariate k
 #' @export
+#' @importFrom stats rnorm
 #' @examples
 #' library(mxsem)
 #' set.seed(123)

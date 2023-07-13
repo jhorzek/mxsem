@@ -6,7 +6,7 @@ variables find_variables(const parameter_table& pt){
   std::vector<std::string> manifests;
   std::vector<std::string> latents;
 
-  for(int i = 0; i < pt.op.size(); i++){
+  for(unsigned int i = 0; i < pt.op.size(); i++){
     if(pt.op.at(i).compare("=~") == 0){
       manifests.push_back(pt.rhs.at(i));
       latents.push_back(pt.lhs.at(i));

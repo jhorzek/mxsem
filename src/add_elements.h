@@ -8,9 +8,9 @@ void add_intercepts(parameter_table& pt);
 
 inline void add_unique(std::vector<std::string>& where_to_add, const std::vector<std::string>& what_to_add){
   bool variable_exists = false;
-  for(int i = 0; i < what_to_add.size(); i++){
+  for(unsigned int i = 0; i < what_to_add.size(); i++){
     variable_exists = false;
-    for(int j = 0; j < where_to_add.size(); j++){
+    for(unsigned int j = 0; j < where_to_add.size(); j++){
       if(what_to_add.at(i).compare(where_to_add.at(j)) == 0){
         variable_exists = true;
         break;
