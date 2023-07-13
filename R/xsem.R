@@ -82,6 +82,9 @@ mxsem <- function(model,
                  add_variances = TRUE,
                  lbound_variances = TRUE){
 
+  if(scale_loadings & scale_latent_variances)
+    warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
+
   parameter_table <- parameter_table_rcpp(syntax = model,
                                           add_intercept = add_intercepts,
                                           add_variance = add_variances,
