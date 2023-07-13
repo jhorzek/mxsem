@@ -3,9 +3,13 @@ Type: Package
 Title: Parse lavaan-like syntax for OpenMx models
 Version: 0.0.1
 Date: 2023-07-12
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full sentences.
+Authors@R: c(person(given   = "Jannik H.", family = "Orzek",
+                    role    = c("aut", "cre", "cph"),
+                    email   = "orzek@mpib-berlin.mpg.de",
+                    comment = c(ORCID = "0000-0002-3123-2248")))
+Maintainer: Jannik H. Orzek <orzek@mpib-berlin.mpg.de>
+Description: Provides a lavaan-like syntax for OpenMx models. Supports 
+  definition variables, bounds, and parameter transformations.
 License: GPL (>= 2)
 Depends: OpenMx
 Imports: Rcpp (>= 1.0.10)
