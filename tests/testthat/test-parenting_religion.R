@@ -2,6 +2,8 @@ test_that("indirect and direct effects work", {
 
   # lavaan model by Nicholas Kerry and Marjorie Prokosch
   # at https://osf.io/aqfk3
+  library(mxsem)
+  library(lavaan)
 
   model<-'ParentStatus~a*Age
 Religiosity_7item~b*ParentStatus
