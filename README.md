@@ -142,8 +142,8 @@ mxsem(model = model,
 
 Sometimes, one may want to express one parameter as a function of other
 parameters. For instance, in moderated non-linear factor analysis, model
-parameters are often expressed in terms of a covariate k. 
-To provide an example, let the effect $a$ of $\xi$ on $\eta$ be expressed as
+parameters are often expressed in terms of a covariate k. For instance,
+the effect $a$ of $\xi$ on $\eta$ could be expressed as
 $a = a_0 + a_1\times k$.
 
 ``` r
@@ -167,8 +167,8 @@ eta =~ y1 + y2 + y3
 eta ~ a*xi
 
 # we need two new parameters: a0 and a1. These are created as follows:
-+a0
-+a1
+!a0
+!a1
 # Now, we redefine a to be a0 + k*a1, where k is found in the data
 a := a0 + data.k*a1
 "

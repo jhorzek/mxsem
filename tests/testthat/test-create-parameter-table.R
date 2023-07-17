@@ -23,7 +23,7 @@ test_that("parameter_table_to_Rcpp works", {
     y4 ~~ y8
     y6 ~~ y8
 
-    + d; + e; +f
+    ! d; ! e; !f
     b := exp(d)
     c := a*b-d+e
 a >-2

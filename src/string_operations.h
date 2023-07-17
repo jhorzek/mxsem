@@ -19,7 +19,7 @@ equation_elements split_string_once(const std::string& str, const std::string& a
 
 std::vector<std::string> split_string_all(const std::string& str, const std::string& at);
 
-void check_lhs(const std::string& lhs, const std::string not_allowed = "+*=~:");
+void check_lhs(const std::string& lhs, const std::string not_allowed = "!+*=~:");
 
 bool char_in_string(const char c, const std::string& str);
 

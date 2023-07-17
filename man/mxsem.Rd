@@ -79,8 +79,8 @@ model_transformations <- '
     y6 ~~ y8
 
 # create new parameters:
-+delta_a
-+delta_b
+!delta_a
+!delta_b
 
 # use the model parameters and the new parameters for transformations:
 a2 := a1 + delta_a

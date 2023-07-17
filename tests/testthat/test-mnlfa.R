@@ -8,8 +8,8 @@ test_that("mnlfa works", {
   eta =~ y1 + y2 + y3
   eta ~ a*xi
 
-  +a0
-  +a1
+  !a0
+  !a1
   a := a0 + data.k*a1
   "
 

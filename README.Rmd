@@ -31,7 +31,7 @@ variables.
 
 The newest version of the package can be installed from GitHub using the following commands in R:
 
-```{r,  eval = FALSE}
+```{r, eval = FALSE}
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("jhorzek/mxsem", 
                          ref = "main")
@@ -41,7 +41,7 @@ devtools::install_github("jhorzek/mxsem",
 
 The following example is directly adapted from **lavaan**:
 
-```{r, eval = FALSE}
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE, message=FALSE, warning=FALSE}
 library(mxsem)
 model <- '
   # latent variable definitions
@@ -71,7 +71,7 @@ mxsem(model = model,
 
 Lower and upper bounds can be added to any of the parameters in the model. 
 The following demonstrates bounds on a loading:
-```{r example, eval = FALSE}
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 library(mxsem)
 model <- '
   # latent variable definitions
@@ -104,7 +104,7 @@ the time intervals between observations are different for the subjects
 in the data set. Here is an example, where the variables `t_1`-`t_5` indicate
 the person-specific times of observation:
 
-```{r}
+```{r, eval = TRUE}
 library(mxsem)
 set.seed(3489)
 dataset <- simulate_latent_growth_curve(N = 100)
@@ -115,7 +115,7 @@ In **OpenMx**, parameters can be set to the values found in the columns of
 the data set with the `data.` prefix. This is used in the following to fix
 the loadings of a latent slope variable on the observations to the times 
 recorded in `t_1`-`t_5`:
-```{r, eval = FALSE}
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 library(mxsem)
 model <- "
   I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
@@ -140,22 +140,22 @@ For instance, in moderated non-linear factor analysis, model parameters are ofte
 expressed in terms of a covariate k. For instance, the effect $a$ of $\xi$ on $\eta$ 
 could be expressed as $a = a_0 + a_1\times k$.
 
-```{r}
+```{r, eval = TRUE}
 library(mxsem)
 set.seed(9820)
 dataset <- simulate_moderated_nonlinear_factor_analysis(N = 100)
 head(dataset)
 ```
 
-```{r, eval = FALSE}
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 model <- "
 xi =~ x1 + x2 + x3
 eta =~ y1 + y2 + y3
 eta ~ a*xi
 
 # we need two new parameters: a0 and a1. These are created as follows:
-+a0
-+a1
+!a0
+!a1
 # Now, we redefine a to be a0 + k*a1, where k is found in the data
 a := a0 + data.k*a1
 "
