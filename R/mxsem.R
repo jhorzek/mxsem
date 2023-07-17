@@ -4,9 +4,130 @@ NULL
 
 #' mxsem
 #'
-#' create an extended SEM with OpenMx using a lavaan like syntax.
+#' Create an extended SEM with **OpenMx** using a **lavaan**-style syntax.
 #'
-#' @param model model syntax similar to lavaan's syntax
+#' Setting up SEM can be tedious. The **lavaan** package provides a great syntax to
+#' make the process easier. The objective of mxsem is to provide a similar syntax
+#' for **OpenMx**. **OpenMx** is a flexible R package for extended SEM. However, note that
+#' mxsem only covers a small part of the **OpenMx** framework by focusing on "standard"
+#' SEM.
+#'
+#' ## Defaults
+#'
+#' By default, mxsem scales latent variables by setting the loadings on the first
+#' item to 1. This can be changed by setting `scale_loadings = FALSE` in the function
+#' call. Setting `scale_latent_variances = TRUE` sets latent variances to 1 for
+#' scaling.
+#'
+#' mxsem will add intercepts for all manifest variables as well as variances for
+#' all manifest and latent variables. A lower bound of 1e-6 will be added to all
+#' variances. Finally, covariances for all exogenous variables will be added.
+#' All of these options can be changed when calling mxsem.
+#'
+#' ## Syntax
+#'
+#' The syntax is, for the most part, identical to that of **lavaan**. The following
+#' specifies loadings of a latent variable `eta` on manifest variables `y1`-`y4`:
+#' ```
+#' eta =~ y1 + y2 + y3
+#' ```
+#' Regressions are specified with `~`:
+#' ```
+#' xi  =~ x1 + x2 + x3
+#' eta =~ y1 + y2 + y3
+#' # predict eta with xi:
+#' eta ~  xi
+#' ```
+#' Add covariances with `~~`
+#' ```
+#' xi  =~ x1 + x2 + x3
+#' eta =~ y1 + y2 + y3
+#' # predict eta with xi:
+#' eta ~  xi
+#' x1 ~~ x2
+#' ```
+#' Intercepts are specified with `~1`
+#' ```
+#' xi  =~ x1 + x2 + x3
+#' eta =~ y1 + y2 + y3
+#' # predict eta with xi:
+#' eta ~  xi
+#' x1 ~~ x2
+#'
+#' eta ~ 1
+#' ```
+#'
+#' ## Parameter labels and constraints
+#'
+#' Add labels to parameters as follows:
+#' ```
+#' xi  =~ l1*x1 + l2*x2 + l3*x3
+#' eta =~ l4*y1 + l5*y2 + l6*y3
+#' # predict eta with xi:
+#' eta ~  b*xi
+#' ```
+#' Fix parameters by using numeric values instead of labels:
+#' ```
+#' xi  =~ 1*x1 + l2*x2 + l3*x3
+#' eta =~ 1*y1 + l5*y2 + l6*y3
+#' # predict eta with xi:
+#' eta ~  b*xi
+#' ```
+#'
+#' ## Bounds
+#'
+#' Lower and upper bounds allow for constraints on parameters. For instance,
+#' a lower bound can prevent negative variances.
+#' ```
+#' xi  =~ 1*x1 + l2*x2 + l3*x3
+#' eta =~ 1*y1 + l5*y2 + l6*y3
+#' # predict eta with xi:
+#' eta ~  b*xi
+#' # residual variance for x1
+#' x1 ~~ v*x1
+#' # bound:
+#' v > 0
+#' ```
+#' Upper bounds are specified with v < 10. Note that the parameter label must always
+#' come first. The following is not allowed: `0 < v` or `10 > v`.
+#'
+#' ## (Non-)linear constraints
+#'
+#' Assume that latent construct `eta` was observed twice, where `eta1` is the first
+#' observation and `eta2` the second. We want to define the loadings of `eta2`
+#' on its observations as `l_1 + delta_l1`. If `delta_l1` is zero, we have measurement
+#' invariance.
+#'
+#' ```
+#' eta1 =~ l1*y1 + l2*y2 + l3*y3
+#' eta2 =~ l4*y4 + l5*y5 + l6*y6
+#' # define new delta-parameter
+#' !delta_1; !delta_2; !delta_3
+#' # redefine l4-l6
+#' l4 := l1 + delta_1
+#' l5 := l2 + delta_2
+#' l6 := l3 + delta_3
+#' ```
+#'
+#' ## Definition variables
+#'
+#' Definition variables allow for person-specific parameter constraints. Use the
+#' `data.`-prefix to specify definition variables.
+#' ```
+#' I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+#' S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+#'
+#' I ~ int*1
+#' S ~ slp*1
+#' ```
+#'
+#' ## Starting Values
+#'
+#' mxsem differs from **lavaan** in the specification of starting values. Instead
+#' of providing starting values in the model syntax, the `set_starting_values`
+#' function is used.
+#'
+#' @param model model syntax similar to **lavaan**'s syntax
 #' @param data raw data used to fit the model
 #' @param scale_loadings should the first loading of each latent variable be used for scaling?
 #' @param scale_latent_variances should the latent variances be used for scaling
@@ -20,6 +141,7 @@ NULL
 #' @return mxModel object that can be fitted with mxRun or mxTryHard
 #' @export
 #' @import OpenMx
+#' @md
 #' @examples
 #' # THE FOLLOWING EXAMPLE IS ADAPTED FROM LAVAAN
 #' library(mxsem)
