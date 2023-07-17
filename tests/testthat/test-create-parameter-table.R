@@ -35,6 +35,8 @@ x1 ~ .5*1
   parameter_table <- mxsem:::parameter_table_rcpp(model,
                                                  add_intercept = TRUE,
                                                  add_variance = TRUE,
+                                                 add_exogenous_latent_covariances = TRUE,
+                                                 add_exogenous_manifest_covariances = TRUE,
                                                  scale_latent_variance = TRUE,
                                                  scale_loading = TRUE)
   parameter_table

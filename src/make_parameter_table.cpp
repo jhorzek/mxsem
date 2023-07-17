@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 #include "string_operations.h"
 #include "clean_syntax.h"
+#include "check_syntax.h"
 #include "parameter_table.h"
 #include "create_algebras.h"
 #include "add_elements.h"
@@ -19,6 +20,8 @@ void add_effects(const std::vector<std::string>& equations,
     for(std::string c_for: check_for){
 
       if(eq.find(c_for) != std::string::npos){
+
+        check_equation(eq);
 
         eq_elem = split_string_once(eq, c_for);
 
@@ -86,10 +89,14 @@ void add_bounds(const std::vector<std::string>& equations,
 parameter_table make_parameter_table(const std::string& syntax,
                                      bool add_intercept,
                                      bool add_variance,
+                                     bool add_exogenous_latent_covariances,
+                                     bool add_exogenous_manifest_covariances,
                                      bool scale_latent_variance,
                                      bool scale_loading){
 
   const std::vector<std::string> equations = clean_syntax(syntax);
+
+  check_cleaned(equations);
 
   parameter_table pt;
 
@@ -109,6 +116,11 @@ parameter_table make_parameter_table(const std::string& syntax,
   if(add_intercept)
     add_intercepts(pt);
 
+  if(add_exogenous_latent_covariances)
+    add_covariances(pt.vars.latents, pt);
+  if(add_exogenous_manifest_covariances)
+    add_covariances(pt.vars.manifests, pt);
+
   if(scale_latent_variance)
     scale_latent_variances(pt);
   if(scale_loading)
@@ -123,6 +135,10 @@ parameter_table make_parameter_table(const std::string& syntax,
 //' @param syntax lavaan like syntax
 //' @param add_intercept should intercepts for manifest variables be automatically added?
 //' @param add_variance should variances for all variables be automatically added?
+//' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
+//' added automatically?
+//' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
+//' added automatically?
 //' @param scale_latent_variance should variances of latent variables be set to 1?
 //' @param scale_loading should the first loading of each latent variable be set to 1?
 //' @return parameter table
@@ -130,11 +146,15 @@ parameter_table make_parameter_table(const std::string& syntax,
 Rcpp::List parameter_table_rcpp(const std::string& syntax,
                                 bool add_intercept,
                                 bool add_variance,
+                                bool add_exogenous_latent_covariances,
+                                bool add_exogenous_manifest_covariances,
                                 bool scale_latent_variance,
                                 bool scale_loading){
    parameter_table pt = make_parameter_table(syntax,
                                              add_intercept,
                                              add_variance,
+                                             add_exogenous_latent_covariances,
+                                             add_exogenous_manifest_covariances,
                                              scale_latent_variance,
                                              scale_loading);
 

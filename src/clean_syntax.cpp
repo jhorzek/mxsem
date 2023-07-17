@@ -9,7 +9,7 @@
 //' @return vector of strings with cleaned syntax
 // [[Rcpp::export]]
 std::vector<std::string> clean_syntax(const std::string& syntax) {
-  std::vector<std::string> cleaned_synatx;
+  std::vector<std::string> cleaned_syntax;
   std::string current_syntax {""};
   bool is_comment = false;
   bool is_open    = false;
@@ -33,7 +33,7 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
       is_comment = false;
       if(!is_open && (current_syntax.length() != 0)){
         // add current syntax if the string did end and is not empty
-        cleaned_synatx.push_back(current_syntax);
+        cleaned_syntax.push_back(current_syntax);
         current_syntax = "";
         break;
       }
@@ -48,7 +48,7 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
         Rcpp::stop("Line ended with ; but it seems like the previous sign was an operator (e.g., =~;!). The last line was " +
           current_syntax);
       if(current_syntax.length() != 0){
-        cleaned_synatx.push_back(current_syntax);
+        cleaned_syntax.push_back(current_syntax);
         current_syntax = "";
         break;
       }
@@ -69,8 +69,8 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
 
   // if the syntax does not end with a new line -> add last element:
   if(current_syntax.length() != 0)
-    cleaned_synatx.push_back(current_syntax);
+    cleaned_syntax.push_back(current_syntax);
 
-  return(cleaned_synatx);
+  return(cleaned_syntax);
 }
 
