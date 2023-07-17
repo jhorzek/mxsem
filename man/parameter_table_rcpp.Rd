@@ -8,6 +8,8 @@ parameter_table_rcpp(
   syntax,
   add_intercept,
   add_variance,
+  add_exogenous_latent_covariances,
+  add_exogenous_manifest_covariances,
   scale_latent_variance,
   scale_loading
 )
@@ -18,6 +20,12 @@ parameter_table_rcpp(
 \item{add_intercept}{should intercepts for manifest variables be automatically added?}
 
 \item{add_variance}{should variances for all variables be automatically added?}
+
+\item{add_exogenous_latent_covariances}{should covariances between exogenous latent variables be
+added automatically?}
+
+\item{add_exogenous_manifest_covariances}{should covariances between exogenous manifest variables be
+added automatically?}
 
 \item{scale_latent_variance}{should variances of latent variables be set to 1?}
 

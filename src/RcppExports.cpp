@@ -34,17 +34,19 @@ BEGIN_RCPP
 END_RCPP
 }
 // parameter_table_rcpp
-Rcpp::List parameter_table_rcpp(const std::string& syntax, bool add_intercept, bool add_variance, bool scale_latent_variance, bool scale_loading);
-RcppExport SEXP _mxsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
+Rcpp::List parameter_table_rcpp(const std::string& syntax, bool add_intercept, bool add_variance, bool add_exogenous_latent_covariances, bool add_exogenous_manifest_covariances, bool scale_latent_variance, bool scale_loading);
+RcppExport SEXP _mxsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP add_exogenous_latent_covariancesSEXP, SEXP add_exogenous_manifest_covariancesSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::string& >::type syntax(syntaxSEXP);
     Rcpp::traits::input_parameter< bool >::type add_intercept(add_interceptSEXP);
     Rcpp::traits::input_parameter< bool >::type add_variance(add_varianceSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_exogenous_latent_covariances(add_exogenous_latent_covariancesSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_exogenous_manifest_covariances(add_exogenous_manifest_covariancesSEXP);
     Rcpp::traits::input_parameter< bool >::type scale_latent_variance(scale_latent_varianceSEXP);
     Rcpp::traits::input_parameter< bool >::type scale_loading(scale_loadingSEXP);
-    rcpp_result_gen = Rcpp::wrap(parameter_table_rcpp(syntax, add_intercept, add_variance, scale_latent_variance, scale_loading));
+    rcpp_result_gen = Rcpp::wrap(parameter_table_rcpp(syntax, add_intercept, add_variance, add_exogenous_latent_covariances, add_exogenous_manifest_covariances, scale_latent_variance, scale_loading));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,7 +66,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_mxsem_char_in_string", (DL_FUNC) &_mxsem_char_in_string, 2},
     {"_mxsem_clean_syntax", (DL_FUNC) &_mxsem_clean_syntax, 1},
-    {"_mxsem_parameter_table_rcpp", (DL_FUNC) &_mxsem_parameter_table_rcpp, 5},
+    {"_mxsem_parameter_table_rcpp", (DL_FUNC) &_mxsem_parameter_table_rcpp, 7},
     {"_mxsem_split_string_all", (DL_FUNC) &_mxsem_split_string_all, 2},
     {NULL, NULL, 0}
 };

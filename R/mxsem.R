@@ -12,12 +12,18 @@ NULL
 #' @param scale_latent_variances should the latent variances be used for scaling
 #' @param add_intercepts should intercepts for manifest variables be added automatically?
 #' @param add_variances should variances for manifest and latent variables be added automatically?
+#' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
+#' added automatically?
+#' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
+#' added automatically?
 #' @param lbound_variances should the lower bound for variances be set to 0.000001?
 #' @return mxModel object that can be fitted with mxRun or mxTryHard
 #' @export
 #' @import OpenMx
 #' @examples
 #' # THE FOLLOWING EXAMPLE IS ADAPTED FROM LAVAAN
+#' library(mxsem)
+#'
 #' model <- '
 #'   # latent variable definitions
 #'      ind60 =~ x1 + x2 + x3
@@ -75,12 +81,14 @@ NULL
 #'   mxTryHard()
 #' omxGetParameters(fit)
 mxsem <- function(model,
-                 data,
-                 scale_loadings = TRUE,
-                 scale_latent_variances = FALSE,
-                 add_intercepts = TRUE,
-                 add_variances = TRUE,
-                 lbound_variances = TRUE){
+                  data,
+                  scale_loadings = TRUE,
+                  scale_latent_variances = FALSE,
+                  add_intercepts = TRUE,
+                  add_variances = TRUE,
+                  add_exogenous_latent_covariances = TRUE,
+                  add_exogenous_manifest_covariances = TRUE,
+                  lbound_variances = TRUE){
 
   if(scale_loadings & scale_latent_variances)
     warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
@@ -88,6 +96,8 @@ mxsem <- function(model,
   parameter_table <- parameter_table_rcpp(syntax = model,
                                           add_intercept = add_intercepts,
                                           add_variance = add_variances,
+                                          add_exogenous_latent_covariances = add_exogenous_latent_covariances,
+                                          add_exogenous_manifest_covariances = add_exogenous_manifest_covariances,
                                           scale_latent_variance = scale_latent_variances,
                                           scale_loading = scale_loadings)
 
@@ -244,13 +254,13 @@ add_algebra <- function(mxMod,
     labels <- new_parameters
     labels[new_parameters_free != "TRUE"] <- paste0(labels[new_parameters_free != "TRUE"], "[1,1]")
     mxMod <- OpenMx::mxModel(mxMod,
-                    mxMatrix(type = "Full",
-                             values = rep(.01, length(new_parameters)),
-                             nrow = 1,
-                             ncol = length(new_parameters),
-                             free = new_parameters_free == "TRUE",
-                             labels = labels,
-                             name = "new_parameters"))
+                             mxMatrix(type = "Full",
+                                      values = rep(.01, length(new_parameters)),
+                                      nrow = 1,
+                                      ncol = length(new_parameters),
+                                      free = new_parameters_free == "TRUE",
+                                      labels = labels,
+                                      name = "new_parameters"))
 
   }
 

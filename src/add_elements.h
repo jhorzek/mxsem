@@ -5,6 +5,8 @@
 
 void add_variances(parameter_table& pt);
 void add_intercepts(parameter_table& pt);
+void add_covariances(std::vector<std::string> variables,
+                     parameter_table& pt);
 
 inline void add_unique(std::vector<std::string>& where_to_add, const std::vector<std::string>& what_to_add){
   bool variable_exists = false;
