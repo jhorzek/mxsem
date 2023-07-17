@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 #include "string_operations.h"
 #include "clean_syntax.h"
+#include "check_syntax.h"
 #include "parameter_table.h"
 #include "create_algebras.h"
 #include "add_elements.h"
@@ -91,6 +92,8 @@ parameter_table make_parameter_table(const std::string& syntax,
 
   const std::vector<std::string> equations = clean_syntax(syntax);
 
+  check_cleaned(equations);
+
   parameter_table pt;
 
   add_effects(equations, pt);
@@ -102,6 +105,9 @@ parameter_table make_parameter_table(const std::string& syntax,
                 pt);
 
   pt.vars = find_variables(pt);
+
+  // check if one of the labels is NA
+  check_labels(pt);
 
   // automatically add some elements:
   if(add_variance)
