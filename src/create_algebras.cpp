@@ -10,11 +10,11 @@ void make_algebras(const std::vector<std::string>& equations,
 
   // find newly created variables
   for(std::string eq: equations){
-    if(eq.at(0) == '+'){
-      // remove plus symbol
+    if(eq.at(0) == '!'){
+      // remove exclamation mark
       eq.erase(eq.begin());
       // check_lhs can be used to check for disallowed elements:
-      check_lhs(eq, "+*=~: ");
+      check_lhs(eq, "!+*=~: ");
       alg.new_parameters.push_back(eq);
       alg.new_parameters_free.push_back("TRUE");
     }

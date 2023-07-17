@@ -45,7 +45,7 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
       // the only difference to a new line is that commands cannot continue after
       // a semicolon.
       if(is_open)
-        Rcpp::stop("Line ended with ; but it seems like the previous sign was an operator (e.g., =~;). The last line was " +
+        Rcpp::stop("Line ended with ; but it seems like the previous sign was an operator (e.g., =~;!). The last line was " +
           current_syntax);
       if(current_syntax.length() != 0){
         cleaned_synatx.push_back(current_syntax);

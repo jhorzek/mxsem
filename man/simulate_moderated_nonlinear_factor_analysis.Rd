@@ -28,8 +28,8 @@ eta =~ y1 + y2 + y3
 eta ~ a*xi
 
 # we need two new parameters: a0 and a1. These are created as follows:
-+a0
-+a1
+!a0
+!a1
 # Now, we redefine a to be a0 + k*a1, where k is found in the data
 a := a0 + data.k*a1
 "
