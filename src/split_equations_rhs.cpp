@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include "string_operations.h"
+#include "check_syntax.h"
 
 std::vector<str_rhs_elem> split_eqation_rhs(std::string rhs){
 
@@ -21,6 +22,8 @@ std::vector<str_rhs_elem> split_eqation_rhs(std::string rhs){
         rhs_split_elem);
 
     }else if(split_modifiers.size() == 2){
+
+      check_modifier(split_modifiers.at(0));
 
       current_elem.modifier = split_modifiers.at(0);
       current_elem.rhs      = split_modifiers.at(1);

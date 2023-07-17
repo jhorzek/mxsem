@@ -2,6 +2,8 @@
 #define CHECK_SYNTAX_H
 #include "parameter_table.h"
 
-void check_labels(const parameter_table pt);
+void check_modifier(const std::string modifier);
+
+void check_equation(const std::string equation);
 
 #endif

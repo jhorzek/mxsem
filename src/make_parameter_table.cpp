@@ -21,6 +21,8 @@ void add_effects(const std::vector<std::string>& equations,
 
       if(eq.find(c_for) != std::string::npos){
 
+        check_equation(eq);
+
         eq_elem = split_string_once(eq, c_for);
 
         check_lhs(eq_elem.lhs);
@@ -105,9 +107,6 @@ parameter_table make_parameter_table(const std::string& syntax,
                 pt);
 
   pt.vars = find_variables(pt);
-
-  // check if one of the labels is NA
-  check_labels(pt);
 
   // automatically add some elements:
   if(add_variance)
