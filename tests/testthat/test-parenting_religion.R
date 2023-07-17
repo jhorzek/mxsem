@@ -4,6 +4,7 @@ test_that("indirect and direct effects work", {
   # at https://osf.io/aqfk3
   library(mxsem)
   library(lavaan)
+  set.seed(123)
 
   model<-'ParentStatus~a*Age
 Religiosity_7item~b*ParentStatus
@@ -31,7 +32,7 @@ direct:=c'
   testthat::expect_true(abs(-2*logLik(fit_lavaan) -
                               fit_mx$fitfunction$result[[1]]) < 1e-4)
 
-  summary_lavaan <- summary(fit_lavaan)
+  summary_lavaan <- lavaan::summary(fit_lavaan)
 
   testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
                               fit_mx$direct$result[[1]]) < 1e-4)
@@ -81,7 +82,7 @@ direct:=l'
   testthat::expect_true(abs(-2*logLik(fit_lavaan) -
                               fit_mx$fitfunction$result[[1]]) < 1e-4)
 
-  summary_lavaan <- summary(fit_lavaan)
+  summary_lavaan <- lavaan::summary(fit_lavaan)
 
   testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
                               fit_mx$direct$result[[1]]) < 1e-4)
