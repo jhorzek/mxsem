@@ -55,9 +55,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="mxsem">mxsem<a class="anchor" aria-label="anchor" href="#mxsem"></a>
 </h1></div>
-<!-- badges: start -->
-<!-- badges: end -->
-<p><strong>mxsem</strong> provides a <strong>lavaan</strong>-like syntax to implement structural equation models (SEM) with <strong>OpenMx</strong>. The objective is to simplify fitting basic SEM with <strong>OpenMx</strong> and to allow users to easily switch between <strong>lavaan</strong> and <strong>OpenMx</strong>. The latter can be useful if one of the two packages reports non-convergence or other issues. Additionally, <strong>mxsem</strong> allows for parameter transformations and definition variables.</p>
+<p><strong>mxsem</strong> provides a <strong>lavaan</strong>-like (Rosseel, 2012) syntax to implement structural equation models (SEM) with <strong>OpenMx</strong> (Boker et al., 2011). The objective is to simplify fitting basic SEM with <strong>OpenMx</strong> and to allow users to easily switch between <strong>lavaan</strong> and <strong>OpenMx</strong>. The latter can be useful if one of the two packages reports non-convergence or other issues. Additionally, <strong>mxsem</strong> allows for parameter transformations and definition variables.</p>
 <blockquote>
 <p><strong>Warning</strong>: The syntax and settings of <strong>mxsem</strong> may differ from <strong>lavaan</strong> in some cases. See <code><a href="reference/mxsem.html">?mxsem::mxsem</a></code> for more details on the syntax and the default arguments.</p>
 </blockquote>
@@ -204,6 +202,16 @@
 <h2 id="adapting-the-model">Adapting the Model<a class="anchor" aria-label="anchor" href="#adapting-the-model"></a>
 </h2>
 <p><code>mxsem</code> returns an <code>mxModel</code> object that can be adapted further by users familiar with <strong>OpenMx</strong>.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ul>
+<li>Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T., Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., &amp; Fox, J. (2011). OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika, 76(2), 306–317. <a href="https://doi.org/10.1007/s11336-010-9200-6" class="external-link uri">https://doi.org/10.1007/s11336-010-9200-6</a>
+</li>
+<li>Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. <a href="https://doi.org/10.18637/jss.v048.i02" class="external-link uri">https://doi.org/10.18637/jss.v048.i02</a>
+</li>
+</ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
