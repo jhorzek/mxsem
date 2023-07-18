@@ -16,9 +16,6 @@ library(mxsem)
 
 # mxsem
 
-<!-- badges: start -->
-<!-- badges: end -->
-
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)
 with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with **OpenMx** and
 to allow users to easily switch between **lavaan** and **OpenMx**. The latter can
