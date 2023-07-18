@@ -3,15 +3,13 @@
 
 # mxsem
 
-<!-- badges: start -->
-<!-- badges: end -->
-
-**mxsem** provides a **lavaan**-like syntax to implement structural
-equation models (SEM) with **OpenMx**. The objective is to simplify
-fitting basic SEM with **OpenMx** and to allow users to easily switch
-between **lavaan** and **OpenMx**. The latter can be useful if one of
-the two packages reports non-convergence or other issues. Additionally,
-**mxsem** allows for parameter transformations and definition variables.
+**mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement
+structural equation models (SEM) with **OpenMx** (Boker et al., 2011).
+The objective is to simplify fitting basic SEM with **OpenMx** and to
+allow users to easily switch between **lavaan** and **OpenMx**. The
+latter can be useful if one of the two packages reports non-convergence
+or other issues. Additionally, **mxsem** allows for parameter
+transformations and definition variables.
 
 > **Warning**: The syntax and settings of **mxsem** may differ from
 > **lavaan** in some cases. See `?mxsem::mxsem` for more details on the
@@ -185,3 +183,14 @@ mxsem(model = model,
 
 `mxsem` returns an `mxModel` object that can be adapted further by users
 familiar with **OpenMx**.
+
+## References
+
+- Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T.,
+  Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., & Fox, J.
+  (2011). OpenMx: An Open Source Extended Structural Equation Modeling
+  Framework. Psychometrika, 76(2), 306–317.
+  <https://doi.org/10.1007/s11336-010-9200-6>
+- Rosseel, Y. (2012). lavaan: An R package for structural equation
+  modeling. Journal of Statistical Software, 48(2), 1–36.
+  <https://doi.org/10.18637/jss.v048.i02>
