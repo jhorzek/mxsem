@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <regex>
 #include "string_operations.h"
 #include "clean_syntax.h"
 
@@ -11,12 +10,14 @@
 void check_cleaned(const std::vector<std::string> cleaned_syntax){
 
   // check if line starts are correct
-  std::regex regex_cmp("^[a-zA-Z_!]+");
-  std::string cmp_to;
+  char cmp_to;
 
   for(std::string s: cleaned_syntax){
     cmp_to = s[0];
-    if(!std::regex_match(cmp_to, regex_cmp)){
+    if(!(isalpha(cmp_to) || // check if character
+    (cmp_to == '_') ||
+    (cmp_to == '!')
+    )){
       Rcpp::Rcout << s << std::endl;
       Rcpp::stop("The following syntax is not allowed:" +
         s +
