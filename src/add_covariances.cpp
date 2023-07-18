@@ -9,7 +9,7 @@ void add_covariances(std::vector<std::string> variables,
   // now, we want to check of the variables are exogenous
   for(std::string var: variables){
     is_exogenous = true;
-    for(int i = 0; i < pt.rhs.size(); i++){
+    for(unsigned int i = 0; i < pt.rhs.size(); i++){
 
       const std::string& lhs_var = pt.lhs.at(i);
       const std::string& op = pt.op.at(i);
@@ -48,10 +48,10 @@ void add_covariances(std::vector<std::string> variables,
   // now, we check if all covariances between the latents exists. If not,
   // we add the covariance.
   bool covariance_exists = false;
-  for(int i = 0; i < exogenous.size()-1; i++){
-    for(int j = i+1; j < exogenous.size(); j++){
+  for(unsigned int i = 0; i < exogenous.size()-1; i++){
+    for(unsigned int j = i+1; j < exogenous.size(); j++){
       covariance_exists = false;
-      for(int k = 0; k < pt.lhs.size(); k++){
+      for(unsigned int k = 0; k < pt.lhs.size(); k++){
         if((pt.lhs.at(k).compare(exogenous.at(i)) == 0) &&
            (pt.op.at(k).compare("~~") == 0) &&
            (pt.rhs.at(k).compare(exogenous.at(j)) == 0)
