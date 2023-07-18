@@ -22,3 +22,4 @@ Suggests:
     testthat (>= 3.0.0),
     lavaan
 Config/testthat/edition: 3
+URL: https://jhorzek.github.io/mxsem/

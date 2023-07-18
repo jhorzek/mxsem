@@ -340,13 +340,13 @@ parse_modifier <- function(modifier, free){
     return(parameter_setting)
   }
 
-  if(grepl(pattern = "^[a-zA-Z]+[0-9\\.-_]*$", x = modifier)){
+  if(grepl(pattern = "^[a-zA-Z]+[a-zA-Z0-9\\.-_]*$", x = modifier)){
     # the modifier is a label
     parameter_setting$label <- modifier
     return(parameter_setting)
   }
 
-  stop("The following modifier is not allowed:", modifier)
+  stop("The following modifier is not allowed: ", modifier)
 }
 
 parse_bounds <- function(bound){

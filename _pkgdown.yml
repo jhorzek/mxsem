@@ -1,0 +1,7 @@
+title: mxsem
+url: https://jhorzek.github.io/mxsem/
+template:
+  bootstrap: 5
+  params:
+    bootswatch: pulse
+
