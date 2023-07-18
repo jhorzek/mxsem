@@ -10,10 +10,12 @@
 equation models (SEM) with **OpenMx**. The objective is to simplify
 fitting basic SEM with **OpenMx** and to allow users to easily switch
 between **lavaan** and **OpenMx**. The latter can be useful if one of
-the two packages reports non-convergence or other issues.
+the two packages reports non-convergence or other issues. Additionally,
+**mxsem** allows for parameter transformations and definition variables.
 
-Additionally, **mxsem** allows for parameter transformations and
-definition variables.
+> **Warning**: The syntax and settings of **mxsem** may differ from
+> **lavaan** in some cases. See `?mxsem::mxsem` for more details on the
+> syntax and the default arguments.
 
 ## Installation
 
