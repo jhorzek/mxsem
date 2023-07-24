@@ -66,6 +66,20 @@ mxsem(model = model,
   mxTryHard() |>
   summary()
 ```
+<details>
+<summary>Show summary</summary>
+
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data  = OpenMx::Bollen) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
 
 ## Adding bounds
 
@@ -93,6 +107,23 @@ mxsem(model = model,
   mxTryHard() |>
   summary()
 ```
+
+<details>
+<summary>Show summary</summary>
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data  = OpenMx::Bollen, 
+      # use latent variances to scale the model
+      scale_loadings = FALSE, 
+      scale_latent_variances = TRUE) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
 
 **mxsem** adds lower bounds to any of the variances by default. To remove these
 lower bounds, set `lbound_variances = FALSE` when calling `mxsem()`.
@@ -132,6 +163,20 @@ mxsem(model = model,
   summary()
 ```
 
+<details>
+<summary>Show summary</summary>
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data = dataset,
+      add_intercepts = FALSE) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
 
 ## Transformations
 
@@ -165,6 +210,20 @@ mxsem(model = model,
   mxTryHard() |>
   summary()
 ```
+
+<details>
+<summary>Show summary</summary>
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data = dataset) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
 
 ## Adapting the Model
 

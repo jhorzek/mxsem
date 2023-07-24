@@ -39,6 +39,6 @@ x1 ~ .5*1
                                                  add_exogenous_manifest_covariances = TRUE,
                                                  scale_latent_variance = TRUE,
                                                  scale_loading = TRUE)
-  parameter_table
+  testthat::expect_true(is(parameter_table, "list"))
 
 })

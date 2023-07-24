@@ -13,7 +13,9 @@ mxsem(
   add_variances = TRUE,
   add_exogenous_latent_covariances = TRUE,
   add_exogenous_manifest_covariances = TRUE,
-  lbound_variances = TRUE
+  lbound_variances = TRUE,
+  directed = "→",
+  undirected = "↔"
 )
 }
 \arguments{
@@ -36,15 +38,20 @@ added automatically?}
 added automatically?}
 
 \item{lbound_variances}{should the lower bound for variances be set to 0.000001?}
+
+\item{directed}{symbol used to indicate directed effects (regressions and loadings)}
+
+\item{undirected}{symbol used to indicate undirected effects (variances and covariances)}
 }
 \value{
 mxModel object that can be fitted with mxRun or mxTryHard
 }
 \description{
-Create an extended SEM with \strong{OpenMx} using a \strong{lavaan}-style syntax.
+Create an extended SEM with \strong{OpenMx} (Boker et al., 2011) using a
+\strong{lavaan}-style (Rosseel, 2012) syntax.
 }
 \details{
-Setting up SEM can be tedious. The \strong{lavaan} package provides a great syntax to
+Setting up SEM can be tedious. The \strong{lavaan} (Rosseel, 2012) package provides a great syntax to
 make the process easier. The objective of mxsem is to provide a similar syntax
 for \strong{OpenMx}. \strong{OpenMx} is a flexible R package for extended SEM. However, note that
 mxsem only covers a small part of the \strong{OpenMx} framework by focusing on "standard"
@@ -173,6 +180,14 @@ S ~ slp*1
 mxsem differs from \strong{lavaan} in the specification of starting values. Instead
 of providing starting values in the model syntax, the \code{set_starting_values}
 function is used.
+}
+
+\subsection{References}{
+\itemize{
+\item Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T., Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., & Fox, J. (2011).
+OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika, 76(2), 306–317. https://doi.org/10.1007/s11336-010-9200-6
+\item Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
+}
 }
 }
 \examples{

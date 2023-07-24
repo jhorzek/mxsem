@@ -145,6 +145,8 @@ NULL
 #' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
 #' added automatically?
 #' @param lbound_variances should the lower bound for variances be set to 0.000001?
+#' @param directed symbol used to indicate directed effects (regressions and loadings)
+#' @param undirected symbol used to indicate undirected effects (variances and covariances)
 #' @return mxModel object that can be fitted with mxRun or mxTryHard
 #' @export
 #' @import OpenMx
@@ -217,7 +219,9 @@ mxsem <- function(model,
                   add_variances = TRUE,
                   add_exogenous_latent_covariances = TRUE,
                   add_exogenous_manifest_covariances = TRUE,
-                  lbound_variances = TRUE){
+                  lbound_variances = TRUE,
+                  directed = "\u2192",
+                  undirected = "\u2194"){
 
   if(scale_loadings & scale_latent_variances)
     warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
@@ -237,7 +241,9 @@ mxsem <- function(model,
 
   mxMod <- add_path(mxMod,
                     parameter_table,
-                    lbound_variances)
+                    lbound_variances,
+                    directed,
+                    undirected)
   mxMod <- add_algebra(mxMod,
                        parameter_table = parameter_table,
                        parameter_table$algebras,
@@ -250,7 +256,9 @@ mxsem <- function(model,
 
 add_path <- function(mxMod,
                      parameter_table,
-                     lbound_variances){
+                     lbound_variances,
+                     directed,
+                     undirected){
   pt <- parameter_table$parameter_table
   for(i in 1:nrow(pt)){
 
@@ -297,9 +305,9 @@ add_path <- function(mxMod,
 
       if(is.na(label)){
         if(arrows == 1){
-          label <- paste0(from, "_to_", to)
+          label <- paste0(from, directed, to)
         }else{
-          label <- paste0(from, "_with_", to)
+          label <- paste0(from, undirected, to)
         }
       }
 

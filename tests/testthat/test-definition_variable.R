@@ -16,7 +16,7 @@ test_that("definition variable works", {
 
   testthat::expect_true(abs(omxGetParameters(mod)["int"] - 1) < .2)
   testthat::expect_true(abs(omxGetParameters(mod)["slp"] - .4) < .1)
-  testthat::expect_true(abs(omxGetParameters(mod)["I_with_I"] - 1) < .2)
-  testthat::expect_true(abs(omxGetParameters(mod)["S_with_S"] - 1) < .2)
+  testthat::expect_true(abs(omxGetParameters(mod)["I\u2194I"] - 1) < .2)
+  testthat::expect_true(abs(omxGetParameters(mod)["S\u2194S"] - 1) < .2)
 
 })
