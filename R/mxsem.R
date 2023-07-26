@@ -8,22 +8,22 @@ NULL
 #' **lavaan**-style (Rosseel, 2012) syntax.
 #'
 #' Setting up SEM can be tedious. The **lavaan** (Rosseel, 2012) package provides a great syntax to
-#' make the process easier. The objective of mxsem is to provide a similar syntax
+#' make the process easier. The objective of **mxsem** is to provide a similar syntax
 #' for **OpenMx**. **OpenMx** is a flexible R package for extended SEM. However, note that
-#' mxsem only covers a small part of the **OpenMx** framework by focusing on "standard"
+#' **mxsem** only covers a small part of the **OpenMx** framework by focusing on "standard"
 #' SEM.
 #'
 #' ## Defaults
 #'
-#' By default, mxsem scales latent variables by setting the loadings on the first
+#' By default, **mxsem** scales latent variables by setting the loadings on the first
 #' item to 1. This can be changed by setting `scale_loadings = FALSE` in the function
 #' call. Setting `scale_latent_variances = TRUE` sets latent variances to 1 for
 #' scaling.
 #'
-#' mxsem will add intercepts for all manifest variables as well as variances for
+#' **mxsem** will add intercepts for all manifest variables as well as variances for
 #' all manifest and latent variables. A lower bound of 1e-6 will be added to all
 #' variances. Finally, covariances for all exogenous variables will be added.
-#' All of these options can be changed when calling mxsem.
+#' All of these options can be changed when calling **mxsem**.
 #'
 #' ## Syntax
 #'
@@ -124,7 +124,7 @@ NULL
 #'
 #' ## Starting Values
 #'
-#' mxsem differs from **lavaan** in the specification of starting values. Instead
+#' **mxsem** differs from **lavaan** in the specification of starting values. Instead
 #' of providing starting values in the model syntax, the `set_starting_values`
 #' function is used.
 #'
@@ -136,7 +136,7 @@ NULL
 #'
 #' @param model model syntax similar to **lavaan**'s syntax
 #' @param data raw data used to fit the model. Alternatively, an object created
-#' with OpenMx::mxData (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`) can be used.
+#' with `OpenMx::mxData` can be used (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`).
 #' @param scale_loadings should the first loading of each latent variable be used for scaling?
 #' @param scale_latent_variances should the latent variances be used for scaling
 #' @param add_intercepts should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
