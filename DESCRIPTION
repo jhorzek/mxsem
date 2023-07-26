@@ -20,6 +20,9 @@ RoxygenNote: 7.2.3
 Encoding: UTF-8
 Suggests: 
     testthat (>= 3.0.0),
-    lavaan
+    lavaan,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
 URL: https://jhorzek.github.io/mxsem/
+VignetteBuilder: knitr

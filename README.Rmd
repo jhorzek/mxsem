@@ -21,11 +21,26 @@ with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic
 to allow users to easily switch between **lavaan** and **OpenMx**. The latter can
 be useful if one of the two packages reports non-convergence or other issues.
 Additionally, **mxsem** allows for parameter transformations and definition
-variables.
+variables. However, **mxsem** is intentionally incomplete in order to focus
+on simplicity. If you want to unlock the full potential of **OpenMx**, **mxsem**
+may not be the best option.
 
 > **Warning**: The syntax and settings of **mxsem** may differ from 
-**lavaan** in some cases. See `?mxsem::mxsem` for more details on the syntax and the 
+**lavaan** in some cases. See `vignette("Syntax", package = "mxsem")` for more details on the syntax and the 
 default arguments.
+
+## Alternatives
+
+**mxsem** is new and may still have some sharp edges. Fortunately, there are other
+packages that also try to simplify implementing **OpenMx** models. You may consider
+the following:
+
+- [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
+specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
+**tidyverse**.
+- [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with **OpenMx**
+and also provides a translation of **lavaan** models to **OpenMx** with the 
+`lavaan.to.OpenMx` function.
 
 ## Installation
 
