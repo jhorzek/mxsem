@@ -27,6 +27,7 @@ The time-distance between these occasions differs between subjects."><!-- mathja
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Syntax.html">Syntax</a>
+    <a class="dropdown-item" href="../articles/create_parameter_table.html">create_parameter_table</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -79,11 +80,13 @@ observation)</p>
 <span class="r-in"><span><span class="st"></span></span></span>
 <span class="r-in"><span><span class="st">  I ~ int*1</span></span></span>
 <span class="r-in"><span><span class="st">  S ~ slp*1</span></span></span>
+<span class="r-in"><span><span class="st"></span></span></span>
+<span class="r-in"><span><span class="st">  # set intercepts of manifest variables to zero</span></span></span>
+<span class="r-in"><span><span class="st">  y1 ~ 0*1; y2 ~ 0*1; y3 ~ 0*1; y4 ~ 0*1; y5 ~ 0*1;</span></span></span>
 <span class="r-in"><span><span class="st">  "</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="mxsem.html">mxsem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">model</span>,</span></span>
-<span class="r-in"><span>             data <span class="op">=</span> <span class="va">dataset</span>,</span></span>
-<span class="r-in"><span>             add_intercepts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>             data <span class="op">=</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/OpenMx/man/mxTryHard.html" class="external-link">mxTryHard</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running untitled16 with 10 parameters</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>

@@ -27,6 +27,7 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Syntax.html">Syntax</a>
+    <a class="dropdown-item" href="../articles/create_parameter_table.html">create_parameter_table</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -73,7 +74,8 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
 
 
 <dt>data</dt>
-<dd><p>raw data used to fit the model</p></dd>
+<dd><p>raw data used to fit the model. Alternatively, an object created
+with OpenMx::mxData (e.g., <code>OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")</code>) can be used.</p></dd>
 
 
 <dt>scale_loadings</dt>
@@ -85,7 +87,8 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
 
 
 <dt>add_intercepts</dt>
-<dd><p>should intercepts for manifest variables be added automatically?</p></dd>
+<dd><p>should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
+are added, <strong>mxsem</strong> will automatically use just the observed covariances and not the observed means.</p></dd>
 
 
 <dt>add_variances</dt>
