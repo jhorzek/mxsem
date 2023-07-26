@@ -15,14 +15,15 @@ mxsem(
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
   directed = "→",
-  undirected = "↔"
+  undirected = "↔",
+  return_parameter_table = FALSE
 )
 }
 \arguments{
 \item{model}{model syntax similar to \strong{lavaan}'s syntax}
 
 \item{data}{raw data used to fit the model. Alternatively, an object created
-with OpenMx::mxData (e.g., \code{OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")}) can be used.}
+with \code{OpenMx::mxData} can be used (e.g., \code{OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")}).}
 
 \item{scale_loadings}{should the first loading of each latent variable be used for scaling?}
 
@@ -44,9 +45,13 @@ added automatically?}
 \item{directed}{symbol used to indicate directed effects (regressions and loadings)}
 
 \item{undirected}{symbol used to indicate undirected effects (variances and covariances)}
+
+\item{return_parameter_table}{if set to TRUE, the internal parameter table is returend
+together with the mxModel}
 }
 \value{
-mxModel object that can be fitted with mxRun or mxTryHard
+mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
+is TRUE, a list with the mxModel and the parameter table is returned.
 }
 \description{
 Create an extended SEM with \strong{OpenMx} (Boker et al., 2011) using a
@@ -54,21 +59,21 @@ Create an extended SEM with \strong{OpenMx} (Boker et al., 2011) using a
 }
 \details{
 Setting up SEM can be tedious. The \strong{lavaan} (Rosseel, 2012) package provides a great syntax to
-make the process easier. The objective of mxsem is to provide a similar syntax
+make the process easier. The objective of \strong{mxsem} is to provide a similar syntax
 for \strong{OpenMx}. \strong{OpenMx} is a flexible R package for extended SEM. However, note that
-mxsem only covers a small part of the \strong{OpenMx} framework by focusing on "standard"
+\strong{mxsem} only covers a small part of the \strong{OpenMx} framework by focusing on "standard"
 SEM.
 \subsection{Defaults}{
 
-By default, mxsem scales latent variables by setting the loadings on the first
+By default, \strong{mxsem} scales latent variables by setting the loadings on the first
 item to 1. This can be changed by setting \code{scale_loadings = FALSE} in the function
 call. Setting \code{scale_latent_variances = TRUE} sets latent variances to 1 for
 scaling.
 
-mxsem will add intercepts for all manifest variables as well as variances for
+\strong{mxsem} will add intercepts for all manifest variables as well as variances for
 all manifest and latent variables. A lower bound of 1e-6 will be added to all
 variances. Finally, covariances for all exogenous variables will be added.
-All of these options can be changed when calling mxsem.
+All of these options can be changed when calling \strong{mxsem}.
 }
 
 \subsection{Syntax}{
@@ -179,7 +184,7 @@ S ~ slp*1
 
 \subsection{Starting Values}{
 
-mxsem differs from \strong{lavaan} in the specification of starting values. Instead
+\strong{mxsem} differs from \strong{lavaan} in the specification of starting values. Instead
 of providing starting values in the model syntax, the \code{set_starting_values}
 function is used.
 }
