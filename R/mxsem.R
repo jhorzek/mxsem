@@ -135,10 +135,12 @@ NULL
 #' * Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
 #'
 #' @param model model syntax similar to **lavaan**'s syntax
-#' @param data raw data used to fit the model
+#' @param data raw data used to fit the model. Alternatively, an object created
+#' with OpenMx::mxData (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`) can be used.
 #' @param scale_loadings should the first loading of each latent variable be used for scaling?
 #' @param scale_latent_variances should the latent variances be used for scaling
-#' @param add_intercepts should intercepts for manifest variables be added automatically?
+#' @param add_intercepts should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
+#' are added, **mxsem** will automatically use just the observed covariances and not the observed means.
 #' @param add_variances should variances for manifest and latent variables be added automatically?
 #' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
 #' added automatically?
@@ -147,9 +149,14 @@ NULL
 #' @param lbound_variances should the lower bound for variances be set to 0.000001?
 #' @param directed symbol used to indicate directed effects (regressions and loadings)
 #' @param undirected symbol used to indicate undirected effects (variances and covariances)
-#' @return mxModel object that can be fitted with mxRun or mxTryHard
+#' @param return_parameter_table if set to TRUE, the internal parameter table is returend
+#' together with the mxModel
+#' @return mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
+#' is TRUE, a list with the mxModel and the parameter table is returned.
 #' @export
 #' @import OpenMx
+#' @importFrom stats cov
+#' @importFrom methods is
 #' @md
 #' @examples
 #' # THE FOLLOWING EXAMPLE IS ADAPTED FROM LAVAAN
@@ -221,7 +228,8 @@ mxsem <- function(model,
                   add_exogenous_manifest_covariances = TRUE,
                   lbound_variances = TRUE,
                   directed = "\u2192",
-                  undirected = "\u2194"){
+                  undirected = "\u2194",
+                  return_parameter_table = FALSE){
 
   if(scale_loadings & scale_latent_variances)
     warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
@@ -234,10 +242,22 @@ mxsem <- function(model,
                                           scale_latent_variance = scale_latent_variances,
                                           scale_loading = scale_loadings)
 
+  if(is(data, "MxDataStatic")){
+    mx_data <- data
+  }else{
+    if(!add_intercepts){
+      mx_data <- OpenMx::mxData(observed = stats::cov(data),
+                                type = "cov",
+                                numObs = nrow(data))
+    }else{
+      mx_data <- OpenMx::mxData(data, type = "raw")
+    }
+  }
+
   mxMod <- OpenMx::mxModel(type = "RAM",
                            manifestVars = parameter_table$variables$manifests,
                            latentVars = parameter_table$variables$latents,
-                           OpenMx::mxData(data, type = "raw"))
+                           mx_data)
 
   mxMod <- add_path(mxMod,
                     parameter_table,
@@ -250,7 +270,15 @@ mxsem <- function(model,
                        parameter_table$new_parameters,
                        parameter_table$new_parameters_free)
 
-  return(mxMod)
+  if(!return_parameter_table)
+    return(mxMod)
+
+  return(
+    list(
+      model = mxMod,
+      parameter_table = parameter_table
+    )
+  )
 
 }
 

@@ -110,4 +110,45 @@ RI_eta2 ~~ 0*eta1_u1 + 0*eta2_u1
 
   testthat::expect_true(abs(-2*logLik(fit_lavaan) -
                               fit_mx$fitfunction$result[[1]]) < 1e-4)
+
+  # no intercepts
+
+  fit_lavaan_no_int <- cfa(model,
+                           data = data,
+                           fixed.x = FALSE)
+
+  fit_mx_no_int  <- mxsem(model = model,
+                          data = data,
+                          add_intercepts = FALSE,
+                          add_exogenous_latent_covariances = FALSE) |>
+    mxTryHard()
+
+  testthat::expect_true(length(unique(names(coef(fit_lavaan_no_int)))) == length(omxGetParameters(fit_mx_no_int)))
+
+  testthat::expect_true(
+    all(
+      abs(
+        omxGetParameters(fit_mx)[names(omxGetParameters(fit_mx_no_int))]
+        - omxGetParameters(fit_mx_no_int)
+      ) < 1e-4
+    )
+  )
+
+  # test custom
+
+  fit_mx_custom  <- mxsem(model = model,
+                          data = mxData(observed = cov(data), type = "cov", means = colMeans(data), numObs = nrow(data)),
+                          add_exogenous_latent_covariances = FALSE) |>
+    mxTryHard()
+
+  testthat::expect_true(length(unique(names(coef(fit_lavaan)))) == length(omxGetParameters(fit_mx_custom)))
+
+  testthat::expect_true(
+    all(
+      abs(
+        omxGetParameters(fit_mx)[names(omxGetParameters(fit_mx_custom))]
+        - omxGetParameters(fit_mx_custom)
+      ) < 1e-4
+    )
+  )
 })

@@ -19,11 +19,13 @@
 #'
 #'   I ~ int*1
 #'   S ~ slp*1
+#'
+#'   # set intercepts of manifest variables to zero
+#'   y1 ~ 0*1; y2 ~ 0*1; y3 ~ 0*1; y4 ~ 0*1; y5 ~ 0*1;
 #'   "
 #'
 #' mod <- mxsem(model = model,
-#'              data = dataset,
-#'              add_intercepts = FALSE) |>
+#'              data = dataset) |>
 #'   mxTryHard()
 simulate_latent_growth_curve <- function(N = 100){
   Tpoints <- 5

@@ -21,13 +21,15 @@ mxsem(
 \arguments{
 \item{model}{model syntax similar to \strong{lavaan}'s syntax}
 
-\item{data}{raw data used to fit the model}
+\item{data}{raw data used to fit the model. Alternatively, an object created
+with OpenMx::mxData (e.g., \code{OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")}) can be used.}
 
 \item{scale_loadings}{should the first loading of each latent variable be used for scaling?}
 
 \item{scale_latent_variances}{should the latent variances be used for scaling}
 
-\item{add_intercepts}{should intercepts for manifest variables be added automatically?}
+\item{add_intercepts}{should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
+are added, \strong{mxsem} will automatically use just the observed covariances and not the observed means.}
 
 \item{add_variances}{should variances for manifest and latent variables be added automatically?}
 

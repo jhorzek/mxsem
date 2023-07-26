@@ -108,9 +108,9 @@ model <- '
      dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
      dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
      
-     # lower bound on a1
+  # lower bound on a1
      a1 > 0
-     # upper bound on a2
+  # upper bound on a2
      a2 < 10.123
 '
 
@@ -164,16 +164,21 @@ recorded in `t_1`-`t_5`:
 ```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 library(mxsem)
 model <- "
-  I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
-  S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
-
-  I ~ int*1
-  S ~ slp*1
+  # specify latent intercept
+     I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+  # specify latent slope
+     S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+    
+  # specify means of latent intercept and slope
+     I ~ int*1
+     S ~ slp*1
+  
+  # set intercepts of manifest variables to zero
+     y1 ~ 0*1; y2 ~ 0*1; y3 ~ 0*1; y4 ~ 0*1; y5 ~ 0*1;
   "
 
 mxsem(model = model,
-      data = dataset,
-      add_intercepts = FALSE) |>
+      data = dataset) |>
   mxTryHard() |>
   summary()
 ```
@@ -183,8 +188,7 @@ mxsem(model = model,
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data = dataset,
-      add_intercepts = FALSE) |>
+      data = dataset) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
@@ -209,15 +213,17 @@ head(dataset)
 
 ```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 model <- "
-xi =~ x1 + x2 + x3
-eta =~ y1 + y2 + y3
-eta ~ a*xi
-
-# we need two new parameters: a0 and a1. These are created as follows:
-!a0
-!a1
-# Now, we redefine a to be a0 + k*a1, where k is found in the data
-a := a0 + data.k*a1
+  # loadings
+     xi =~ x1 + x2 + x3
+     eta =~ y1 + y2 + y3
+  # regression
+     eta ~ a*xi
+  
+  # we need two new parameters: a0 and a1. These are created as follows:
+     !a0
+     !a1
+  # Now, we redefine a to be a0 + k*a1, where k is found in the data
+     a := a0 + data.k*a1
 "
 
 mxsem(model = model,
@@ -244,6 +250,13 @@ summary(fit_mx)
 
 `mxsem` returns an `mxModel` object that can be adapted further by users familiar
 with **OpenMx**.
+
+## Trouble shooting
+
+Sometimes things may go wrong. One way to figure out where **mxsem** messed up
+is to look at the parameter table generated internally. This parameter table
+is not returned by default. See `vignette("create_parameter_table", package = "mxsem")`
+for more details.
 
 
 ## References
