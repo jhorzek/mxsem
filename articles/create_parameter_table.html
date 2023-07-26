@@ -72,9 +72,9 @@
     
     
 <p>The core function of <strong>mxsem</strong> is to create a parameter
-table, where are loadings, regressions, and (co-)variances are
+table, where all loadings, regressions, and (co-)variances are
 specified. This parameter table is then used to set up an
-<strong>mxModel</strong> using the <code>mxPath</code>-function. It can
+<strong>mxModel</strong> with the <code>mxPath</code>-function. It can
 be useful to visually inspect the parameter table created by
 <strong>mxsem</strong>. To this end, set the
 <code>return_parameter_table</code>-argument to <code>TRUE</code>:</p>
@@ -88,8 +88,8 @@ be useful to visually inspect the parameter table created by
 <span><span class="st">     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8</span></span>
 <span><span class="st"></span></span>
 <span><span class="st">  # regressions</span></span>
-<span><span class="st">    dem60 ~ ind60</span></span>
-<span><span class="st">    dem65 ~ ind60 + dem60</span></span>
+<span><span class="st">    dem60 ~ g1*ind60</span></span>
+<span><span class="st">    dem65 ~ g2*ind60 + g3*dem60</span></span>
 <span><span class="st"></span></span>
 <span><span class="st">  # residual correlations</span></span>
 <span><span class="st">    y1 ~~ y5</span></span>
@@ -97,6 +97,11 @@ be useful to visually inspect the parameter table created by
 <span><span class="st">    y3 ~~ y7</span></span>
 <span><span class="st">    y4 ~~ y8</span></span>
 <span><span class="st">    y6 ~~ y8</span></span>
+<span><span class="st">    </span></span>
+<span><span class="st">! delta_a</span></span>
+<span><span class="st">! g1g3</span></span>
+<span><span class="st">a2   := a1 + delta_a</span></span>
+<span><span class="st">g1g3 := g1*g3</span></span>
 <span><span class="st">'</span></span>
 <span></span>
 <span><span class="va">model_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxsem.html">mxsem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">model</span>,</span>
@@ -105,56 +110,57 @@ be useful to visually inspect the parameter table created by
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model_list</span><span class="op">$</span><span class="va">parameter_table</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $parameter_table</span></span>
-<span><span class="co">#&gt;      lhs op   rhs modifier lbound ubound free</span></span>
-<span><span class="co">#&gt; 1  ind60 =~    x1      1.0               TRUE</span></span>
-<span><span class="co">#&gt; 2  ind60 =~    x2                        TRUE</span></span>
-<span><span class="co">#&gt; 3  ind60 =~    x3                        TRUE</span></span>
-<span><span class="co">#&gt; 4  dem60 =~    y1      1.0               TRUE</span></span>
-<span><span class="co">#&gt; 5  dem60 =~    y2       a1               TRUE</span></span>
-<span><span class="co">#&gt; 6  dem60 =~    y3        b               TRUE</span></span>
-<span><span class="co">#&gt; 7  dem60 =~    y4       c1               TRUE</span></span>
-<span><span class="co">#&gt; 8  dem65 =~    y5      1.0               TRUE</span></span>
-<span><span class="co">#&gt; 9  dem65 =~    y6       a2               TRUE</span></span>
-<span><span class="co">#&gt; 10 dem65 =~    y7        b               TRUE</span></span>
-<span><span class="co">#&gt; 11 dem65 =~    y8       c2               TRUE</span></span>
-<span><span class="co">#&gt; 12 dem60  ~ ind60                        TRUE</span></span>
-<span><span class="co">#&gt; 13 dem65  ~ ind60                        TRUE</span></span>
-<span><span class="co">#&gt; 14 dem65  ~ dem60                        TRUE</span></span>
-<span><span class="co">#&gt; 15    y1 ~~    y5                        TRUE</span></span>
-<span><span class="co">#&gt; 16    y2 ~~    y4                        TRUE</span></span>
-<span><span class="co">#&gt; 17    y2 ~~    y6                        TRUE</span></span>
-<span><span class="co">#&gt; 18    y3 ~~    y7                        TRUE</span></span>
-<span><span class="co">#&gt; 19    y4 ~~    y8                        TRUE</span></span>
-<span><span class="co">#&gt; 20    y6 ~~    y8                        TRUE</span></span>
-<span><span class="co">#&gt; 21 ind60 ~~ ind60                        TRUE</span></span>
-<span><span class="co">#&gt; 22 dem60 ~~ dem60                        TRUE</span></span>
-<span><span class="co">#&gt; 23 dem65 ~~ dem65                        TRUE</span></span>
-<span><span class="co">#&gt; 24    y1 ~~    y1                        TRUE</span></span>
-<span><span class="co">#&gt; 25    y2 ~~    y2                        TRUE</span></span>
-<span><span class="co">#&gt; 26    y3 ~~    y3                        TRUE</span></span>
-<span><span class="co">#&gt; 27    y4 ~~    y4                        TRUE</span></span>
-<span><span class="co">#&gt; 28    y6 ~~    y6                        TRUE</span></span>
-<span><span class="co">#&gt; 29    x1 ~~    x1                        TRUE</span></span>
-<span><span class="co">#&gt; 30    x2 ~~    x2                        TRUE</span></span>
-<span><span class="co">#&gt; 31    x3 ~~    x3                        TRUE</span></span>
-<span><span class="co">#&gt; 32    y5 ~~    y5                        TRUE</span></span>
-<span><span class="co">#&gt; 33    y7 ~~    y7                        TRUE</span></span>
-<span><span class="co">#&gt; 34    y8 ~~    y8                        TRUE</span></span>
-<span><span class="co">#&gt; 35    y1  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 36    y2  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 37    y3  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 38    y4  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 39    y6  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 40    x1  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 41    x2  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 42    x3  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 43    y5  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 44    y7  ~     1                        TRUE</span></span>
-<span><span class="co">#&gt; 45    y8  ~     1                        TRUE</span></span>
+<span><span class="co">#&gt;      lhs op   rhs modifier lbound ubound  free</span></span>
+<span><span class="co">#&gt; 1  ind60 =~    x1      1.0                TRUE</span></span>
+<span><span class="co">#&gt; 2  ind60 =~    x2                         TRUE</span></span>
+<span><span class="co">#&gt; 3  ind60 =~    x3                         TRUE</span></span>
+<span><span class="co">#&gt; 4  dem60 =~    y1      1.0                TRUE</span></span>
+<span><span class="co">#&gt; 5  dem60 =~    y2       a1                TRUE</span></span>
+<span><span class="co">#&gt; 6  dem60 =~    y3        b                TRUE</span></span>
+<span><span class="co">#&gt; 7  dem60 =~    y4       c1                TRUE</span></span>
+<span><span class="co">#&gt; 8  dem65 =~    y5      1.0                TRUE</span></span>
+<span><span class="co">#&gt; 9  dem65 =~    y6       a2               FALSE</span></span>
+<span><span class="co">#&gt; 10 dem65 =~    y7        b                TRUE</span></span>
+<span><span class="co">#&gt; 11 dem65 =~    y8       c2                TRUE</span></span>
+<span><span class="co">#&gt; 12 dem60  ~ ind60       g1                TRUE</span></span>
+<span><span class="co">#&gt; 13 dem65  ~ ind60       g2                TRUE</span></span>
+<span><span class="co">#&gt; 14 dem65  ~ dem60       g3                TRUE</span></span>
+<span><span class="co">#&gt; 15    y1 ~~    y5                         TRUE</span></span>
+<span><span class="co">#&gt; 16    y2 ~~    y4                         TRUE</span></span>
+<span><span class="co">#&gt; 17    y2 ~~    y6                         TRUE</span></span>
+<span><span class="co">#&gt; 18    y3 ~~    y7                         TRUE</span></span>
+<span><span class="co">#&gt; 19    y4 ~~    y8                         TRUE</span></span>
+<span><span class="co">#&gt; 20    y6 ~~    y8                         TRUE</span></span>
+<span><span class="co">#&gt; 21 ind60 ~~ ind60                         TRUE</span></span>
+<span><span class="co">#&gt; 22 dem60 ~~ dem60                         TRUE</span></span>
+<span><span class="co">#&gt; 23 dem65 ~~ dem65                         TRUE</span></span>
+<span><span class="co">#&gt; 24    y1 ~~    y1                         TRUE</span></span>
+<span><span class="co">#&gt; 25    y2 ~~    y2                         TRUE</span></span>
+<span><span class="co">#&gt; 26    y3 ~~    y3                         TRUE</span></span>
+<span><span class="co">#&gt; 27    y4 ~~    y4                         TRUE</span></span>
+<span><span class="co">#&gt; 28    y6 ~~    y6                         TRUE</span></span>
+<span><span class="co">#&gt; 29    x1 ~~    x1                         TRUE</span></span>
+<span><span class="co">#&gt; 30    x2 ~~    x2                         TRUE</span></span>
+<span><span class="co">#&gt; 31    x3 ~~    x3                         TRUE</span></span>
+<span><span class="co">#&gt; 32    y5 ~~    y5                         TRUE</span></span>
+<span><span class="co">#&gt; 33    y7 ~~    y7                         TRUE</span></span>
+<span><span class="co">#&gt; 34    y8 ~~    y8                         TRUE</span></span>
+<span><span class="co">#&gt; 35    y1  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 36    y2  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 37    y3  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 38    y4  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 39    y6  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 40    x1  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 41    x2  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 42    x3  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 43    y5  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 44    y7  ~     1                         TRUE</span></span>
+<span><span class="co">#&gt; 45    y8  ~     1                         TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $algebras</span></span>
-<span><span class="co">#&gt; [1] lhs op  rhs</span></span>
-<span><span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span><span class="co">#&gt;    lhs op        rhs</span></span>
+<span><span class="co">#&gt; 1   a2 := a1+delta_a</span></span>
+<span><span class="co">#&gt; 2 g1g3 :=      g1*g3</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $variables</span></span>
 <span><span class="co">#&gt; $variables$manifests</span></span>
@@ -165,10 +171,29 @@ be useful to visually inspect the parameter table created by
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $new_parameters</span></span>
-<span><span class="co">#&gt; character(0)</span></span>
+<span><span class="co">#&gt; [1] "delta_a" "g1g3"   </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $new_parameters_free</span></span>
-<span><span class="co">#&gt; character(0)</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "TRUE"  "FALSE"</span></span></code></pre></div>
+<p>The element <code>parameter_table$parameter_table</code> specifies
+all loadings (<code>op</code> is <code>=~</code>), regressions
+(<code>op</code> is <code>~</code>), and (co-)variances (<code>op</code>
+is <code>~~</code>). The <code>modifier</code> specifies parameter
+labels, <code>lbound</code> is the lower bound and <code>ubound</code>
+is the upper bound for parameters. Finally, <code>free</code> specifies
+if a parameter is estimated (<code>TRUE</code>) or fixed
+(<code>FALSE</code>).</p>
+<p>If there are algebras, these are listed in the
+<code>parameter_table$algebras</code> data.frame. Note that the new
+parameters <code>delta_a</code> and <code>g1g3</code> used in these
+algebras are listed in <code>parameter_table$new_parameters</code>,
+while <code>parameter_table$new_parameters_free</code> specifies for
+each of these new parameters if they are free or fixed. In this case
+<code>g1g3</code> is fixed because it is the product of two other
+parameters.</p>
+<p>The <code>variables</code> specify which of the variables are
+manifest (observed) and which are latent (unobserved). Each manifest
+variable must also be found in the data set.</p>
   </main>
 </div>
 

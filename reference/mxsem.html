@@ -63,7 +63,8 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
 <span>  add_exogenous_manifest_covariances <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  lbound_variances <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  directed <span class="op">=</span> <span class="st">"→"</span>,</span>
-<span>  undirected <span class="op">=</span> <span class="st">"↔"</span></span>
+<span>  undirected <span class="op">=</span> <span class="st">"↔"</span>,</span>
+<span>  return_parameter_table <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -75,7 +76,7 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
 
 <dt>data</dt>
 <dd><p>raw data used to fit the model. Alternatively, an object created
-with OpenMx::mxData (e.g., <code>OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")</code>) can be used.</p></dd>
+with <code><a href="https://rdrr.io/pkg/OpenMx/man/mxData.html" class="external-link">OpenMx::mxData</a></code> can be used (e.g., <code>OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")</code>).</p></dd>
 
 
 <dt>scale_loadings</dt>
@@ -116,31 +117,37 @@ added automatically?</p></dd>
 <dt>undirected</dt>
 <dd><p>symbol used to indicate undirected effects (variances and covariances)</p></dd>
 
+
+<dt>return_parameter_table</dt>
+<dd><p>if set to TRUE, the internal parameter table is returend
+together with the mxModel</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>mxModel object that can be fitted with mxRun or mxTryHard</p>
+<p>mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
+is TRUE, a list with the mxModel and the parameter table is returned.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Setting up SEM can be tedious. The <strong>lavaan</strong> (Rosseel, 2012) package provides a great syntax to
-make the process easier. The objective of mxsem is to provide a similar syntax
+make the process easier. The objective of <strong>mxsem</strong> is to provide a similar syntax
 for <strong>OpenMx</strong>. <strong>OpenMx</strong> is a flexible R package for extended SEM. However, note that
-mxsem only covers a small part of the <strong>OpenMx</strong> framework by focusing on "standard"
+<strong>mxsem</strong> only covers a small part of the <strong>OpenMx</strong> framework by focusing on "standard"
 SEM.</p><div class="section">
 <h3 id="defaults">Defaults<a class="anchor" aria-label="anchor" href="#defaults"></a></h3>
 
 
-<p>By default, mxsem scales latent variables by setting the loadings on the first
+<p>By default, <strong>mxsem</strong> scales latent variables by setting the loadings on the first
 item to 1. This can be changed by setting <code>scale_loadings = FALSE</code> in the function
 call. Setting <code>scale_latent_variances = TRUE</code> sets latent variances to 1 for
 scaling.</p>
-<p>mxsem will add intercepts for all manifest variables as well as variances for
+<p><strong>mxsem</strong> will add intercepts for all manifest variables as well as variances for
 all manifest and latent variables. A lower bound of 1e-6 will be added to all
 variances. Finally, covariances for all exogenous variables will be added.
-All of these options can be changed when calling mxsem.</p>
+All of these options can be changed when calling <strong>mxsem</strong>.</p>
 </div>
 
 <div class="section">
@@ -240,7 +247,7 @@ invariance.</p>
 <h3 id="starting-values">Starting Values<a class="anchor" aria-label="anchor" href="#starting-values"></a></h3>
 
 
-<p>mxsem differs from <strong>lavaan</strong> in the specification of starting values. Instead
+<p><strong>mxsem</strong> differs from <strong>lavaan</strong> in the specification of starting values. Instead
 of providing starting values in the model syntax, the <code>set_starting_values</code>
 function is used.</p>
 </div>
