@@ -62,15 +62,19 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="mxsem">mxsem<a class="anchor" aria-label="anchor" href="#mxsem"></a>
 </h1></div>
-<p><strong>mxsem</strong> provides a <strong>lavaan</strong>-like (Rosseel, 2012) syntax to implement structural equation models (SEM) with <strong>OpenMx</strong> (Boker et al., 2011). The objective is to simplify fitting basic SEM with <strong>OpenMx</strong> and to allow users to easily switch between <strong>lavaan</strong> and <strong>OpenMx</strong>. The latter can be useful if one of the two packages reports non-convergence or other issues. Additionally, <strong>mxsem</strong> allows for parameter transformations and definition variables. However, <strong>mxsem</strong> is intentionally incomplete in order to focus on simplicity. If you want to unlock the full potential of <strong>OpenMx</strong>, <strong>mxsem</strong> may not be the best option.</p>
+<p><strong>mxsem</strong> provides a <strong>lavaan</strong>-like (Rosseel, 2012) syntax to implement structural equation models (SEM) with <strong>OpenMx</strong> (Boker et al., 2011). The objective is to simplify fitting basic SEM with <strong>OpenMx</strong> and to allow users to easily switch between <strong>lavaan</strong> and <strong>OpenMx</strong>. The latter can be useful if one of the two packages reports non-convergence or other issues. Additionally, <strong>mxsem</strong> allows for parameter transformations and definition variables. However, <strong>mxsem</strong> is intentionally incomplete in order to focus on simplicity. The main function (<code><a href="reference/mxsem.html">mxsem()</a></code>) is similar to <strong>lavaan</strong>’s <code>sem()</code>-function in that it tries to set up parts of the model automatically (e.g., add variances automatically or scale the latent variables automatically). If you want to unlock the full potential of <strong>OpenMx</strong>, <strong>mxsem</strong> may not be the best option.</p>
 <blockquote>
 <p><strong>Warning</strong>: The syntax and settings of <strong>mxsem</strong> may differ from <strong>lavaan</strong> in some cases. See <code><a href="articles/Syntax.html">vignette("Syntax", package = "mxsem")</a></code> for more details on the syntax and the default arguments.</p>
 </blockquote>
 <div class="section level2">
 <h2 id="alternatives">Alternatives<a class="anchor" aria-label="anchor" href="#alternatives"></a>
 </h2>
-<p><strong>mxsem</strong> is new and may still have some sharp edges. Fortunately, there are other packages that also try to simplify implementing <strong>OpenMx</strong> models. You may consider the following:</p>
+<p><strong>mxsem</strong> is not the first package providing a <strong>lavaan</strong>-like syntax for <strong>OpenMx</strong>. The following packages provide similar (or even more) functionality:</p>
 <ul>
+<li>
+<a href="https://github.com/mikewlcheung/metasem" class="external-link"><strong>metaSEM</strong></a> provides a <code>lavaan2RAM</code> function that can be combined with the <code>create.mxModel</code> function. This combination offers more features than <strong>mxsem</strong>. For instance, constraints of the form <code>a &lt; b</code> are supported. In <strong>mxsem</strong> such constraints require algebras (e.g., <code>!diff; a := b - exp(diff)</code>).</li>
+<li>
+<a href="https://github.com/tbates/umx" class="external-link"><strong>umx</strong></a> provides a <code>umxLav2RAM</code> function that can be used to parse single <strong>lavaan</strong>-style statements (e.g., <code>eta =~ y1 + y2 + y3</code>) or an entire <strong>lavaan</strong> model.</li>
 <li>
 <a href="https://github.com/cjvanlissa/tidySEM" class="external-link"><strong>tidySEM</strong></a> provides a unified syntax to specify both, <strong>lavaan</strong> and <strong>OpenMx</strong> models. Additionally, it works well with the <strong>tidyverse</strong>.</li>
 <li>
@@ -174,8 +178,8 @@ Show summary
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AIC:      1528.9445               3178.945                 3283.308</span></span>
 <span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC:      -287.9662               3273.962                 3144.740</span></span>
 <span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-26 12:38:44 </span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.2889161 secs </span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-27 13:16:19 </span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.273941 secs </span></span>
 <span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>
@@ -212,41 +216,41 @@ Show summary
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; free parameters:</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           name matrix   row   col    Estimate  Std.Error A lbound ubound</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     ind60→x1      A    x1 ind60 -0.66602170 0.06402866                </span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     ind60→x2      A    x2 ind60 -1.45290743 0.12615568                </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     ind60→x3      A    x3 ind60 -1.21127127 0.12698640                </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     dem60→y1      A    y1 dem60  2.21018204 0.24807745                </span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5           a1      A    y2 dem60  2.98303882 0.39468080        0       </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6            b      A    y3 dem60  2.52119422 0.27197809                </span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7           c1      A    y4 dem60  2.86625997 0.31515644                </span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8     dem65→y5      A    y5 dem65  2.08191983 0.25257949                </span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9           a2      A    y6 dem65  2.61417776 0.33069500          10.123</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10          c2      A    y8 dem65  2.72104681 0.30581996                </span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11       x1↔x1      S    x1    x1  0.08176757 0.01979702    1e-06       </span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12       x2↔x2      S    x2    x2  0.11868526 0.07037988    1e-06       </span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13       x3↔x3      S    x3    x3  0.46717098 0.08933784    1e-06       </span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14       y1↔y1      S    y1    y1  1.92282885 0.40071175    1e-06       </span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15       y2↔y2      S    y2    y2  6.51160402 1.20295551    1e-06       </span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16       y3↔y3      S    y3    y3  5.31391669 0.95937886    1e-06       </span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17       y4↔y4      S    y4    y4  2.88901915 0.63410194    1e-06       </span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18       y5↔y5      S    y5    y5  2.38176210 0.45556179    1e-06       </span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19       y6↔y6      S    y6    y6  4.36051508 0.82329062    1e-06       </span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20       y7↔y7      S    y7    y7  3.58248792 0.68194958    1e-06       </span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21       y8↔y8      S    y8    y8  2.95767332 0.62795292    1e-06       </span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 ind60↔dem60      S ind60 dem60 -0.43953627 0.10490347                </span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 ind60↔dem65      S ind60 dem65 -0.54935165 0.09041693                </span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 dem60↔dem65      S dem60 dem65  0.97753026 0.02697913                </span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25      one→x1      M     1    x1  5.05438384 0.08369589                </span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26      one→x2      M     1    x2  4.79219463 0.17242320                </span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27      one→x3      M     1    x3  3.55768979 0.16060031                </span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28      one→y1      M     1    y1  5.46466668 0.30128777                </span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29      one→y2      M     1    y2  4.25644290 0.45329784                </span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30      one→y3      M     1    y3  6.56311028 0.39447209                </span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31      one→y4      M     1    y4  4.45253306 0.38479430                </span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32      one→y5      M     1    y5  5.13625193 0.29925389                </span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33      one→y6      M     1    y6  2.97807410 0.38634730                </span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34      one→y7      M     1    y7  6.19626390 0.36404189                </span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35      one→y8      M     1    y8  4.04338969 0.37170615                </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     ind60→x1      A    x1 ind60 -0.66602170 0.06402951                </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     ind60→x2      A    x2 ind60 -1.45290744 0.12615656                </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     ind60→x3      A    x3 ind60 -1.21127127 0.12698825                </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     dem60→y1      A    y1 dem60  2.21018206 0.24807614                </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5           a1      A    y2 dem60  2.98303881 0.39467357        0       </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6            b      A    y3 dem60  2.52119422 0.27196938                </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7           c1      A    y4 dem60  2.86625994 0.31515084                </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8     dem65→y5      A    y5 dem65  2.08191981 0.25257937                </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9           a2      A    y6 dem65  2.61417778 0.33068838          10.123</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10          c2      A    y8 dem65  2.72104686 0.30581387                </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11       x1↔x1      S    x1    x1  0.08176758 0.01979700    1e-06       </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12       x2↔x2      S    x2    x2  0.11868526 0.07037930    1e-06       </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13       x3↔x3      S    x3    x3  0.46717098 0.08933534    1e-06       </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14       y1↔y1      S    y1    y1  1.92282884 0.40070469    1e-06       </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15       y2↔y2      S    y2    y2  6.51160409 1.20280196    1e-06       </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16       y3↔y3      S    y3    y3  5.31391666 0.95933882    1e-06       </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17       y4↔y4      S    y4    y4  2.88901919 0.63407764    1e-06       </span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18       y5↔y5      S    y5    y5  2.38176210 0.45551623    1e-06       </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19       y6↔y6      S    y6    y6  4.36051510 0.82331883    1e-06       </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20       y7↔y7      S    y7    y7  3.58248796 0.68189650    1e-06       </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21       y8↔y8      S    y8    y8  2.95767334 0.62789118    1e-06       </span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 ind60↔dem60      S ind60 dem60 -0.43953628 0.10489895                </span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 ind60↔dem65      S ind60 dem65 -0.54935165 0.09041592                </span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 dem60↔dem65      S dem60 dem65  0.97753026 0.02697979                </span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25      one→x1      M     1    x1  5.05438385 0.08369636                </span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26      one→x2      M     1    x2  4.79219464 0.17242431                </span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27      one→x3      M     1    x3  3.55768980 0.16060060                </span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28      one→y1      M     1    y1  5.46466669 0.30130512                </span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29      one→y2      M     1    y2  4.25644288 0.45331748                </span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30      one→y3      M     1    y3  6.56311028 0.39450081                </span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31      one→y4      M     1    y4  4.45253306 0.38482130                </span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32      one→y5      M     1    y5  5.13625193 0.29927231                </span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33      one→y6      M     1    y6  2.97807411 0.38636810                </span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34      one→y7      M     1    y7  6.19626393 0.36405650                </span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35      one→y8      M     1    y8  4.04338972 0.37172145                </span></span>
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Model Statistics: </span></span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)</span></span>
@@ -260,8 +264,8 @@ Show summary
 <span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AIC:      1550.9954               3200.995                 3265.611</span></span>
 <span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC:      -279.8202               3282.107                 3171.797</span></span>
 <span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-26 12:38:45 </span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.07293105 secs </span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-27 13:16:20 </span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.07494998 secs </span></span>
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>
@@ -340,8 +344,8 @@ Show summary
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AIC:       821.2609               861.2609                 863.7328</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC:       795.2092               887.3126                 855.7301</span></span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-26 12:38:46 </span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.241333 secs </span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-27 13:16:21 </span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.246155 secs </span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>
@@ -421,8 +425,8 @@ Show summary
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AIC:       461.3822               515.3822                 526.0151</span></span>
 <span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC:       443.1460               567.4856                 504.3206</span></span>
 <span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-26 12:38:46 </span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.03846908 secs </span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; timestamp: 2023-07-27 13:16:21 </span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wall clock time: 0.03747702 secs </span></span>
 <span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>

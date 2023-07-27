@@ -136,7 +136,33 @@ is TRUE, a list with the mxModel and the parameter table is returned.</p>
 make the process easier. The objective of <strong>mxsem</strong> is to provide a similar syntax
 for <strong>OpenMx</strong>. <strong>OpenMx</strong> is a flexible R package for extended SEM. However, note that
 <strong>mxsem</strong> only covers a small part of the <strong>OpenMx</strong> framework by focusing on "standard"
-SEM.</p><div class="section">
+SEM. Similar to <strong>lavaan</strong>'s <code>sem()</code>-function, <code>mxsem</code> tries to set up parts
+of the model automatically (e.g., add variances automatically or scale the
+latent variables automatically). If you want to unlock
+the full potential of <strong>OpenMx</strong>, <strong>mxsem</strong> may not be the best option.</p>
+<p><strong>Warning</strong>: The syntax and settings of <strong>mxsem</strong> may differ from
+<strong>lavaan</strong> in some cases. See <code><a href="../articles/Syntax.html">vignette("Syntax", package = "mxsem")</a></code> for more details
+on the syntax and the default arguments.</p><div class="section">
+<h3 id="alternatives">Alternatives<a class="anchor" aria-label="anchor" href="#alternatives"></a></h3>
+
+
+<p><strong>mxsem</strong> is not the first package providing a <strong>lavaan</strong>-like syntax for <strong>OpenMx</strong>.
+The following packages provide similar (or even more) functionality:</p><ul><li><p><a href="https://github.com/mikewlcheung/metasem" class="external-link"><strong>metaSEM</strong></a> provides a <code>lavaan2RAM</code>
+function that can be combined with the <code>create.mxModel</code> function. This combination
+offers more features than <strong>mxsem</strong>. For instance, constraints of the form <code>a &lt; b</code>
+are supported. In <strong>mxsem</strong> such constraints require algebras (e.g., <code>!diff; a := b - exp(diff)</code>).</p></li>
+<li><p><a href="https://github.com/tbates/umx" class="external-link"><strong>umx</strong></a> provides a <code>umxLav2RAM</code> function that
+can be used to parse single <strong>lavaan</strong>-style statements (e.g., <code>eta =~ y1 + y2 + y3</code>)
+or an entire <strong>lavaan</strong> model.</p></li>
+<li><p><a href="https://github.com/cjvanlissa/tidySEM" class="external-link"><strong>tidySEM</strong></a> provides a unified syntax to
+specify both, <strong>lavaan</strong> and <strong>OpenMx</strong> models. Additionally, it works well with the
+<strong>tidyverse</strong>.</p></li>
+<li><p><a href="https://github.com/OpenMx/ezMx" class="external-link"><strong>ezMx</strong></a> simplifies fitting SEM with <strong>OpenMx</strong>
+and also provides a translation of <strong>lavaan</strong> models to <strong>OpenMx</strong> with the
+<code>lavaan.to.OpenMx</code> function.</p></li>
+</ul></div>
+
+<div class="section">
 <h3 id="defaults">Defaults<a class="anchor" aria-label="anchor" href="#defaults"></a></h3>
 
 
