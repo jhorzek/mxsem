@@ -11,7 +11,33 @@ NULL
 #' make the process easier. The objective of **mxsem** is to provide a similar syntax
 #' for **OpenMx**. **OpenMx** is a flexible R package for extended SEM. However, note that
 #' **mxsem** only covers a small part of the **OpenMx** framework by focusing on "standard"
-#' SEM.
+#' SEM. Similar to **lavaan**'s `sem()`-function, `mxsem` tries to set up parts
+#' of the model automatically (e.g., add variances automatically or scale the
+#' latent variables automatically). If you want to unlock
+#' the full potential of **OpenMx**, **mxsem** may not be the best option.
+#'
+#' **Warning**: The syntax and settings of **mxsem** may differ from
+#' **lavaan** in some cases. See `vignette("Syntax", package = "mxsem")` for more details
+#' on the syntax and the default arguments.
+#'
+#' ## Alternatives
+#'
+#' **mxsem** is not the first package providing a **lavaan**-like syntax for **OpenMx**.
+#' The following packages provide similar (or even more) functionality:
+#'
+#' - [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
+#' function that can be combined with the `create.mxModel` function. This combination
+#' offers more features than **mxsem**. For instance, constraints of the form `a < b`
+#' are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
+#' - [**umx**](https://github.com/tbates/umx) provides a `umxLav2RAM` function that
+#' can be used to parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`)
+#' or an entire **lavaan** model.
+#' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
+#' specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
+#' **tidyverse**.
+#' - [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with **OpenMx**
+#' and also provides a translation of **lavaan** models to **OpenMx** with the
+#' `lavaan.to.OpenMx` function.
 #'
 #' ## Defaults
 #'

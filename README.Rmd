@@ -22,19 +22,27 @@ to allow users to easily switch between **lavaan** and **OpenMx**. The latter ca
 be useful if one of the two packages reports non-convergence or other issues.
 Additionally, **mxsem** allows for parameter transformations and definition
 variables. However, **mxsem** is intentionally incomplete in order to focus
-on simplicity. If you want to unlock the full potential of **OpenMx**, **mxsem**
-may not be the best option.
+on simplicity. The main function (`mxsem()`) is similar to **lavaan**'s `sem()`-function
+in that it tries to set up parts of the model automatically (e.g., add variances
+automatically or scale the latent variables automatically). If you want to unlock 
+the full potential of **OpenMx**, **mxsem** may not be the best option.
 
 > **Warning**: The syntax and settings of **mxsem** may differ from 
-**lavaan** in some cases. See `vignette("Syntax", package = "mxsem")` for more details on the syntax and the 
-default arguments.
+**lavaan** in some cases. See `vignette("Syntax", package = "mxsem")` for more details 
+on the syntax and the default arguments.
 
 ## Alternatives
 
-**mxsem** is new and may still have some sharp edges. Fortunately, there are other
-packages that also try to simplify implementing **OpenMx** models. You may consider
-the following:
+**mxsem** is not the first package providing a **lavaan**-like syntax for **OpenMx**.
+The following packages provide similar (or even more) functionality:
 
+- [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
+function that can be combined with the `create.mxModel` function. This combination
+offers more features than **mxsem**. For instance, constraints of the form `a < b`
+are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
+- [**umx**](https://github.com/tbates/umx) provides a `umxLav2RAM` function that 
+can be used to parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) 
+or an entire **lavaan** model.
 - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
 specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 **tidyverse**.

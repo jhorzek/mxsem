@@ -62,7 +62,35 @@ Setting up SEM can be tedious. The \strong{lavaan} (Rosseel, 2012) package provi
 make the process easier. The objective of \strong{mxsem} is to provide a similar syntax
 for \strong{OpenMx}. \strong{OpenMx} is a flexible R package for extended SEM. However, note that
 \strong{mxsem} only covers a small part of the \strong{OpenMx} framework by focusing on "standard"
-SEM.
+SEM. Similar to \strong{lavaan}'s \code{sem()}-function, \code{mxsem} tries to set up parts
+of the model automatically (e.g., add variances automatically or scale the
+latent variables automatically). If you want to unlock
+the full potential of \strong{OpenMx}, \strong{mxsem} may not be the best option.
+
+\strong{Warning}: The syntax and settings of \strong{mxsem} may differ from
+\strong{lavaan} in some cases. See \code{vignette("Syntax", package = "mxsem")} for more details
+on the syntax and the default arguments.
+\subsection{Alternatives}{
+
+\strong{mxsem} is not the first package providing a \strong{lavaan}-like syntax for \strong{OpenMx}.
+The following packages provide similar (or even more) functionality:
+\itemize{
+\item \href{https://github.com/mikewlcheung/metasem}{\strong{metaSEM}} provides a \code{lavaan2RAM}
+function that can be combined with the \code{create.mxModel} function. This combination
+offers more features than \strong{mxsem}. For instance, constraints of the form \code{a < b}
+are supported. In \strong{mxsem} such constraints require algebras (e.g., \verb{!diff; a := b - exp(diff)}).
+\item \href{https://github.com/tbates/umx}{\strong{umx}} provides a \code{umxLav2RAM} function that
+can be used to parse single \strong{lavaan}-style statements (e.g., \code{eta =~ y1 + y2 + y3})
+or an entire \strong{lavaan} model.
+\item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} provides a unified syntax to
+specify both, \strong{lavaan} and \strong{OpenMx} models. Additionally, it works well with the
+\strong{tidyverse}.
+\item \href{https://github.com/OpenMx/ezMx}{\strong{ezMx}} simplifies fitting SEM with \strong{OpenMx}
+and also provides a translation of \strong{lavaan} models to \strong{OpenMx} with the
+\code{lavaan.to.OpenMx} function.
+}
+}
+
 \subsection{Defaults}{
 
 By default, \strong{mxsem} scales latent variables by setting the loadings on the first
