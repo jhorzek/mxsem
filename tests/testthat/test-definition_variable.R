@@ -12,10 +12,12 @@ test_that("definition variable works", {
   y1 ~ 0*1; y2 ~ 0*1; y3 ~ 0*1; y4 ~ 0*1; y5 ~ 0*1;
   "
 
-  mod <- mxsem(model = model,
-               data = dataset) |>
-    mxTryHard()
-
+  # we get a warning here because all loadings of S have been assigned labels
+  testthat::expect_warning(
+    mod <- mxsem(model = model,
+                 data = dataset) |>
+      mxTryHard()
+  )
   testthat::expect_true(abs(omxGetParameters(mod)["int"] - 1) < .2)
   testthat::expect_true(abs(omxGetParameters(mod)["slp"] - .4) < .1)
   testthat::expect_true(abs(omxGetParameters(mod)["I\u2194I"] - 1) < .2)

@@ -23,4 +23,6 @@ void check_lhs(const std::string& lhs, const std::string not_allowed = "!+*=~:")
 
 bool char_in_string(const char c, const std::string& str);
 
+bool is_number(const std::string& str);
+
 #endif
