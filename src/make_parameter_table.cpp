@@ -8,12 +8,30 @@
 #include "find_variables.h"
 #include "scale_latent_variables.h"
 
+void add_user_defined(const std::vector<std::string>& equations,
+                      parameter_table& pt){
+  for(std::string eq: equations){
+
+    // if this is a user specified special element in curly braces, we
+    // add it to the parameter table
+    if(eq[0] == '{'){
+      pt.user_defined.push_back(eq);
+      }
+
+  }
+}
+
 void add_effects(const std::vector<std::string>& equations,
                  parameter_table& pt){
 
   equation_elements eq_elem;
 
   for(std::string eq: equations){
+
+    // if this is a user specified special element in curly braces, we skip the
+    // rest
+    if(eq[0] == '{')
+      continue;
 
     std::vector<std::string> check_for = {"=~", "~~", "~"};
 
@@ -55,6 +73,11 @@ void add_bounds(const std::vector<std::string>& equations,
   // why we first looked for the loadings, etc.
   for(std::string eq: equations){
 
+    // if this is a user specified special element in curly braces, we skip the
+    // rest
+    if(eq[0] == '{')
+      continue;
+
     std::vector<std::string> check_for = {">", "<"};
 
     for(std::string c_for: check_for){
@@ -85,6 +108,39 @@ void add_bounds(const std::vector<std::string>& equations,
   }
 }
 
+std::string remove_outer_braces(const std::string str){
+
+  if((str[0] != '{') || (str[str.size()-1] != '}')){
+    Rcpp::stop( str + " has unbalanced curly braces");
+  }
+
+  return(str.substr(1, str.size() - 2));
+}
+
+bool pt_remove_outer_braces(parameter_table& pt){
+
+  bool has_curly = false;
+
+  for(unsigned int i = 0; i < pt.lhs.size(); i++){
+
+    // check lhs
+    if(pt.lhs.at(i)[0] == '{'){
+      has_curly = true;
+      pt.lhs.at(i) = remove_outer_braces(pt.lhs.at(i));
+    }
+    if(pt.rhs.at(i)[0] == '{'){
+      has_curly = true;
+      pt.rhs.at(i) = remove_outer_braces(pt.rhs.at(i));
+    }
+    if(pt.modifier.at(i)[0] == '{'){
+      has_curly = true;
+      pt.modifier.at(i) = remove_outer_braces(pt.modifier.at(i));
+    }
+  }
+
+  return(has_curly);
+}
+
 
 parameter_table make_parameter_table(const std::string& syntax,
                                      bool add_intercept,
@@ -100,6 +156,8 @@ parameter_table make_parameter_table(const std::string& syntax,
 
   parameter_table pt;
 
+  add_user_defined(equations, pt);
+
   add_effects(equations, pt);
 
   add_bounds(equations, pt);
@@ -107,6 +165,11 @@ parameter_table make_parameter_table(const std::string& syntax,
   // Now add transformations (mxAlgebra)
   make_algebras(equations,
                 pt);
+
+  // clean user defined elements: remove outer braces
+  bool has_curly = pt_remove_outer_braces(pt);
+  if(has_curly)
+    Rcpp::warning("Found curly braces in the model syntax. This is extremely experimental and highly discouraged! Please make sure to thoroughly check the model returend by mxsem!");
 
   pt.vars = find_variables(pt);
 
@@ -130,26 +193,26 @@ parameter_table make_parameter_table(const std::string& syntax,
 }
 
 //' parameter_table_rcpp
-//'
-//' creates a parameter table from a lavaan like syntax
-//' @param syntax lavaan like syntax
-//' @param add_intercept should intercepts for manifest variables be automatically added?
-//' @param add_variance should variances for all variables be automatically added?
-//' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
-//' added automatically?
-//' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
-//' added automatically?
-//' @param scale_latent_variance should variances of latent variables be set to 1?
-//' @param scale_loading should the first loading of each latent variable be set to 1?
-//' @return parameter table
-// [[Rcpp::export]]
-Rcpp::List parameter_table_rcpp(const std::string& syntax,
-                                bool add_intercept,
-                                bool add_variance,
-                                bool add_exogenous_latent_covariances,
-                                bool add_exogenous_manifest_covariances,
-                                bool scale_latent_variance,
-                                bool scale_loading){
+ //'
+ //' creates a parameter table from a lavaan like syntax
+ //' @param syntax lavaan like syntax
+ //' @param add_intercept should intercepts for manifest variables be automatically added?
+ //' @param add_variance should variances for all variables be automatically added?
+ //' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
+ //' added automatically?
+ //' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
+ //' added automatically?
+ //' @param scale_latent_variance should variances of latent variables be set to 1?
+ //' @param scale_loading should the first loading of each latent variable be set to 1?
+ //' @return parameter table
+ // [[Rcpp::export]]
+ Rcpp::List parameter_table_rcpp(const std::string& syntax,
+                                 bool add_intercept,
+                                 bool add_variance,
+                                 bool add_exogenous_latent_covariances,
+                                 bool add_exogenous_manifest_covariances,
+                                 bool scale_latent_variance,
+                                 bool scale_loading){
    parameter_table pt = make_parameter_table(syntax,
                                              add_intercept,
                                              add_variance,
@@ -170,8 +233,10 @@ Rcpp::List parameter_table_rcpp(const std::string& syntax,
                                                          Rcpp::Named("rhs") = pt.alg.rhs);
    Rcpp::List pt_variables = Rcpp::List::create(Rcpp::Named("manifests") = pt.vars.manifests,
                                                 Rcpp::Named("latents") = pt.vars.latents);
+
    Rcpp::List combined = Rcpp::List::create(
      Rcpp::Named("parameter_table") = pt_Rcpp,
+     Rcpp::Named("user_defined") = pt.user_defined,
      Rcpp::Named("algebras") = pt_algebras,
      Rcpp::Named("variables") = pt_variables,
      Rcpp::Named("new_parameters") = pt.alg.new_parameters,

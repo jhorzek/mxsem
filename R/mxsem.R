@@ -296,6 +296,15 @@ mxsem <- function(model,
                        parameter_table$new_parameters,
                        parameter_table$new_parameters_free)
 
+  # add user defined elements
+  if(length(parameter_table$user_defined) != 0)
+    warning("User defined elements using curly braces can be problematic. Make sure to check the model thoroughly")
+  for(user_def in parameter_table$user_defined)
+  mxMod <- mxModel(
+    mxMod,
+    eval(parse(text = user_def))
+  )
+
   if(!return_parameter_table)
     return(mxMod)
 

@@ -16,7 +16,8 @@ void check_cleaned(const std::vector<std::string> cleaned_syntax){
     cmp_to = s[0];
     if(!(isalpha(cmp_to) || // check if character
     (cmp_to == '_') ||
-    (cmp_to == '!')
+    (cmp_to == '!') ||
+    (cmp_to == '{')
     )){
       Rcpp::Rcout << s << std::endl;
       Rcpp::stop("The following syntax is not allowed:" +

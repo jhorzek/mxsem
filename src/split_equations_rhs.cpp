@@ -7,14 +7,14 @@ std::vector<str_rhs_elem> split_eqation_rhs(std::string rhs){
   std::vector<str_rhs_elem> str_elems;
 
   // split at +. This separates different rhs elements
-  std::vector<std::string> rhs_split = split_string_all(rhs, "+");
+  std::vector<std::string> rhs_split = split_string_all(rhs, '+');
 
   // split right hand side further at the modifier
   for(std::string rhs_split_elem: rhs_split){
     str_rhs_elem current_elem;
 
     // check for modifier (*)
-    std::vector<std::string> split_modifiers = split_string_all(rhs_split_elem, "*");
+    std::vector<std::string> split_modifiers = split_string_all(rhs_split_elem, '*');
 
     if(split_modifiers.size() > 2){
 

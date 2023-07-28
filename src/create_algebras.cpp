@@ -10,6 +10,10 @@ void make_algebras(const std::vector<std::string>& equations,
 
   // find newly created variables
   for(std::string eq: equations){
+    if(eq.at(0) == '{'){
+      // skip user defined
+      continue;
+    }
     if(eq.at(0) == '!'){
       // remove exclamation mark
       eq.erase(eq.begin());
