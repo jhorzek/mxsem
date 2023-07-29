@@ -12,10 +12,10 @@ Rcpp::List find_model_name(const std::string& syntax){
    unsigned int loc{0};
    int n_equals{0}; // counts the number of equal signs in a line.
    unsigned int name_start{0}, name_end{0};
+   bool found_start = false;
 
    for(char c: syntax){
-
-     if(name_start == 0){
+     if(!found_start){
        // search for = signs
        switch(c){
        case '=':
@@ -37,14 +37,15 @@ Rcpp::List find_model_name(const std::string& syntax){
      }
 
      if(n_equals >= 3){
-       name_start = loc - n_equals;
+       found_start = true;
+       name_start  = loc - n_equals;
      }
 
      loc++;
    }
 
    std::string model_name;
-   if((name_start > 0) && (name_end < syntax.size()) && (name_end > name_start)){
+   if(found_start && (name_end < syntax.size()) && (name_end > name_start)){
      std::string model_name_full = {syntax.begin() + name_start,
                                     syntax.begin() + name_end};
      for(char c: model_name_full){
