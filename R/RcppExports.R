@@ -20,6 +20,16 @@ clean_syntax <- function(syntax) {
     .Call(`_mxsem_clean_syntax`, syntax)
 }
 
+#' find_model_name
+#'
+#' checks for a model name in the syntax
+#' @param syntax lavaan like syntax
+#' @return vector with (1) model name and (2) model syntax
+#' @keywords internal
+find_model_name <- function(syntax) {
+    .Call(`_mxsem_find_model_name`, syntax)
+}
+
 #' parameter_table_rcpp
 #'
 #' creates a parameter table from a lavaan like syntax
@@ -43,7 +53,7 @@ parameter_table_rcpp <- function(syntax, add_intercept, add_variance, add_exogen
 #' @param str string to be splitted
 #' @param at where to split the string at
 #' @return vector of strings
-#' @export
+#' @keywords internal
 split_string_all <- function(str, at) {
     .Call(`_mxsem_split_string_all`, str, at)
 }

@@ -17,15 +17,13 @@ library(mxsem)
 # mxsem
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)
-with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with **OpenMx** and
-to allow users to easily switch between **lavaan** and **OpenMx**. The latter can
-be useful if one of the two packages reports non-convergence or other issues.
-Additionally, **mxsem** allows for parameter transformations and definition
+with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with
+**OpenMx**, while also unlocking some very useful advanced features. For instance, 
+**mxsem** allows for parameter transformations and definition
 variables. However, **mxsem** is intentionally incomplete in order to focus
 on simplicity. The main function (`mxsem()`) is similar to **lavaan**'s `sem()`-function
 in that it tries to set up parts of the model automatically (e.g., add variances
-automatically or scale the latent variables automatically). If you want to unlock 
-the full potential of **OpenMx**, **mxsem** may not be the best option.
+automatically or scale the latent variables automatically).
 
 > **Warning**: The syntax and settings of **mxsem** may differ from 
 **lavaan** in some cases. See `vignette("Syntax", package = "mxsem")` for more details 
