@@ -72,16 +72,15 @@ the full potential of \strong{OpenMx}, \strong{mxsem} may not be the best option
 on the syntax and the default arguments.
 \subsection{Alternatives}{
 
-\strong{mxsem} is not the first package providing a \strong{lavaan}-like syntax for \strong{OpenMx}.
-The following packages provide similar (or even more) functionality:
+You will find similar functions in the following packages:
 \itemize{
 \item \href{https://github.com/mikewlcheung/metasem}{\strong{metaSEM}} provides a \code{lavaan2RAM}
 function that can be combined with the \code{create.mxModel} function. This combination
 offers more features than \strong{mxsem}. For instance, constraints of the form \code{a < b}
 are supported. In \strong{mxsem} such constraints require algebras (e.g., \verb{!diff; a := b - exp(diff)}).
-\item \href{https://github.com/tbates/umx}{\strong{umx}} provides a \code{umxLav2RAM} function that
-can be used to parse single \strong{lavaan}-style statements (e.g., \code{eta =~ y1 + y2 + y3})
-or an entire \strong{lavaan} model.
+\item \href{https://github.com/tbates/umx}{\strong{umx}} provides the \code{umxRAM} and \code{umxLav2RAM}
+functions that can parse single \strong{lavaan}-style statements (e.g., \code{eta =~ y1 + y2 + y3})
+or an entire \strong{lavaan} models to \strong{OpenMx} models.
 \item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} provides a unified syntax to
 specify both, \strong{lavaan} and \strong{OpenMx} models. Additionally, it works well with the
 \strong{tidyverse}.
@@ -89,6 +88,10 @@ specify both, \strong{lavaan} and \strong{OpenMx} models. Additionally, it works
 and also provides a translation of \strong{lavaan} models to \strong{OpenMx} with the
 \code{lavaan.to.OpenMx} function.
 }
+
+Because \strong{mxsem} implements the syntax parser from scratch, it can extend the
+\strong{lavaan} syntax to account for specific \strong{OpenMx} features. This enables
+implicit transformations with curly braces.
 }
 
 \subsection{Defaults}{
@@ -194,6 +197,12 @@ eta2 =~ l4*y4 + l5*y5 + l6*y6
 l4 := l1 + delta_1
 l5 := l2 + delta_2
 l6 := l3 + delta_3
+}\if{html}{\out{</div>}}
+
+Alternatively, implicit transformations can be used as follows:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{eta1 =~ l1*y1 + l2*y2 + l3*y3
+eta2 =~ \{l1 + delta_1\} * y4 + \{l2 + delta_2\} * y5 + \{l3 + delta_3\} * y6
 }\if{html}{\out{</div>}}
 }
 
