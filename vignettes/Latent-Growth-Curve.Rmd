@@ -91,7 +91,7 @@ slope variable `S` on the observations `y1`-`y4` must be person-specific.
 This is expressed in the following equation, where the time $t_{ui}$ is person-specific:
 $$y_{it_{ui}} = I_i + S_i\times t_{ui}+\varepsilon_{it_{ui}}$$ 
 To this end, so-called definition variables are used [see @mehtaPuttingIndividualBack2000;
-@sterbaFittingNonlinearLatent2014]
+@sterbaFittingNonlinearLatent2014].
 With **mxsem**, this can be achieved as follows:
 
 ```{r}
