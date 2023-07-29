@@ -14,8 +14,8 @@ mxsem(
   add_exogenous_latent_covariances = TRUE,
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
-  directed = "→",
-  undirected = "↔",
+  directed = "<U+2192>",
+  undirected = "<U+2194>",
   return_parameter_table = FALSE
 )
 }
@@ -92,6 +92,13 @@ and also provides a translation of \strong{lavaan} models to \strong{OpenMx} wit
 Because \strong{mxsem} implements the syntax parser from scratch, it can extend the
 \strong{lavaan} syntax to account for specific \strong{OpenMx} features. This enables
 implicit transformations with curly braces.
+}
+
+\subsection{Citation}{
+
+Cite \strong{OpenMx} (Boker et al., 2011) for the modeling and \strong{lavaan} for the
+syntax (Rosseel, 2012). \strong{mxsem} itself is just a very small package and lets
+\strong{OpenMx} do all the heavy lifting.
 }
 
 \subsection{Defaults}{
