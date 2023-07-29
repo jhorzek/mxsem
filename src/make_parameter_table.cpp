@@ -167,9 +167,9 @@ parameter_table make_parameter_table(const std::string& syntax,
                 pt);
 
   // clean user defined elements: remove outer braces
-  bool has_curly = pt_remove_outer_braces(pt);
-  if(has_curly)
-    Rcpp::warning("Found curly braces in the model syntax. This is extremely experimental and highly discouraged! Please make sure to thoroughly check the model returend by mxsem!");
+  // bool has_curly = pt_remove_outer_braces(pt);
+  // if(has_curly)
+  //   Rcpp::warning("Found curly braces in the model syntax. This is extremely experimental and highly discouraged! Please make sure to thoroughly check the model returend by mxsem!");
 
   pt.vars = find_variables(pt);
 
@@ -193,26 +193,26 @@ parameter_table make_parameter_table(const std::string& syntax,
 }
 
 //' parameter_table_rcpp
- //'
- //' creates a parameter table from a lavaan like syntax
- //' @param syntax lavaan like syntax
- //' @param add_intercept should intercepts for manifest variables be automatically added?
- //' @param add_variance should variances for all variables be automatically added?
- //' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
- //' added automatically?
- //' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
- //' added automatically?
- //' @param scale_latent_variance should variances of latent variables be set to 1?
- //' @param scale_loading should the first loading of each latent variable be set to 1?
- //' @return parameter table
- // [[Rcpp::export]]
- Rcpp::List parameter_table_rcpp(const std::string& syntax,
-                                 bool add_intercept,
-                                 bool add_variance,
-                                 bool add_exogenous_latent_covariances,
-                                 bool add_exogenous_manifest_covariances,
-                                 bool scale_latent_variance,
-                                 bool scale_loading){
+//'
+//' creates a parameter table from a lavaan like syntax
+//' @param syntax lavaan like syntax
+//' @param add_intercept should intercepts for manifest variables be automatically added?
+//' @param add_variance should variances for all variables be automatically added?
+//' @param add_exogenous_latent_covariances should covariances between exogenous latent variables be
+//' added automatically?
+//' @param add_exogenous_manifest_covariances should covariances between exogenous manifest variables be
+//' added automatically?
+//' @param scale_latent_variance should variances of latent variables be set to 1?
+//' @param scale_loading should the first loading of each latent variable be set to 1?
+//' @return parameter table
+// [[Rcpp::export]]
+Rcpp::List parameter_table_rcpp(const std::string& syntax,
+                               bool add_intercept,
+                               bool add_variance,
+                               bool add_exogenous_latent_covariances,
+                               bool add_exogenous_manifest_covariances,
+                               bool scale_latent_variance,
+                               bool scale_loading){
    parameter_table pt = make_parameter_table(syntax,
                                              add_intercept,
                                              add_variance,

@@ -271,6 +271,10 @@ mxsem <- function(model,
                                           scale_latent_variance = scale_latent_variances,
                                           scale_loading = scale_loadings)
 
+  parameter_table <- check_modifier_for_algebra(parameter_table = parameter_table,
+                                                directed = directed,
+                                                undirected = undirected)
+
   if(is(data, "MxDataStatic")){
     mx_data <- data
   }else{
@@ -307,10 +311,10 @@ mxsem <- function(model,
   if(length(parameter_table$user_defined) != 0)
     warning("User defined elements using curly braces can be problematic. Make sure to check the model thoroughly")
   for(user_def in parameter_table$user_defined)
-  mxMod <- mxModel(
-    mxMod,
-    eval(parse(text = user_def))
-  )
+    mxMod <- mxModel(
+      mxMod,
+      eval(parse(text = user_def))
+    )
 
   if(!return_parameter_table)
     return(mxMod)
