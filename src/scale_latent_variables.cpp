@@ -35,6 +35,7 @@ void scale_latent_variances(parameter_table& pt){
 void scale_loadings(parameter_table& pt){
   std::vector<std::string> latents = pt.vars.latents;
   for(std::string& latent: latents){
+
     bool was_scaled = false; // set to true if the latent variable was already
     // scaled manually by the user
     int scale_location = -1; // set to the location of the parameter used

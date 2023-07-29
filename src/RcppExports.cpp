@@ -62,13 +62,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // split_string_all
-std::vector<std::string> split_string_all(const std::string& str, const std::string& at);
+std::vector<std::string> split_string_all(const std::string& str, const char at);
 RcppExport SEXP _mxsem_split_string_all(SEXP strSEXP, SEXP atSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::string& >::type str(strSEXP);
-    Rcpp::traits::input_parameter< const std::string& >::type at(atSEXP);
+    Rcpp::traits::input_parameter< const char >::type at(atSEXP);
     rcpp_result_gen = Rcpp::wrap(split_string_all(str, at));
     return rcpp_result_gen;
 END_RCPP

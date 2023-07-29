@@ -16,6 +16,7 @@ struct variables{
 class parameter_table{
 public:
   std::vector<std::string> lhs, op, rhs, modifier, lbound, ubound, free;
+  std::vector<std::string> user_defined;
   algebra alg;
   variables vars;
 

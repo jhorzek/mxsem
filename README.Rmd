@@ -32,21 +32,25 @@ on the syntax and the default arguments.
 ## Alternatives
 
 **mxsem** is not the first package providing a **lavaan**-like syntax for **OpenMx**.
-The following packages provide similar (or even more) functionality:
+You will find similar functions in the following packages:
 
 - [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
 function that can be combined with the `create.mxModel` function. This combination
 offers more features than **mxsem**. For instance, constraints of the form `a < b`
 are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
-- [**umx**](https://github.com/tbates/umx) provides a `umxLav2RAM` function that 
-can be used to parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) 
-or an entire **lavaan** model.
+- [**umx**](https://github.com/tbates/umx) provides the `umxRAM` and `umxLav2RAM` 
+functions that can parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) 
+or an entire **lavaan** models to **OpenMx** models.
 - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
 specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 **tidyverse**.
 - [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with **OpenMx**
 and also provides a translation of **lavaan** models to **OpenMx** with the 
 `lavaan.to.OpenMx` function.
+
+Because **mxsem** implements the syntax parser from scratch, it can extend the 
+**lavaan** syntax to account for specific **OpenMx** features. This enables 
+[implicit transformations](#transformations) with curly braces.
 
 ## Installation
 
@@ -217,6 +221,10 @@ dataset <- simulate_moderated_nonlinear_factor_analysis(N = 100)
 head(dataset)
 ```
 
+**mxsem** currently supports two ways of specifying such transformations. First,
+they can be specified explicitly. To this end, the parameters $a_0$ and $a_1$
+must fist be initialized with `!a0` and `!a1`. Additionally, the transformation
+must be defined with `a := a0 + a1*data.k`.
 ```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 model <- "
   # loadings
@@ -230,6 +238,38 @@ model <- "
      !a1
   # Now, we redefine a to be a0 + k*a1, where k is found in the data
      a := a0 + data.k*a1
+"
+
+mxsem(model = model,
+      data = dataset) |>
+  mxTryHard() |>
+  summary()
+```
+
+<details>
+<summary>Show summary</summary>
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data = dataset) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
+
+Alternatively, the transformations can be defined implicitly by placing the
+algebra in curly braces and directly inserting it in the syntax in place
+of the parameter label:
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
+model <- "
+  # loadings
+     xi =~ x1 + x2 + x3
+     eta =~ y1 + y2 + y3
+  # regression
+     eta ~ {a0 + a1*data.k} * xi
 "
 
 mxsem(model = model,
