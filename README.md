@@ -24,21 +24,23 @@ variables automatically).
 for **OpenMx**. You will find similar functions in the following
 packages:
 
-- [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a
-  `lavaan2RAM` function that can be combined with the `create.mxModel`
-  function. This combination offers more features than **mxsem**. For
-  instance, constraints of the form `a < b` are supported. In **mxsem**
-  such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
-- [**umx**](https://github.com/tbates/umx) provides the `umxRAM` and
-  `umxLav2RAM` functions that can parse single **lavaan**-style
-  statements (e.g., `eta =~ y1 + y2 + y3`) or an entire **lavaan**
-  models to **OpenMx** models.
-- [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a
-  unified syntax to specify both, **lavaan** and **OpenMx** models.
-  Additionally, it works well with the **tidyverse**.
-- [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with
-  **OpenMx** and also provides a translation of **lavaan** models to
-  **OpenMx** with the `lavaan.to.OpenMx` function.
+- [**metaSEM**](https://github.com/mikewlcheung/metasem) (Cheung, 2015)
+  provides a `lavaan2RAM` function that can be combined with the
+  `create.mxModel` function. This combination offers more features than
+  **mxsem**. For instance, constraints of the form `a < b` are
+  supported. In **mxsem** such constraints require algebras (e.g.,
+  `!diff; a := b - exp(diff)`).
+- [**umx**](https://github.com/tbates/umx) (Bates et al., 2019) provides
+  the `umxRAM` and `umxLav2RAM` functions that can parse single
+  **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) or an entire
+  **lavaan** models to **OpenMx** models.
+- [**tidySEM**](https://github.com/cjvanlissa/tidySEM) (van Lissa, 2023)
+  provides a unified syntax to specify both, **lavaan** and **OpenMx**
+  models. Additionally, it works well with the **tidyverse**.
+- [**ezMx**](https://github.com/OpenMx/ezMx) (Bates, et al. 2014)
+  simplifies fitting SEM with **OpenMx** and also provides a translation
+  of **lavaan** models to **OpenMx** with the `lavaan.to.OpenMx`
+  function.
 
 Because **mxsem** implements the syntax parser from scratch, it can
 extend the **lavaan** syntax to account for specific **OpenMx**
@@ -155,8 +157,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:28:12 
-    #> Wall clock time: 0.446058 secs 
+    #> timestamp: 2023-07-29 22:45:46 
+    #> Wall clock time: 0.5170691 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -199,57 +201,57 @@ Show summary
     #> Summary of untitled4 
     #>  
     #> free parameters:
-    #>           name matrix   row   col    Estimate  Std.Error A lbound ubound
-    #> 1     ind60→x1      A    x1 ind60  0.66666817 0.06315811                
-    #> 2     ind60→x2      A    x2 ind60  1.45423327 0.12398408                
-    #> 3     ind60→x3      A    x3 ind60  1.21231511 0.12554182                
-    #> 4     dem60→y1      A    y1 dem60 -2.24692391 0.16355099                
-    #> 5           a1      A    y2 dem60  0.00000000         NA !     0!       
-    #> 6            b      A    y3 dem60 -2.55892758 0.17727532                
-    #> 7           c1      A    y4 dem60 -2.80348678 0.23768484                
-    #> 8     dem65→y5      A    y5 dem65 -2.10524901 0.19296746                
-    #> 9           a2      A    y6 dem65 -2.55243482 0.27868943          10.123
-    #> 10          c2      A    y8 dem65 -2.71463846 0.22684792                
-    #> 11       x1↔x1      S    x1    x1  0.08172351 0.01983069    1e-06       
-    #> 12       x2↔x2      S    x2    x2  0.11872316 0.07051526    1e-06       
-    #> 13       x3↔x3      S    x3    x3  0.46734771 0.08933710    1e-06       
-    #> 14       y1↔y1      S    y1    y1  1.76022723 0.40669821    1e-06       
-    #> 15       y2↔y2      S    y2    y2 15.37208482         NA    1e-06       
-    #> 16       y3↔y3      S    y3    y3  4.97654056 0.92949325    1e-06       
-    #> 17       y4↔y4      S    y4    y4  3.24412423 0.68679281    1e-06       
-    #> 18       y5↔y5      S    y5    y5  2.28325765 0.45050084    1e-06       
-    #> 19       y6↔y6      S    y6    y6  4.68028665 0.88283380    1e-06       
-    #> 20       y7↔y7      S    y7    y7  3.46858361 0.67374984    1e-06       
-    #> 21       y8↔y8      S    y8    y8  2.99198462 0.64558166    1e-06       
-    #> 22 ind60↔dem60      S ind60 dem60 -0.45702988 0.10095317                
-    #> 23 ind60↔dem65      S ind60 dem65 -0.55364627 0.08757232                
-    #> 24 dem60↔dem65      S dem60 dem65  0.97486174 0.03020595                
-    #> 25      one→x1      M     1    x1  5.05438382 0.08376214                
-    #> 26      one→x2      M     1    x2  4.79219459 0.17257632                
-    #> 27      one→x3      M     1    x3  3.55768977 0.16071459                
-    #> 28      one→y1      M     1    y1  5.46466654 0.30132361                
-    #> 29      one→y2      M     1    y2  4.25644282 0.45272066                
-    #> 30      one→y3      M     1    y3  6.56311010 0.39201665                
-    #> 31      one→y4      M     1    y4  4.45253284 0.38479123                
-    #> 32      one→y5      M     1    y5  5.13625184 0.29924456                
-    #> 33      one→y6      M     1    y6  2.97807402 0.38637295                
-    #> 34      one→y7      M     1    y7  6.19626378 0.36547303                
-    #> 35      one→y8      M     1    y8  4.04338956 0.37170720                
+    #>           name matrix   row   col   Estimate  Std.Error A lbound ubound
+    #> 1     ind60→x1      A    x1 ind60 0.66602170 0.06403525                
+    #> 2     ind60→x2      A    x2 ind60 1.45290743 0.12616885                
+    #> 3     ind60→x3      A    x3 ind60 1.21127127 0.12699756                
+    #> 4     dem60→y1      A    y1 dem60 2.21018204 0.24813122                
+    #> 5           a1      A    y2 dem60 2.98303880 0.39474294        0       
+    #> 6            b      A    y3 dem60 2.52119420 0.27204229                
+    #> 7           c1      A    y4 dem60 2.86625994 0.31523966                
+    #> 8     dem65→y5      A    y5 dem65 2.08191981 0.25265235                
+    #> 9           a2      A    y6 dem65 2.61417778 0.33076255          10.123
+    #> 10          c2      A    y8 dem65 2.72104682 0.30590232                
+    #> 11       x1↔x1      S    x1    x1 0.08176758 0.01979702    1e-06       
+    #> 12       x2↔x2      S    x2    x2 0.11868527 0.07037968    1e-06       
+    #> 13       x3↔x3      S    x3    x3 0.46717097 0.08933524    1e-06       
+    #> 14       y1↔y1      S    y1    y1 1.92282890 0.40071764    1e-06       
+    #> 15       y2↔y2      S    y2    y2 6.51160400 1.20278761    1e-06       
+    #> 16       y3↔y3      S    y3    y3 5.31391666 0.95938707    1e-06       
+    #> 17       y4↔y4      S    y4    y4 2.88901917 0.63416283    1e-06       
+    #> 18       y5↔y5      S    y5    y5 2.38176210 0.45555538    1e-06       
+    #> 19       y6↔y6      S    y6    y6 4.36051497 0.82334914    1e-06       
+    #> 20       y7↔y7      S    y7    y7 3.58248789 0.68192587    1e-06       
+    #> 21       y8↔y8      S    y8    y8 2.95767335 0.62794435    1e-06       
+    #> 22 ind60↔dem60      S ind60 dem60 0.43953627 0.10491916                
+    #> 23 ind60↔dem65      S ind60 dem65 0.54935165 0.09042957                
+    #> 24 dem60↔dem65      S dem60 dem65 0.97753026 0.02697909                
+    #> 25      one→x1      M     1    x1 5.05438384 0.08369864                
+    #> 26      one→x2      M     1    x2 4.79219462 0.17242963                
+    #> 27      one→x3      M     1    x3 3.55768979 0.16060500                
+    #> 28      one→y1      M     1    y1 5.46466667 0.30132526                
+    #> 29      one→y2      M     1    y2 4.25644292 0.45334534                
+    #> 30      one→y3      M     1    y3 6.56311026 0.39451355                
+    #> 31      one→y4      M     1    y4 4.45253305 0.38484489                
+    #> 32      one→y5      M     1    y5 5.13625191 0.29928887                
+    #> 33      one→y6      M     1    y6 2.97807411 0.38639609                
+    #> 34      one→y7      M     1    y7 6.19626392 0.36408226                
+    #> 35      one→y8      M     1    y8 4.04338971 0.37175295                
     #> 
     #> Model Statistics: 
     #>                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)
-    #>        Model:             35                    790              3187.076
+    #>        Model:             35                    790              3130.995
     #>    Saturated:             77                    748                    NA
     #> Independence:             22                    803                    NA
     #> Number of observations/statistics: 75/825
     #> 
     #> Information Criteria: 
     #>       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted
-    #> AIC:      1607.0759               3257.076                 3321.691
-    #> BIC:      -223.7397               3338.188                 3227.877
+    #> AIC:      1550.9954               3200.995                 3265.611
+    #> BIC:      -279.8202               3282.107                 3171.797
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:28:13 
-    #> Wall clock time: 0.106462 secs 
+    #> timestamp: 2023-07-29 22:45:47 
+    #> Wall clock time: 0.1048181 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -347,8 +349,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:28:15 
-    #> Wall clock time: 0.3517909 secs 
+    #> timestamp: 2023-07-29 22:45:48 
+    #> Wall clock time: 0.4733469 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -446,8 +448,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:28:16 
-    #> Wall clock time: 0.05271602 secs 
+    #> timestamp: 2023-07-29 22:45:49 
+    #> Wall clock time: 0.07555914 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -456,7 +458,8 @@ Show summary
 
 Alternatively, the transformations can be defined implicitly by placing
 the algebra in curly braces and directly inserting it in the syntax in
-place of the parameter label:
+place of the parameter label. This is inspired by the approach in
+**metaSEM** (Cheung, 2015).
 
 ``` r
 model <- "
@@ -515,8 +518,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:28:16 
-    #> Wall clock time: 0.05251098 secs 
+    #> timestamp: 2023-07-29 22:45:49 
+    #> Wall clock time: 0.06922221 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -538,11 +541,21 @@ details.
 
 ## References
 
+- Bates, T. C., Maes, H., & Neale, M. C. (2019). umx: Twin and
+  Path-Based Structural Equation Modeling in R. Twin Research and Human
+  Genetics, 22(1), 27–41. <https://doi.org/10.1017/thg.2019.2>
+- Bates, T. C., Prindle, J. J. (2014). ezMx.
+  <https://github.com/OpenMx/ezMx>
 - Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T.,
   Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., & Fox, J.
   (2011). OpenMx: An Open Source Extended Structural Equation Modeling
   Framework. Psychometrika, 76(2), 306–317.
   <https://doi.org/10.1007/s11336-010-9200-6>
+- Cheung, M. W.-L. (2015). metaSEM: An R package for meta-analysis using
+  structural equation modeling. Frontiers in Psychology, 5.
+  <https://doi.org/10.3389/fpsyg.2014.01521>
 - Rosseel, Y. (2012). lavaan: An R package for structural equation
   modeling. Journal of Statistical Software, 48(2), 1–36.
   <https://doi.org/10.18637/jss.v048.i02>
+- van Lissa, C. J. (2023). tidySEM: Tidy Structural Equation Modeling. R
+  package version 0.2.4, <https://cjvanlissa.github.io/tidySEM/>.

@@ -14,8 +14,8 @@ mxsem(
   add_exogenous_latent_covariances = TRUE,
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
-  directed = "<U+2192>",
-  undirected = "<U+2194>",
+  directed = "→",
+  undirected = "↔",
   return_parameter_table = FALSE
 )
 }
@@ -74,17 +74,18 @@ on the syntax and the default arguments.
 
 You will find similar functions in the following packages:
 \itemize{
-\item \href{https://github.com/mikewlcheung/metasem}{\strong{metaSEM}} provides a \code{lavaan2RAM}
+\item \href{https://github.com/mikewlcheung/metasem}{\strong{metaSEM}} (Cheung, 2015) provides a \code{lavaan2RAM}
 function that can be combined with the \code{create.mxModel} function. This combination
 offers more features than \strong{mxsem}. For instance, constraints of the form \code{a < b}
 are supported. In \strong{mxsem} such constraints require algebras (e.g., \verb{!diff; a := b - exp(diff)}).
-\item \href{https://github.com/tbates/umx}{\strong{umx}} provides the \code{umxRAM} and \code{umxLav2RAM}
-functions that can parse single \strong{lavaan}-style statements (e.g., \code{eta =~ y1 + y2 + y3})
+\item \href{https://github.com/tbates/umx}{\strong{umx}} (Bates et al., 2019)
+provides the \code{umxRAM} and \code{umxLav2RAM} functions that can parse single \strong{lavaan}-style
+statements (e.g., \code{eta =~ y1 + y2 + y3})
 or an entire \strong{lavaan} models to \strong{OpenMx} models.
-\item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} provides a unified syntax to
+\item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} (van Lissa, 2023) provides a unified syntax to
 specify both, \strong{lavaan} and \strong{OpenMx} models. Additionally, it works well with the
 \strong{tidyverse}.
-\item \href{https://github.com/OpenMx/ezMx}{\strong{ezMx}} simplifies fitting SEM with \strong{OpenMx}
+\item \href{https://github.com/OpenMx/ezMx}{\strong{ezMx}} (Bates, et al. 2014) simplifies fitting SEM with \strong{OpenMx}
 and also provides a translation of \strong{lavaan} models to \strong{OpenMx} with the
 \code{lavaan.to.OpenMx} function.
 }
@@ -211,6 +212,8 @@ Alternatively, implicit transformations can be used as follows:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{eta1 =~ l1*y1 + l2*y2 + l3*y3
 eta2 =~ \{l1 + delta_1\} * y4 + \{l2 + delta_2\} * y5 + \{l3 + delta_3\} * y6
 }\if{html}{\out{</div>}}
+
+This is inspired by the approach in \strong{metaSEM} (Cheung, 2015).
 }
 
 \subsection{Definition variables}{
@@ -235,9 +238,13 @@ function is used.
 
 \subsection{References}{
 \itemize{
+\item Bates, T. C., Maes, H., & Neale, M. C. (2019). umx: Twin and Path-Based Structural Equation Modeling in R. Twin Research and Human Genetics, 22(1), 27–41. https://doi.org/10.1017/thg.2019.2
+\item Bates, T. C., Prindle, J. J. (2014). ezMx. https://github.com/OpenMx/ezMx
 \item Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T., Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., & Fox, J. (2011).
 OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika, 76(2), 306–317. https://doi.org/10.1007/s11336-010-9200-6
+\item Cheung, M. W.-L. (2015). metaSEM: An R package for meta-analysis using structural equation modeling. Frontiers in Psychology, 5. https://doi.org/10.3389/fpsyg.2014.01521
 \item Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
+\item van Lissa, C. J. (2023). tidySEM: Tidy Structural Equation Modeling. R package version 0.2.4, https://cjvanlissa.github.io/tidySEM/.
 }
 }
 }
