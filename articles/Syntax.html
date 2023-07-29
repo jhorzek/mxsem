@@ -41,6 +41,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Latent-Growth-Curve.html">Latent-Growth-Curve</a>
     <a class="dropdown-item" href="../articles/Syntax.html">Syntax</a>
     <a class="dropdown-item" href="../articles/create_parameter_table.html">create_parameter_table</a>
   </div>
@@ -169,6 +170,31 @@ Use the <code>data.</code>-prefix to specify definition variables.</p>
 <span></span>
 <span><span class="va">I</span> <span class="op">~</span> <span class="va">int</span><span class="op">*</span><span class="fl">1</span></span>
 <span><span class="va">S</span> <span class="op">~</span> <span class="va">slp</span><span class="op">*</span><span class="fl">1</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="model-name">Model name<a class="anchor" aria-label="anchor" href="#model-name"></a>
+</h2>
+<p>You can specify a model name using the following syntax:</p>
+<pre><code># start with at least three equal signs:
+=== model_name ===
+I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+
+I ~ int*1
+S ~ slp*1</code></pre>
+<p>Note that <strong>mxsem</strong> will ignore
+<strong>everything</strong> above the three (or more) equal signs! That
+is, the following will result in problems:</p>
+<pre><code># the following two lines will be ignored:
+
+I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+
+# start with at least three equal signs:
+=== model_name ===
+
+I ~ int*1
+S ~ slp*1</code></pre>
 </div>
 <div class="section level2">
 <h2 id="starting-values">Starting Values<a class="anchor" aria-label="anchor" href="#starting-values"></a>

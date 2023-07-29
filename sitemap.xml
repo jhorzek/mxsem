@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Latent-Growth-Curve.html</loc>
+  </url>
+  <url>
     <loc>/articles/Syntax.html</loc>
   </url>
   <url>
@@ -23,6 +26,9 @@
   </url>
   <url>
     <loc>/reference/clean_syntax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/find_model_name.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
