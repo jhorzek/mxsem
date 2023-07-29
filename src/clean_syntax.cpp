@@ -11,11 +11,32 @@
 std::vector<std::string> clean_syntax(const std::string& syntax) {
   std::vector<std::string> cleaned_syntax;
   std::string current_syntax {""};
-  bool is_comment = false;
-  bool is_open    = false;
+  bool is_comment  = false;
+  bool is_open     = false;
+  int n_curly_open = 0; // indicates if the user specified a block of code
+  // that should not be changed
 
   for(char c: syntax){
 
+    // check for curly braces:
+    switch(c){
+    case '{':
+      n_curly_open++;
+      break;
+    case '}':
+      n_curly_open--;
+      if(n_curly_open < 0){
+        Rcpp::stop("Error parsing the syntax: Found a closing curly brace } without an opening curly brance {. The last line was "  +
+          current_syntax);
+      }
+      break;
+    }
+    if(n_curly_open != 0){
+      current_syntax += c;
+      continue;
+    }
+
+    // if we are not in the curly-brace area:
     switch(c){
     case ' ':
       // removes  whitespace
@@ -66,6 +87,9 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
         break;
     }
   }
+
+  if(n_curly_open != 0)
+    Rcpp::stop("Found unbalanced curly braces (e.g., {{}) in your syntax.");
 
   // if the syntax does not end with a new line -> add last element:
   if(current_syntax.length() != 0)

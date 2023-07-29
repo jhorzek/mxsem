@@ -32,15 +32,15 @@ on the syntax and the default arguments.
 ## Alternatives
 
 **mxsem** is not the first package providing a **lavaan**-like syntax for **OpenMx**.
-The following packages provide similar (or even more) functionality:
+You will find similar functions in the following packages:
 
 - [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
 function that can be combined with the `create.mxModel` function. This combination
 offers more features than **mxsem**. For instance, constraints of the form `a < b`
 are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
-- [**umx**](https://github.com/tbates/umx) provides a `umxLav2RAM` function that 
-can be used to parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) 
-or an entire **lavaan** model.
+- [**umx**](https://github.com/tbates/umx) provides the `umxRAM` and `umxLav2RAM` 
+functions that can parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) 
+or an entire **lavaan** models to **OpenMx** models.
 - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
 specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 **tidyverse**.
