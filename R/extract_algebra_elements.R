@@ -17,7 +17,7 @@ extract_algebra_elements <- function(mxAlgebra_formula, extracted = c()){
       extracted <- extract_algebra_elements(mxAlgebra_formula[[i]], extracted)
     }else if(is(mxAlgebra_formula[[i]], "name")){
       potential_element <- mxAlgebra_formula[[i]]
-      if(as.character(potential_element) %in% OpenMx:::omxSymbolTable$R.name)
+      if(as.character(potential_element) %in% OpenMx::omxSymbolTable$R.name)
         next
       extracted <- c(extracted, as.character(potential_element))
     }else{

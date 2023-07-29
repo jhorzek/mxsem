@@ -48,6 +48,10 @@ specify both, **lavaan** and **OpenMx** models. Additionally, it works well with
 and also provides a translation of **lavaan** models to **OpenMx** with the 
 `lavaan.to.OpenMx` function.
 
+Because **mxsem** implements the syntax parser from scratch, it can extend the 
+**lavaan** syntax to account for specific **OpenMx** features. This enables 
+[implicit transformations](#transformations) with curly braces.
+
 ## Installation
 
 The newest version of the package can be installed from GitHub using the following commands in R:
