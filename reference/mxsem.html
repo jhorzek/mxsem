@@ -63,8 +63,8 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
 <span>  add_exogenous_latent_covariances <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_exogenous_manifest_covariances <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  lbound_variances <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  directed <span class="op">=</span> <span class="st">"→"</span>,</span>
-<span>  undirected <span class="op">=</span> <span class="st">"↔"</span>,</span>
+<span>  directed <span class="op">=</span> <span class="st">"&lt;U+2192&gt;"</span>,</span>
+<span>  undirected <span class="op">=</span> <span class="st">"&lt;U+2194&gt;"</span>,</span>
 <span>  return_parameter_table <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -163,6 +163,15 @@ and also provides a translation of <strong>lavaan</strong> models to <strong>Ope
 </ul><p>Because <strong>mxsem</strong> implements the syntax parser from scratch, it can extend the
 <strong>lavaan</strong> syntax to account for specific <strong>OpenMx</strong> features. This enables
 implicit transformations with curly braces.</p>
+</div>
+
+<div class="section">
+<h3 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a></h3>
+
+
+<p>Cite <strong>OpenMx</strong> (Boker et al., 2011) for the modeling and <strong>lavaan</strong> for the
+syntax (Rosseel, 2012). <strong>mxsem</strong> itself is just a very small package and lets
+<strong>OpenMx</strong> do all the heavy lifting.</p>
 </div>
 
 <div class="section">
