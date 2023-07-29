@@ -24,18 +24,19 @@ NULL
 #'
 #' You will find similar functions in the following packages:
 #'
-#' - [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
+#' - [**metaSEM**](https://github.com/mikewlcheung/metasem) (Cheung, 2015) provides a `lavaan2RAM`
 #' function that can be combined with the `create.mxModel` function. This combination
 #' offers more features than **mxsem**. For instance, constraints of the form `a < b`
 #' are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
-#' - [**umx**](https://github.com/tbates/umx) provides the `umxRAM` and `umxLav2RAM`
-#' functions that can parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`)
+#' - [**umx**](https://github.com/tbates/umx) (Bates et al., 2019)
+#' provides the `umxRAM` and `umxLav2RAM` functions that can parse single **lavaan**-style
+#' statements (e.g., `eta =~ y1 + y2 + y3`)
 #' or an entire **lavaan** models to **OpenMx** models.
-#' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
+#' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) (van Lissa, 2023) provides a unified syntax to
 #' specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 #' **tidyverse**.
-#' - [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with **OpenMx**
-#' and also provides a translation of **lavaan** models to **OpenMx** with the
+#' - [**ezMx**](https://github.com/OpenMx/ezMx) (Bates, et al. 2014) simplifies fitting SEM with **OpenMx**
+#'   and also provides a translation of **lavaan** models to **OpenMx** with the
 #' `lavaan.to.OpenMx` function.
 #'
 #' Because **mxsem** implements the syntax parser from scratch, it can extend the
@@ -152,6 +153,7 @@ NULL
 #' eta1 =~ l1*y1 + l2*y2 + l3*y3
 #' eta2 =~ {l1 + delta_1} * y4 + {l2 + delta_2} * y5 + {l3 + delta_3} * y6
 #' ```
+#' This is inspired by the approach in **metaSEM** (Cheung, 2015).
 #'
 #' ## Definition variables
 #'
@@ -173,9 +175,13 @@ NULL
 #'
 #' ## References
 #'
+#' * Bates, T. C., Maes, H., & Neale, M. C. (2019). umx: Twin and Path-Based Structural Equation Modeling in R. Twin Research and Human Genetics, 22(1), 27–41. https://doi.org/10.1017/thg.2019.2
+#' * Bates, T. C., Prindle, J. J. (2014). ezMx. https://github.com/OpenMx/ezMx
 #' * Boker, S. M., Neale, M., Maes, H., Wilde, M., Spiegel, M., Brick, T., Spies, J., Estabrook, R., Kenny, S., Bates, T., Mehta, P., & Fox, J. (2011).
 #' OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika, 76(2), 306–317. https://doi.org/10.1007/s11336-010-9200-6
+#' * Cheung, M. W.-L. (2015). metaSEM: An R package for meta-analysis using structural equation modeling. Frontiers in Psychology, 5. https://doi.org/10.3389/fpsyg.2014.01521
 #' * Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
+#' * van Lissa, C. J. (2023). tidySEM: Tidy Structural Equation Modeling. R package version 0.2.4, https://cjvanlissa.github.io/tidySEM/.
 #'
 #' @param model model syntax similar to **lavaan**'s syntax
 #' @param data raw data used to fit the model. Alternatively, an object created
