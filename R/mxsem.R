@@ -22,22 +22,25 @@ NULL
 #'
 #' ## Alternatives
 #'
-#' **mxsem** is not the first package providing a **lavaan**-like syntax for **OpenMx**.
-#' The following packages provide similar (or even more) functionality:
+#' You will find similar functions in the following packages:
 #'
 #' - [**metaSEM**](https://github.com/mikewlcheung/metasem) provides a `lavaan2RAM`
 #' function that can be combined with the `create.mxModel` function. This combination
 #' offers more features than **mxsem**. For instance, constraints of the form `a < b`
 #' are supported. In **mxsem** such constraints require algebras (e.g., `!diff; a := b - exp(diff)`).
-#' - [**umx**](https://github.com/tbates/umx) provides a `umxLav2RAM` function that
-#' can be used to parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`)
-#' or an entire **lavaan** model.
+#' - [**umx**](https://github.com/tbates/umx) provides the `umxRAM` and `umxLav2RAM`
+#' functions that can parse single **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`)
+#' or an entire **lavaan** models to **OpenMx** models.
 #' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) provides a unified syntax to
 #' specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 #' **tidyverse**.
 #' - [**ezMx**](https://github.com/OpenMx/ezMx) simplifies fitting SEM with **OpenMx**
 #' and also provides a translation of **lavaan** models to **OpenMx** with the
 #' `lavaan.to.OpenMx` function.
+#'
+#' Because **mxsem** implements the syntax parser from scratch, it can extend the
+#' **lavaan** syntax to account for specific **OpenMx** features. This enables
+#' implicit transformations with curly braces.
 #'
 #' ## Defaults
 #'
@@ -134,6 +137,13 @@ NULL
 #' l4 := l1 + delta_1
 #' l5 := l2 + delta_2
 #' l6 := l3 + delta_3
+#' ```
+#'
+#' Alternatively, implicit transformations can be used as follows:
+#'
+#' ```
+#' eta1 =~ l1*y1 + l2*y2 + l3*y3
+#' eta2 =~ {l1 + delta_1} * y4 + {l2 + delta_2} * y5 + {l3 + delta_3} * y6
 #' ```
 #'
 #' ## Definition variables
