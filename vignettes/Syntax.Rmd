@@ -120,6 +120,37 @@ I ~ int*1
 S ~ slp*1
 ```
 
+## Model name
+
+You can specify a model name using the following syntax:
+
+```
+# start with at least three equal signs:
+=== model_name ===
+I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+
+I ~ int*1
+S ~ slp*1
+```
+
+Note that **mxsem** will ignore **everything** above the three (or more) equal
+signs! That is, the following will result in problems:
+
+```
+# the following two lines will be ignored:
+
+I =~ 1*y1 + 1*y2 + 1*y3 + 1*y4 + 1*y5
+S =~ data.t_1 * y1 + data.t_2 * y2 + data.t_3 * y3 + data.t_4 * y4 + data.t_5 * y5
+
+# start with at least three equal signs:
+=== model_name ===
+
+I ~ int*1
+S ~ slp*1
+```
+
+
 ## Starting Values
 
 mxsem differs from **lavaan** in the specification of starting values. Instead

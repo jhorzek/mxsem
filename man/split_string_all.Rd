@@ -17,3 +17,4 @@ vector of strings
 \description{
 splits a string
 }
+\keyword{internal}

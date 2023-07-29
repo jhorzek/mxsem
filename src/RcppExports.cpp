@@ -33,6 +33,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// find_model_name
+Rcpp::List find_model_name(const std::string& syntax);
+RcppExport SEXP _mxsem_find_model_name(SEXP syntaxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type syntax(syntaxSEXP);
+    rcpp_result_gen = Rcpp::wrap(find_model_name(syntax));
+    return rcpp_result_gen;
+END_RCPP
+}
 // parameter_table_rcpp
 Rcpp::List parameter_table_rcpp(const std::string& syntax, bool add_intercept, bool add_variance, bool add_exogenous_latent_covariances, bool add_exogenous_manifest_covariances, bool scale_latent_variance, bool scale_loading);
 RcppExport SEXP _mxsem_parameter_table_rcpp(SEXP syntaxSEXP, SEXP add_interceptSEXP, SEXP add_varianceSEXP, SEXP add_exogenous_latent_covariancesSEXP, SEXP add_exogenous_manifest_covariancesSEXP, SEXP scale_latent_varianceSEXP, SEXP scale_loadingSEXP) {
@@ -66,6 +77,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_mxsem_char_in_string", (DL_FUNC) &_mxsem_char_in_string, 2},
     {"_mxsem_clean_syntax", (DL_FUNC) &_mxsem_clean_syntax, 1},
+    {"_mxsem_find_model_name", (DL_FUNC) &_mxsem_find_model_name, 1},
     {"_mxsem_parameter_table_rcpp", (DL_FUNC) &_mxsem_parameter_table_rcpp, 7},
     {"_mxsem_split_string_all", (DL_FUNC) &_mxsem_split_string_all, 2},
     {NULL, NULL, 0}

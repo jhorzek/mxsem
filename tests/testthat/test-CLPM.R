@@ -1,4 +1,4 @@
-test_that("CLPM works", {
+test_that("CLPM", {
 
   # The following simulation and analysis of a random intercept cross-lagged panel model
   # is based on the syntax from Jeroen D. Mulder & Ellen L. Hamaker (2021) Three Extensions of the Random

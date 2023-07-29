@@ -260,7 +260,10 @@ mxsem <- function(model,
   if(scale_loadings & scale_latent_variances)
     warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
 
-  parameter_table <- parameter_table_rcpp(syntax = model,
+  # split the string into pre-processing, model name, and model syntax
+  splitted_syntax <- find_model_name(syntax = model)
+
+  parameter_table <- parameter_table_rcpp(syntax = splitted_syntax$model_syntax,
                                           add_intercept = add_intercepts,
                                           add_variance = add_variances,
                                           add_exogenous_latent_covariances = add_exogenous_latent_covariances,
@@ -280,10 +283,14 @@ mxsem <- function(model,
     }
   }
 
-  mxMod <- OpenMx::mxModel(type = "RAM",
-                           manifestVars = parameter_table$variables$manifests,
-                           latentVars = parameter_table$variables$latents,
-                           mx_data)
+  mxMod <- OpenMx::mxModel(
+    model = ifelse(test = splitted_syntax$model_name == "",
+                   NA,
+                   splitted_syntax$model_name),
+    type = "RAM",
+    manifestVars = parameter_table$variables$manifests,
+    latentVars = parameter_table$variables$latents,
+    mx_data)
 
   mxMod <- add_path(mxMod,
                     parameter_table,

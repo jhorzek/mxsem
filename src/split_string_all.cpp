@@ -7,7 +7,7 @@
 //' @param str string to be splitted
 //' @param at where to split the string at
 //' @return vector of strings
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 std::vector<std::string> split_string_all(const std::string& str, const std::string& at) {
   // adapted from Vincenzo Pii at https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
