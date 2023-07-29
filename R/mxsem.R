@@ -42,6 +42,13 @@ NULL
 #' **lavaan** syntax to account for specific **OpenMx** features. This enables
 #' implicit transformations with curly braces.
 #'
+#'
+#' ## Citation
+#'
+#' Cite **OpenMx** (Boker et al., 2011) for the modeling and **lavaan** for the
+#' syntax (Rosseel, 2012). **mxsem** itself is just a very small package and lets
+#' **OpenMx** do all the heavy lifting.
+#'
 #' ## Defaults
 #'
 #' By default, **mxsem** scales latent variables by setting the loadings on the first

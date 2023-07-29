@@ -52,6 +52,12 @@ Because **mxsem** implements the syntax parser from scratch, it can extend the
 **lavaan** syntax to account for specific **OpenMx** features. This enables 
 [implicit transformations](#transformations) with curly braces.
 
+## Citation
+
+Cite **OpenMx** (Boker et al., 2011) for the modeling and **lavaan** for the 
+syntax (Rosseel, 2012). **mxsem** itself is just a very small package and lets 
+**OpenMx** do all the heavy lifting.
+
 ## Installation
 
 The newest version of the package can be installed from GitHub using the following commands in R:
@@ -210,7 +216,7 @@ summary(fit_mx)
 ## Transformations
 
 Sometimes, one may want to express one parameter as a function of other parameters.
-For instance, in moderated non-linear factor analysis, model parameters are often 
+In moderated non-linear factor analysis, for example, model parameters are often 
 expressed in terms of a covariate k. For instance, the effect $a$ of $\xi$ on $\eta$ 
 could be expressed as $a = a_0 + a_1\times k$.
 
