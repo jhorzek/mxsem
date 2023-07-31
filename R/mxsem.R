@@ -303,6 +303,7 @@ mxsem <- function(model,
                                           scale_latent_variance = scale_latent_variances,
                                           scale_loading = scale_loadings)
 
+  check_all_fields(parameter_table)
   parameter_table <- check_modifier_for_algebra(parameter_table = parameter_table,
                                                 directed = directed,
                                                 undirected = undirected)
