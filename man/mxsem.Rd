@@ -14,8 +14,8 @@ mxsem(
   add_exogenous_latent_covariances = TRUE,
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
-  directed = "→",
-  undirected = "↔",
+  directed = "<U+2192>",
+  undirected = "<U+2194>",
   return_parameter_table = FALSE
 )
 }
@@ -211,6 +211,12 @@ Alternatively, implicit transformations can be used as follows:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{eta1 =~ l1*y1 + l2*y2 + l3*y3
 eta2 =~ \{l1 + delta_1\} * y4 + \{l2 + delta_2\} * y5 + \{l3 + delta_3\} * y6
+}\if{html}{\out{</div>}}
+
+Specific labels for the transformation results can also be provided:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{eta1 =~ l1*y1 + l2*y2 + l3*y3
+eta2 =~ \{l4 := l1 + delta_1\} * y4 + \{l5 := l2 + delta_2\} * y5 + \{l6 := l3 + delta_3\} * y6
 }\if{html}{\out{</div>}}
 
 This is inspired by the approach in \strong{metaSEM} (Cheung, 2015).
