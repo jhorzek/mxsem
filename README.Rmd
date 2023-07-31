@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 library(mxsem)
+set.seed(123)
 ```
 
 # mxsem
@@ -247,10 +248,14 @@ model <- "
      a := a0 + data.k*a1
 "
 
-mxsem(model = model,
+fit_mx <- mxsem(model = model,
       data = dataset) |>
-  mxTryHard() |>
-  summary()
+  mxTryHard()
+
+summary(fit_mx)
+
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
 ```
 
 <details>
@@ -263,6 +268,8 @@ fit_mx <- mxsem(model = model,
 ```
 ```{r,echo=FALSE}
 summary(fit_mx)
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
 ```
 
 </details>
@@ -295,6 +302,42 @@ fit_mx <- mxsem(model = model,
 ```
 ```{r,echo=FALSE}
 summary(fit_mx)
+```
+
+</details>
+
+You can also provide custom names for the algebra results:
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
+model <- "
+  # loadings
+     xi =~ x1 + x2 + x3
+     eta =~ y1 + y2 + y3
+  # regression
+     eta ~ {a := a0 + a1*data.k} * xi
+"
+
+fit_mx <- mxsem(model = model,
+      data = dataset) |>
+  mxTryHard()
+
+summary(fit_mx)
+
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
+```
+
+<details>
+<summary>Show summary</summary>
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+      data = dataset) |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
 ```
 
 </details>

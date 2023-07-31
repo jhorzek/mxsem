@@ -153,7 +153,16 @@ NULL
 #' eta1 =~ l1*y1 + l2*y2 + l3*y3
 #' eta2 =~ {l1 + delta_1} * y4 + {l2 + delta_2} * y5 + {l3 + delta_3} * y6
 #' ```
+#'
+#' Specific labels for the transformation results can also be provided:
+#'
+#' ```
+#' eta1 =~ l1*y1 + l2*y2 + l3*y3
+#' eta2 =~ {l4 := l1 + delta_1} * y4 + {l5 := l2 + delta_2} * y5 + {l6 := l3 + delta_3} * y6
+#' ```
+#'
 #' This is inspired by the approach in **metaSEM** (Cheung, 2015).
+#'
 #'
 #' ## Definition variables
 #'
