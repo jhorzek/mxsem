@@ -14,8 +14,8 @@ mxsem(
   add_exogenous_latent_covariances = TRUE,
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
-  directed = "<U+2192>",
-  undirected = "<U+2194>",
+  directed = "→",
+  undirected = "↔",
   return_parameter_table = FALSE
 )
 }

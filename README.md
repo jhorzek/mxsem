@@ -157,8 +157,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:57 
-    #> Wall clock time: 0.285316 secs 
+    #> timestamp: 2023-07-31 13:45:30 
+    #> Wall clock time: 0.293278 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -202,56 +202,56 @@ Show summary
     #>  
     #> free parameters:
     #>           name matrix   row   col    Estimate  Std.Error A lbound ubound
-    #> 1     ind60→x1      A    x1 ind60  0.65907707 0.06288236                
-    #> 2     ind60→x2      A    x2 ind60  1.43718329 0.12381556                
-    #> 3     ind60→x3      A    x3 ind60  1.19826915 0.12489763                
-    #> 4     dem60→y1      A    y1 dem60  2.14739204 0.25406461                
-    #> 5           a1      A    y2 dem60  3.07920264 0.39750112        0       
-    #> 6            b      A    y3 dem60 -1.55624783 0.42420730                
-    #> 7           c1      A    y4 dem60  2.87107164 0.32431628                
-    #> 8     dem65→y5      A    y5 dem65 -2.03834024 0.25723189                
-    #> 9           a2      A    y6 dem65 -2.68971596 0.32640482          10.123
-    #> 10          c2      A    y8 dem65 -2.73288290 0.30489594                
-    #> 11       x1↔x1      S    x1    x1  0.08154848 0.01981528    1e-06       
-    #> 12       x2↔x2      S    x2    x2  0.11934812 0.07049735    1e-06       
-    #> 13       x3↔x3      S    x3    x3  0.46736721 0.08929630    1e-06       
-    #> 14       y1↔y1      S    y1    y1  2.21267051 0.45169287    1e-06       
-    #> 15       y2↔y2      S    y2    y2  5.96690318 1.16904207    1e-06       
-    #> 16       y3↔y3      S    y3    y3 19.30498828 4.29224465    1e-06       
-    #> 17       y4↔y4      S    y4    y4  2.89263351 0.69550703    1e-06       
-    #> 18       y5↔y5      S    y5    y5  2.54641200 0.49114590    1e-06       
-    #> 19       y6↔y6      S    y6    y6  3.93085873 0.78704458    1e-06       
-    #> 20       y7↔y7      S    y7    y7  5.21757524 1.25469184    1e-06       
-    #> 21       y8↔y8      S    y8    y8  2.86466382 0.66025123    1e-06       
-    #> 22 ind60↔dem60      S ind60 dem60  0.41796936 0.11478600                
-    #> 23 ind60↔dem65      S ind60 dem65 -0.53608422 0.09291786                
-    #> 24 dem60↔dem65      S dem60 dem65 -0.98588667 0.03356586                
-    #> 25      one→x1      M     1    x1  5.05438384 0.08294249                
-    #> 26      one→x2      M     1    x2  4.79219463 0.17068404                
-    #> 27      one→x3      M     1    x3  3.55768979 0.15930322                
-    #> 28      one→y1      M     1    y1  5.46466667 0.30165424                
-    #> 29      one→y2      M     1    y2  4.25644289 0.45387164                
-    #> 30      one→y3      M     1    y3  6.56311026 0.53822090                
-    #> 31      one→y4      M     1    y4  4.45253304 0.38534834                
-    #> 32      one→y5      M     1    y5  5.13625194 0.29893069                
-    #> 33      one→y6      M     1    y6  2.97807408 0.38586192                
-    #> 34      one→y7      M     1    y7  6.19626390 0.31916737                
-    #> 35      one→y8      M     1    y8  4.04338969 0.37120547                
+    #> 1     ind60→x1      A    x1 ind60  0.66666815 0.06314203                
+    #> 2     ind60→x2      A    x2 ind60  1.45423326 0.12394721                
+    #> 3     ind60→x3      A    x3 ind60  1.21231509 0.12551275                
+    #> 4     dem60→y1      A    y1 dem60 -2.24692386 0.16292809                
+    #> 5           a1      A    y2 dem60  0.00000000         NA !     0!       
+    #> 6            b      A    y3 dem60 -2.55892738 0.17648475                
+    #> 7           c1      A    y4 dem60 -2.80348655 0.23710803                
+    #> 8     dem65→y5      A    y5 dem65 -2.10524882 0.19254708                
+    #> 9           a2      A    y6 dem65 -2.55243469 0.27839775          10.123
+    #> 10          c2      A    y8 dem65 -2.71463830 0.22625659                
+    #> 11       x1↔x1      S    x1    x1  0.08172352 0.01983068    1e-06       
+    #> 12       x2↔x2      S    x2    x2  0.11872315 0.07051504    1e-06       
+    #> 13       x3↔x3      S    x3    x3  0.46734771 0.08933374    1e-06       
+    #> 14       y1↔y1      S    y1    y1  1.76022749 0.40668814    1e-06       
+    #> 15       y2↔y2      S    y2    y2 15.37208533         NA    1e-06       
+    #> 16       y3↔y3      S    y3    y3  4.97654067 0.92946421    1e-06       
+    #> 17       y4↔y4      S    y4    y4  3.24412436 0.68674912    1e-06       
+    #> 18       y5↔y5      S    y5    y5  2.28325758 0.45047306    1e-06       
+    #> 19       y6↔y6      S    y6    y6  4.68028674 0.88272249    1e-06       
+    #> 20       y7↔y7      S    y7    y7  3.46858346 0.67373234    1e-06       
+    #> 21       y8↔y8      S    y8    y8  2.99198432 0.64558867    1e-06       
+    #> 22 ind60↔dem60      S ind60 dem60 -0.45702984 0.10093202                
+    #> 23 ind60↔dem65      S ind60 dem65 -0.55364625 0.08756465                
+    #> 24 dem60↔dem65      S dem60 dem65  0.97486174 0.03020539                
+    #> 25      one→x1      M     1    x1  5.05438384 0.08376190                
+    #> 26      one→x2      M     1    x2  4.79219463 0.17257565                
+    #> 27      one→x3      M     1    x3  3.55768979 0.16071368                
+    #> 28      one→y1      M     1    y1  5.46466667 0.30132622                
+    #> 29      one→y2      M     1    y2  4.25644288 0.45272065                
+    #> 30      one→y3      M     1    y3  6.56311025 0.39201794                
+    #> 31      one→y4      M     1    y4  4.45253304 0.38479483                
+    #> 32      one→y5      M     1    y5  5.13625192 0.29924780                
+    #> 33      one→y6      M     1    y6  2.97807408 0.38637444                
+    #> 34      one→y7      M     1    y7  6.19626389 0.36547691                
+    #> 35      one→y8      M     1    y8  4.04338968 0.37171110                
     #> 
     #> Model Statistics: 
     #>                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)
-    #>        Model:             35                    790              3238.013
+    #>        Model:             35                    790              3187.076
     #>    Saturated:             77                    748                    NA
     #> Independence:             22                    803                    NA
     #> Number of observations/statistics: 75/825
     #> 
     #> Information Criteria: 
     #>       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted
-    #> AIC:      1658.0132               3308.013                 3372.629
-    #> BIC:      -172.8024               3389.125                 3278.814
+    #> AIC:      1607.0759               3257.076                 3321.691
+    #> BIC:      -223.7397               3338.188                 3227.877
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:58 
-    #> Wall clock time: 0.081846 secs 
+    #> timestamp: 2023-07-31 13:45:31 
+    #> Wall clock time: 0.05354595 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -349,8 +349,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:58 
-    #> Wall clock time: 0.236979 secs 
+    #> timestamp: 2023-07-31 13:45:33 
+    #> Wall clock time: 0.2386739 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -452,8 +452,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:59 
-    #> Wall clock time: 0.0360899 secs 
+    #> timestamp: 2023-07-31 13:45:33 
+    #> Wall clock time: 0.03776979 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -524,8 +524,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:59 
-    #> Wall clock time: 0.03715706 secs 
+    #> timestamp: 2023-07-31 13:45:33 
+    #> Wall clock time: 0.03638387 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -595,8 +595,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-31 13:30:59 
-    #> Wall clock time: 0.03708315 secs 
+    #> timestamp: 2023-07-31 13:45:34 
+    #> Wall clock time: 0.03728795 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
