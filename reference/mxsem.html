@@ -270,6 +270,9 @@ invariance.</p>
 <p>Alternatively, implicit transformations can be used as follows:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>eta1 <span class="ot">=</span><span class="er">~</span> l1<span class="sc">*</span>y1 <span class="sc">+</span> l2<span class="sc">*</span>y2 <span class="sc">+</span> l3<span class="sc">*</span>y3</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>eta2 <span class="ot">=</span><span class="er">~</span> {l1 <span class="sc">+</span> delta_1} <span class="sc">*</span> y4 <span class="sc">+</span> {l2 <span class="sc">+</span> delta_2} <span class="sc">*</span> y5 <span class="sc">+</span> {l3 <span class="sc">+</span> delta_3} <span class="sc">*</span> y6</span></code></pre><p></p></div>
+<p>Specific labels for the transformation results can also be provided:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>eta1 <span class="ot">=</span><span class="er">~</span> l1<span class="sc">*</span>y1 <span class="sc">+</span> l2<span class="sc">*</span>y2 <span class="sc">+</span> l3<span class="sc">*</span>y3</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>eta2 <span class="ot">=</span><span class="er">~</span> {l4 <span class="sc">:</span><span class="er">=</span> l1 <span class="sc">+</span> delta_1} <span class="sc">*</span> y4 <span class="sc">+</span> {l5 <span class="sc">:</span><span class="er">=</span> l2 <span class="sc">+</span> delta_2} <span class="sc">*</span> y5 <span class="sc">+</span> {l6 <span class="sc">:</span><span class="er">=</span> l3 <span class="sc">+</span> delta_3} <span class="sc">*</span> y6</span></code></pre><p></p></div>
 <p>This is inspired by the approach in <strong>metaSEM</strong> (Cheung, 2015).</p>
 </div>
 
