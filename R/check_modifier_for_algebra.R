@@ -20,39 +20,55 @@ check_modifier_for_algebra <- function(parameter_table,
 
   for(i in which(is_algebra)){
 
-    # create new variable name
-
-    # directed effect
-    if(parameter_table$parameter_table$op[i]  == "~"){
-      from <- parameter_table$parameter_table$rhs[i]
-      to <- parameter_table$parameter_table$lhs[i]
-
-      if(from == "1"){
-        from <- "one"
-      }
-
-    }else{
-      from <- parameter_table$parameter_table$lhs[i]
-      to <- parameter_table$parameter_table$rhs[i]
-    }
-
-    if(parameter_table$parameter_table$op[i] == "~~"){
-      arrows <- 2
-    }else{
-      arrows <- 1
-    }
-
-    if(arrows == 1){
-      new_name <- paste0(from, directed, to)
-    }else{
-      new_name <- paste0(from, undirected, to)
-    }
-
-
+    # remove braces
     cleaned_algebra <-  gsub(
       pattern = "^\\{", replacement = "",
       x = gsub(pattern = "\\}$", replacement = "", x = parameter_table$parameter_table$modifier[i])
     )
+
+    if(grepl(pattern = ":=", x = cleaned_algebra)){
+      # already has a variable name
+      has_name <- TRUE
+
+      splitted_algebra <- strsplit(x = cleaned_algebra, split = ":=")
+      if(length(splitted_algebra) != 1)
+        stop("Error while splitting algebra ", cleaned_algebra, ". Are there multiple := ?")
+      if(length(splitted_algebra[[1]]) != 2)
+        stop("Error while splitting algebra ", cleaned_algebra, ". Are there multiple := ?")
+
+      new_name <- clean_syntax(splitted_algebra[[1]][1])
+
+      cleaned_algebra <- splitted_algebra[[1]][2]
+    }else{
+
+      # create new variable name
+      has_name <- FALSE
+      # directed effect
+      if(parameter_table$parameter_table$op[i]  == "~"){
+        from <- parameter_table$parameter_table$rhs[i]
+        to <- parameter_table$parameter_table$lhs[i]
+
+        if(from == "1"){
+          from <- "one"
+        }
+
+      }else{
+        from <- parameter_table$parameter_table$lhs[i]
+        to <- parameter_table$parameter_table$rhs[i]
+      }
+
+      if(parameter_table$parameter_table$op[i] == "~~"){
+        arrows <- 2
+      }else{
+        arrows <- 1
+      }
+
+      if(arrows == 1){
+        new_name <- paste0(from, directed, to)
+      }else{
+        new_name <- paste0(from, undirected, to)
+      }
+    }
 
     parameter_table$algebras <- rbind(parameter_table$algebras,
                                       data.frame(lhs = new_name,
@@ -85,8 +101,11 @@ check_modifier_for_algebra <- function(parameter_table,
       )
     }
 
-    # the modifier will automatically be replaced with the label used above
-    parameter_table$parameter_table$modifier[i] <- ""
+    parameter_table$parameter_table$modifier[i] <- ifelse(
+      has_name,
+      new_name,
+      # the modifier will automatically be replaced with the label used above
+      "")
     parameter_table$parameter_table$free[i]     <- FALSE
   }
   return(parameter_table)

@@ -157,8 +157,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:45:46 
-    #> Wall clock time: 0.5170691 secs 
+    #> timestamp: 2023-07-31 13:30:57 
+    #> Wall clock time: 0.285316 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -201,57 +201,57 @@ Show summary
     #> Summary of untitled4 
     #>  
     #> free parameters:
-    #>           name matrix   row   col   Estimate  Std.Error A lbound ubound
-    #> 1     ind60→x1      A    x1 ind60 0.66602170 0.06403525                
-    #> 2     ind60→x2      A    x2 ind60 1.45290743 0.12616885                
-    #> 3     ind60→x3      A    x3 ind60 1.21127127 0.12699756                
-    #> 4     dem60→y1      A    y1 dem60 2.21018204 0.24813122                
-    #> 5           a1      A    y2 dem60 2.98303880 0.39474294        0       
-    #> 6            b      A    y3 dem60 2.52119420 0.27204229                
-    #> 7           c1      A    y4 dem60 2.86625994 0.31523966                
-    #> 8     dem65→y5      A    y5 dem65 2.08191981 0.25265235                
-    #> 9           a2      A    y6 dem65 2.61417778 0.33076255          10.123
-    #> 10          c2      A    y8 dem65 2.72104682 0.30590232                
-    #> 11       x1↔x1      S    x1    x1 0.08176758 0.01979702    1e-06       
-    #> 12       x2↔x2      S    x2    x2 0.11868527 0.07037968    1e-06       
-    #> 13       x3↔x3      S    x3    x3 0.46717097 0.08933524    1e-06       
-    #> 14       y1↔y1      S    y1    y1 1.92282890 0.40071764    1e-06       
-    #> 15       y2↔y2      S    y2    y2 6.51160400 1.20278761    1e-06       
-    #> 16       y3↔y3      S    y3    y3 5.31391666 0.95938707    1e-06       
-    #> 17       y4↔y4      S    y4    y4 2.88901917 0.63416283    1e-06       
-    #> 18       y5↔y5      S    y5    y5 2.38176210 0.45555538    1e-06       
-    #> 19       y6↔y6      S    y6    y6 4.36051497 0.82334914    1e-06       
-    #> 20       y7↔y7      S    y7    y7 3.58248789 0.68192587    1e-06       
-    #> 21       y8↔y8      S    y8    y8 2.95767335 0.62794435    1e-06       
-    #> 22 ind60↔dem60      S ind60 dem60 0.43953627 0.10491916                
-    #> 23 ind60↔dem65      S ind60 dem65 0.54935165 0.09042957                
-    #> 24 dem60↔dem65      S dem60 dem65 0.97753026 0.02697909                
-    #> 25      one→x1      M     1    x1 5.05438384 0.08369864                
-    #> 26      one→x2      M     1    x2 4.79219462 0.17242963                
-    #> 27      one→x3      M     1    x3 3.55768979 0.16060500                
-    #> 28      one→y1      M     1    y1 5.46466667 0.30132526                
-    #> 29      one→y2      M     1    y2 4.25644292 0.45334534                
-    #> 30      one→y3      M     1    y3 6.56311026 0.39451355                
-    #> 31      one→y4      M     1    y4 4.45253305 0.38484489                
-    #> 32      one→y5      M     1    y5 5.13625191 0.29928887                
-    #> 33      one→y6      M     1    y6 2.97807411 0.38639609                
-    #> 34      one→y7      M     1    y7 6.19626392 0.36408226                
-    #> 35      one→y8      M     1    y8 4.04338971 0.37175295                
+    #>           name matrix   row   col    Estimate  Std.Error A lbound ubound
+    #> 1     ind60→x1      A    x1 ind60  0.65907707 0.06288236                
+    #> 2     ind60→x2      A    x2 ind60  1.43718329 0.12381556                
+    #> 3     ind60→x3      A    x3 ind60  1.19826915 0.12489763                
+    #> 4     dem60→y1      A    y1 dem60  2.14739204 0.25406461                
+    #> 5           a1      A    y2 dem60  3.07920264 0.39750112        0       
+    #> 6            b      A    y3 dem60 -1.55624783 0.42420730                
+    #> 7           c1      A    y4 dem60  2.87107164 0.32431628                
+    #> 8     dem65→y5      A    y5 dem65 -2.03834024 0.25723189                
+    #> 9           a2      A    y6 dem65 -2.68971596 0.32640482          10.123
+    #> 10          c2      A    y8 dem65 -2.73288290 0.30489594                
+    #> 11       x1↔x1      S    x1    x1  0.08154848 0.01981528    1e-06       
+    #> 12       x2↔x2      S    x2    x2  0.11934812 0.07049735    1e-06       
+    #> 13       x3↔x3      S    x3    x3  0.46736721 0.08929630    1e-06       
+    #> 14       y1↔y1      S    y1    y1  2.21267051 0.45169287    1e-06       
+    #> 15       y2↔y2      S    y2    y2  5.96690318 1.16904207    1e-06       
+    #> 16       y3↔y3      S    y3    y3 19.30498828 4.29224465    1e-06       
+    #> 17       y4↔y4      S    y4    y4  2.89263351 0.69550703    1e-06       
+    #> 18       y5↔y5      S    y5    y5  2.54641200 0.49114590    1e-06       
+    #> 19       y6↔y6      S    y6    y6  3.93085873 0.78704458    1e-06       
+    #> 20       y7↔y7      S    y7    y7  5.21757524 1.25469184    1e-06       
+    #> 21       y8↔y8      S    y8    y8  2.86466382 0.66025123    1e-06       
+    #> 22 ind60↔dem60      S ind60 dem60  0.41796936 0.11478600                
+    #> 23 ind60↔dem65      S ind60 dem65 -0.53608422 0.09291786                
+    #> 24 dem60↔dem65      S dem60 dem65 -0.98588667 0.03356586                
+    #> 25      one→x1      M     1    x1  5.05438384 0.08294249                
+    #> 26      one→x2      M     1    x2  4.79219463 0.17068404                
+    #> 27      one→x3      M     1    x3  3.55768979 0.15930322                
+    #> 28      one→y1      M     1    y1  5.46466667 0.30165424                
+    #> 29      one→y2      M     1    y2  4.25644289 0.45387164                
+    #> 30      one→y3      M     1    y3  6.56311026 0.53822090                
+    #> 31      one→y4      M     1    y4  4.45253304 0.38534834                
+    #> 32      one→y5      M     1    y5  5.13625194 0.29893069                
+    #> 33      one→y6      M     1    y6  2.97807408 0.38586192                
+    #> 34      one→y7      M     1    y7  6.19626390 0.31916737                
+    #> 35      one→y8      M     1    y8  4.04338969 0.37120547                
     #> 
     #> Model Statistics: 
     #>                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)
-    #>        Model:             35                    790              3130.995
+    #>        Model:             35                    790              3238.013
     #>    Saturated:             77                    748                    NA
     #> Independence:             22                    803                    NA
     #> Number of observations/statistics: 75/825
     #> 
     #> Information Criteria: 
     #>       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted
-    #> AIC:      1550.9954               3200.995                 3265.611
-    #> BIC:      -279.8202               3282.107                 3171.797
+    #> AIC:      1658.0132               3308.013                 3372.629
+    #> BIC:      -172.8024               3389.125                 3278.814
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:45:47 
-    #> Wall clock time: 0.1048181 secs 
+    #> timestamp: 2023-07-31 13:30:58 
+    #> Wall clock time: 0.081846 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -349,8 +349,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:45:48 
-    #> Wall clock time: 0.4733469 secs 
+    #> timestamp: 2023-07-31 13:30:58 
+    #> Wall clock time: 0.236979 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -400,10 +400,14 @@ model <- "
      a := a0 + data.k*a1
 "
 
-mxsem(model = model,
+fit_mx <- mxsem(model = model,
       data = dataset) |>
-  mxTryHard() |>
-  summary()
+  mxTryHard()
+
+summary(fit_mx)
+
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
 ```
 
 <details>
@@ -448,11 +452,13 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:45:49 
-    #> Wall clock time: 0.07555914 secs 
+    #> timestamp: 2023-07-31 13:30:59 
+    #> Wall clock time: 0.0360899 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
+    #>           [,1]
+    #> [1,] 0.7816809
 
 </details>
 
@@ -518,11 +524,84 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-07-29 22:45:49 
-    #> Wall clock time: 0.06922221 secs 
+    #> timestamp: 2023-07-31 13:30:59 
+    #> Wall clock time: 0.03715706 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
+
+</details>
+
+You can also provide custom names for the algebra results:
+
+``` r
+model <- "
+  # loadings
+     xi =~ x1 + x2 + x3
+     eta =~ y1 + y2 + y3
+  # regression
+     eta ~ {a := a0 + a1*data.k} * xi
+"
+
+fit_mx <- mxsem(model = model,
+      data = dataset) |>
+  mxTryHard()
+
+summary(fit_mx)
+
+# get just the value for parameter a:
+mxEval(expression = a, model = fit_mx)
+```
+
+<details>
+<summary>
+Show summary
+</summary>
+
+    #> Summary of untitled76 
+    #>  
+    #> free parameters:
+    #>       name         matrix row col    Estimate   Std.Error A lbound ubound
+    #> 1    xi→x2              A  x2  xi  0.79157858 0.026246184                
+    #> 2    xi→x3              A  x3  xi  0.89166108 0.027991673                
+    #> 3   eta→y2              A  y2 eta  0.81610411 0.028977474                
+    #> 4   eta→y3              A  y3 eta  0.90741889 0.027924346                
+    #> 5    x1↔x1              S  x1  x1  0.04060244 0.011022344 !     0!       
+    #> 6    x2↔x2              S  x2  x2  0.04519865 0.008621643 !     0!       
+    #> 7    x3↔x3              S  x3  x3  0.04647166 0.010143724       0!       
+    #> 8    y1↔y1              S  y1  y1  0.03388962 0.008495346 !     0!       
+    #> 9    y2↔y2              S  y2  y2  0.04210945 0.007766691 !     0!       
+    #> 10   y3↔y3              S  y3  y3  0.03107010 0.007268278       0!       
+    #> 11   xi↔xi              S  xi  xi  1.07304552 0.157796861    1e-06       
+    #> 12 eta↔eta              S eta eta  0.26127631 0.041232786    1e-06       
+    #> 13  one→x1              M   1  x1 -0.14881030 0.105057193                
+    #> 14  one→x2              M   1  x2 -0.10969677 0.084338898                
+    #> 15  one→x3              M   1  x3 -0.15448454 0.094426293                
+    #> 16  one→y1              M   1  y1 -0.05304659 0.089761149                
+    #> 17  one→y2              M   1  y2 -0.13040871 0.074578868                
+    #> 18  one→y3              M   1  y3 -0.05666275 0.081647174                
+    #> 19      a0 new_parameters   1   1  0.78168092 0.069381896                
+    #> 20      a1 new_parameters   1   2 -0.19334145 0.107742907                
+    #> 
+    #> Model Statistics: 
+    #>                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)
+    #>        Model:             20                      7              475.3822
+    #>    Saturated:             27                      0                    NA
+    #> Independence:             12                     15                    NA
+    #> Number of observations/statistics: 100/27
+    #> 
+    #> Information Criteria: 
+    #>       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted
+    #> AIC:       461.3822               515.3822                 526.0151
+    #> BIC:       443.1460               567.4856                 504.3206
+    #> To get additional fit indices, see help(mxRefModels)
+    #> timestamp: 2023-07-31 13:30:59 
+    #> Wall clock time: 0.03708315 secs 
+    #> optimizer:  SLSQP 
+    #> OpenMx version number: 2.21.8 
+    #> Need help?  See help(mxSummary)
+    #>           [,1]
+    #> [1,] 0.7816809
 
 </details>
 

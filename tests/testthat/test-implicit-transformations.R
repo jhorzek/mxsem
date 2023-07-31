@@ -125,6 +125,34 @@ test_that("implicit transformations", {
   testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
                               sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])) < 1e-4)
 
+  model_transform <- '
+  # latent variable definitions
+     ind60 =~ x1 + x2 + x3
+     dem60 =~ y1 + a1*y2 + b1*y3 + c*y4
+     dem65 =~ y5 + {a2:=a1 +
+     b2 +
+          delta_a}*y6 + b2*y7 + c*y8
 
+  # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+
+  # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+
+    !delta_b
+    b2 := b1 + delta_b
+'
+
+  fit_transform <- mxsem(model_transform, data = OpenMx::Bollen) |>
+    mxTryHard()
+
+  testthat::expect_true(abs(logLik(fit_base) - logLik(fit_transform)) < 1e-4)
+  testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
+                              sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])) < 1e-4)
 
 })
