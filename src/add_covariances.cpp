@@ -50,11 +50,21 @@ void add_covariances(std::vector<std::string> variables,
   bool covariance_exists = false;
   for(unsigned int i = 0; i < exogenous.size()-1; i++){
     for(unsigned int j = i+1; j < exogenous.size(); j++){
+
       covariance_exists = false;
       for(unsigned int k = 0; k < pt.lhs.size(); k++){
+
         if((pt.lhs.at(k).compare(exogenous.at(i)) == 0) &&
            (pt.op.at(k).compare("~~") == 0) &&
            (pt.rhs.at(k).compare(exogenous.at(j)) == 0)
+        ){
+          covariance_exists = true;
+          break;
+        }
+        // the order does not matter:
+        if((pt.lhs.at(k).compare(exogenous.at(j)) == 0) &&
+           (pt.op.at(k).compare("~~") == 0) &&
+           (pt.rhs.at(k).compare(exogenous.at(i)) == 0)
         ){
           covariance_exists = true;
           break;
