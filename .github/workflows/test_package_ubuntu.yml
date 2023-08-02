@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: 'true'
+      - uses: r-lib/actions/setup-pandoc@v1
       - name: install R
         run: |
          # copied from https://cran.r-project.org/bin/linux/ubuntu/#get-5000-cran-packages
