@@ -10,7 +10,7 @@ Authors@R: c(person(given   = "Jannik H.", family = "Orzek",
 Maintainer: Jannik H. Orzek <orzek@mpib-berlin.mpg.de>
 Description: Provides a lavaan-like syntax for OpenMx models. Supports 
   definition variables, bounds, and parameter transformations.
-License: GPL (>= 2)
+License: GPL (>= 3)
 Depends: OpenMx
 Imports: 
   Rcpp (>= 1.0.10), 
