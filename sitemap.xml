@@ -69,4 +69,10 @@
   <url>
     <loc>/reference/split_string_all.html</loc>
   </url>
+  <url>
+    <loc>/reference/unicode_directed.html</loc>
+  </url>
+  <url>
+    <loc>/reference/unicode_undirected.html</loc>
+  </url>
 </urlset>
