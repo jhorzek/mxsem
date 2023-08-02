@@ -41,6 +41,9 @@ are taken directly from that script:
 # at https://osf.io/527zr
 
 library(mokken)
+#> Loading required package: poLCA
+#> Loading required package: scatterplot3d
+#> Loading required package: MASS
 
 ## Load data
 data("DS14", package="mokken")
@@ -403,8 +406,8 @@ summary(mlnfa_model)
 #> RMSEA:  0  [95% CI (NA, NA)]
 #> Prob(RMSEA <= 0.05): NA
 #> To get additional fit indices, see help(mxRefModels)
-#> timestamp: 2023-08-02 15:36:45 
-#> Wall clock time: 268.9821 secs 
+#> timestamp: 2023-08-02 17:35:53 
+#> Wall clock time: 226.1492 secs 
 #> optimizer:  SLSQP 
 #> OpenMx version number: 2.21.8 
 #> Need help?  See help(mxSummary)
