@@ -1,15 +1,17 @@
 Package: mxsem
 Type: Package
-Title: Parse lavaan-like syntax for OpenMx models
+Title: Specify OpenMx Models with a Lavaan-Like Syntax
 Version: 0.0.1
 Date: 2023-07-12
 Authors@R: c(person(given   = "Jannik H.", family = "Orzek",
                     role    = c("aut", "cre", "cph"),
-                    email   = "orzek@mpib-berlin.mpg.de",
+                    email   = "jannik.orzek@mailbox.org",
                     comment = c(ORCID = "0000-0002-3123-2248")))
-Maintainer: Jannik H. Orzek <orzek@mpib-berlin.mpg.de>
-Description: Provides a lavaan-like syntax for OpenMx models. Supports 
-  definition variables, bounds, and parameter transformations.
+Maintainer: Jannik H. Orzek <jannik.orzek@mailbox.org>
+Description: Provides a lavaan-like syntax for OpenMx models. The syntax supports 
+  definition variables, bounds, and parameter transformations. This allows for
+  latent growth curve models with person-specific measurement occasions, moderated
+  nonlinear factor analysis and much more.
 License: GPL (>= 3)
 Depends: OpenMx
 Imports: 
