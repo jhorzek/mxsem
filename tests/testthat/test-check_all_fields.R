@@ -1,7 +1,6 @@
 test_that("check all fields", {
   set.seed(123)
   library(mxsem)
-  library(lavaan)
 
   model <- '
   # latent variable definitions
@@ -20,8 +19,6 @@ test_that("check all fields", {
     y4 ~~ y8
     y6 ~~ y8
 '
-
-  fit_lavaan <- sem(model, data = PoliticalDemocracy)
 
   fit_mxsem <- mxsem(model, data = PoliticalDemocracy, return_parameter_table = TRUE)
 
