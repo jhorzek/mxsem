@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Latent-Growth-Curve.html">Latent-Growth-Curve</a>
+    <a class="dropdown-item" href="../articles/Moderated-Nonlinear-Factor-Analysis.html">Moderated-Nonlinear-Factor-Analysis</a>
     <a class="dropdown-item" href="../articles/Syntax.html">Syntax</a>
     <a class="dropdown-item" href="../articles/create_parameter_table.html">create_parameter_table</a>
   </div>
@@ -104,7 +105,7 @@ observations (<span class="math inline">\(y_1\)</span>-<span class="math inline"
 variances, covariances, and means, the model allows for person-specific
 parameters (this is identical to a random effect in mixed models).</p>
 <p>Such latent growth curve models can be set up with
-<strong>lavaan</strong> <span class="citation">(<strong>rosseelLavaanPackageStructural2012?</strong>)</span>.
+<strong>lavaan</strong> <span class="citation">(Rosseel, 2012)</span>.
 For instance, the model shown above can be defined with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
@@ -230,8 +231,8 @@ the <code>t_1</code> variable located in <code>lgc_dat</code>.</p>
 <span><span class="co">#&gt; AIC:       826.5694               866.5694                 869.0413</span></span>
 <span><span class="co">#&gt; BIC:       800.5177               892.6211                 861.0386</span></span>
 <span><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span><span class="co">#&gt; timestamp: 2023-08-01 11:40:31 </span></span>
-<span><span class="co">#&gt; Wall clock time: 0.4652576 secs </span></span>
+<span><span class="co">#&gt; timestamp: 2023-08-02 14:44:08 </span></span>
+<span><span class="co">#&gt; Wall clock time: 0.4611843 secs </span></span>
 <span><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>
@@ -256,6 +257,11 @@ modeling. <em>Frontiers in Psychology</em>, <em>5</em>. <a href="https://doi.org
 Mehta, P. D., &amp; West, S. G. (2000). Putting the individual back into
 individual growth curves. <em>Psychological Methods</em>, <em>5</em>(1),
 23–43. <a href="https://doi.org/10.1037/1082-989x.5.1.23" class="external-link">https://doi.org/10.1037/1082-989x.5.1.23</a>
+</div>
+<div id="ref-rosseelLavaanPackageStructural2012" class="csl-entry">
+Rosseel, Y. (2012). Lavaan: An <span><em>R</em></span> package for
+structural equation modeling. <em>Journal of Statistical Software</em>,
+<em>48</em>(2), 1–36. <a href="https://doi.org/10.18637/jss.v048.i02" class="external-link">https://doi.org/10.18637/jss.v048.i02</a>
 </div>
 <div id="ref-sterbaFittingNonlinearLatent2014" class="csl-entry">
 Sterba, S. K. (2014). Fitting <span>Nonlinear Latent Growth Curve Models

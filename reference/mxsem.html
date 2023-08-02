@@ -27,6 +27,7 @@ lavaan-style (Rosseel, 2012) syntax."><!-- mathjax --><script src="https://cdnjs
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Latent-Growth-Curve.html">Latent-Growth-Curve</a>
+    <a class="dropdown-item" href="../articles/Moderated-Nonlinear-Factor-Analysis.html">Moderated-Nonlinear-Factor-Analysis</a>
     <a class="dropdown-item" href="../articles/Syntax.html">Syntax</a>
     <a class="dropdown-item" href="../articles/create_parameter_table.html">create_parameter_table</a>
   </div>
@@ -138,7 +139,7 @@ make the process easier. The objective of <strong>mxsem</strong> is to provide a
 for <strong>OpenMx</strong>. <strong>OpenMx</strong> is a flexible R package for extended SEM. However, note that
 <strong>mxsem</strong> only covers a small part of the <strong>OpenMx</strong> framework by focusing on "standard"
 SEM. Similar to <strong>lavaan</strong>'s <code>sem()</code>-function, <code>mxsem</code> tries to set up parts
-of the model automatically (e.g., add variances automatically or scale the
+of the model automatically (e.g., adding variances automatically or scaling the
 latent variables automatically). If you want to unlock
 the full potential of <strong>OpenMx</strong>, <strong>mxsem</strong> may not be the best option.</p>
 <p><strong>Warning</strong>: The syntax and settings of <strong>mxsem</strong> may differ from
@@ -155,7 +156,8 @@ are supported. In <strong>mxsem</strong> such constraints require algebras (e.g.
 provides the <code>umxRAM</code> and <code>umxLav2RAM</code> functions that can parse single <strong>lavaan</strong>-style
 statements (e.g., <code>eta =~ y1 + y2 + y3</code>)
 or an entire <strong>lavaan</strong> models to <strong>OpenMx</strong> models.</p></li>
-<li><p><a href="https://github.com/cjvanlissa/tidySEM" class="external-link"><strong>tidySEM</strong></a> (van Lissa, 2023) provides a unified syntax to
+<li><p><a href="https://github.com/cjvanlissa/tidySEM" class="external-link"><strong>tidySEM</strong></a> (van Lissa, 2023) provides the
+<code>as_ram</code> function to translate <strong>lavaan</strong> syntax to <strong>OpenMx</strong> and also implements a unified syntax to
 specify both, <strong>lavaan</strong> and <strong>OpenMx</strong> models. Additionally, it works well with the
 <strong>tidyverse</strong>.</p></li>
 <li><p><a href="https://github.com/OpenMx/ezMx" class="external-link"><strong>ezMx</strong></a> (Bates, et al. 2014) simplifies fitting SEM with <strong>OpenMx</strong>
