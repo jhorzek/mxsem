@@ -1,0 +1,325 @@
+---
+title: "Moderated-Nonlinear-Factor-Analysis"
+output: rmarkdown::html_vignette
+bibliography: mxsem.bib
+csl: apa.csl
+vignette: >
+  %\VignetteIndexEntry{Moderated-Nonlinear-Factor-Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(mxsem)
+library(lavaan)
+set.seed(123)
+# to knit this vignette, use
+# knitr::knit(input = "Moderated-Nonlinear-Factor-Analysis.mxsemmd",
+#             output = "Moderated-Nonlinear-Factor-Analysis.Rmd")
+```
+
+Moderated nonlinear factor analysis (MNLFA) has been proposed by @bauerMoreGeneralModel2017
+to assess measurement invariance. The general idea is that parameters within
+the model (that is, loadings, regressions, intercepts, and (co-)variances) may
+differ across individuals. These differences are predicted using covariates such
+as age and gender. For instance, @kolbeAssessingMeasurementInvariance2022 demonstrate
+MNLFA using the following model:
+```{r, include = FALSE}
+cfa_syntax <- "
+
+Si =~ lSi_1*Si1  +
+      lSi_3*Si3  +
+      lSi_6*Si6  +
+      lSi_8*Si8  +
+      lSi_10*Si10 +
+      lSi_11*Si11 +
+      lSi_14*Si14
+
+Na =~ lNa_2*Na2  +
+      lNa_4*Na4  +
+      lNa_5*Na5  +
+      lNa_7*Na7  +
+      lNa_9*Na9 +
+      lNa_12*Na12 +
+      lNa_13*Na13
+
+Si ~~ 1*Si
+Na ~~ 1*Na + cov*Si
+
+Si1  ~~ vSi_1*Si1
+Si3  ~~ vSi_3*Si3
+Si6  ~~ vSi_6*Si6
+Si8  ~~ vSi_8*Si8
+Si10 ~~ vSi_10*Si10
+Si11 ~~ vSi_11*Si11
+Si14 ~~ vSi_14*Si14
+
+Na2  ~~ vNa_2*Na2
+Na4  ~~ vNa_4*Na4
+Na5  ~~ vNa_5*Na5
+Na7  ~~ vNa_7*Na7
+Na9  ~~ vNa_9*Na9
+Na12 ~~ vNa_12*Na12
+Na13 ~~ vNa_13*Na13
+
+Si1  ~ iSi_1*1
+Si3  ~ iSi_3*1
+Si6  ~ iSi_6*1
+Si8  ~ iSi_8*1
+Si10 ~ iSi_10*1
+Si11 ~ iSi_11*1
+Si14 ~ iSi_14*1
+
+Na2  ~ iNa_2*1
+Na4  ~ iNa_4*1
+Na5  ~ iNa_5*1
+Na7  ~ iNa_7*1
+Na9  ~ iNa_9*1
+Na12 ~ iNa_12*1
+Na13 ~ iNa_13*1
+"
+data <- simulateData(cfa_syntax)
+
+fit <- cfa(cfa_syntax, data = data)
+png(filename = "figures/mnlfa.png", width = 10, height = 5, units = "cm", res = 200)
+semPlot::semPaths(object = fit,
+                  whatLabels = "name",
+                  edge.label.cex = .8,
+                  edge.label.position = .7)
+dev.off()
+```
+![](figures/mnlfa.png)
+
+The loading `lSi_1` may differ linearly by age and gender [@kolbeAssessingMeasurementInvariance2022].
+That is `lSi_1 = lSi0_1 + lSi1_1*Age  + lSi2_1*Male`.
+If `lSi1_1` or `lSi2_1` are non-zero, this suggests measurement non-invariance.
+
+MNLFA is a powerful procedure, but specifying the models can be tedious.
+@kolbeAssessingMeasurementInvariance2022 provide an in-depth introduction using
+**OpenMx** using the DS14 data set by @denolletPredictiveValueSocial2013
+included in the **mokken** [@MokkenScaleAnalysis2007] package.
+
+The script for the tutorial by @kolbeAssessingMeasurementInvariance2022 can
+be found on osf at https://osf.io/527zr. The following pre-processing steps
+are taken directly from that script:
+
+```{r}
+# code copied from Laura Kolbe, Terrence D. Jorgensen, Suzanne Jak, and Dylan Molenaar
+# at https://osf.io/527zr
+
+library(mokken)
+
+## Load data
+data("DS14", package="mokken")
+
+## Save as data frame
+DS14 <- data.frame(DS14)
+
+## Recode negatively worded items
+DS14$Si1 <- 4 - DS14$Si1.
+DS14$Si3 <- 4 - DS14$Si3.
+
+## Standardize age
+DS14$Age <- (DS14$Age - mean(DS14$Age))/sd(DS14$Age)
+# mean-centering age is another option, but caused convergence difficulties with
+# this dataset
+
+## Change order of variables
+DS14 <- DS14[,c("Male","Age","Si1","Si3","Si6","Si8","Si10","Si11","Si14",
+                "Na2","Na4","Na5","Na7","Na9","Na12", "Na13")]
+
+## Check data
+head(DS14)
+```
+
+## Model specification
+
+We want to specify the configural model outlined in @kolbeAssessingMeasurementInvariance2022.
+In this model, all loadings, intercepts, variances and co-variances are predicted
+with the covariates `Age` and `Male`. The only parameter that is constant across
+all subjects are the latent variances of `Si` and `Na`, which are fixed to 1 for
+scaling.
+
+For demonstrative purposes, we will first set up a confirmatory factor analysis
+without the `Age` and `Male` covariates. Using **mxsem**, the syntax could look
+as follows:
+
+
+```{r}
+cfa_syntax <- "
+
+# loadings
+Si =~ lSi_1*Si1  +
+      lSi_3*Si3  +
+      lSi_6*Si6  +
+      lSi_8*Si8  +
+      lSi_10*Si10 +
+      lSi_11*Si11 +
+      lSi_14*Si14
+
+Na =~ lNa_2*Na2  +
+      lNa_4*Na4  +
+      lNa_5*Na5  +
+      lNa_7*Na7  +
+      lNa_9*Na9 +
+      lNa_12*Na12 +
+      lNa_13*Na13
+
+# latent variances and covariances
+Si ~~ 1*Si
+Na ~~ 1*Na + cov*Si
+
+# manifest variances
+Si1  ~~ vSi_1*Si1
+Si3  ~~ vSi_3*Si3
+Si6  ~~ vSi_6*Si6
+Si8  ~~ vSi_8*Si8
+Si10 ~~ vSi_10*Si10
+Si11 ~~ vSi_11*Si11
+Si14 ~~ vSi_14*Si14
+
+Na2  ~~ vNa_2*Na2
+Na4  ~~ vNa_4*Na4
+Na5  ~~ vNa_5*Na5
+Na7  ~~ vNa_7*Na7
+Na9  ~~ vNa_9*Na9
+Na12 ~~ vNa_12*Na12
+Na13 ~~ vNa_13*Na13
+
+# intercepts
+Si1  ~ iSi_1*1
+Si3  ~ iSi_3*1
+Si6  ~ iSi_6*1
+Si8  ~ iSi_8*1
+Si10 ~ iSi_10*1
+Si11 ~ iSi_11*1
+Si14 ~ iSi_14*1
+
+Na2  ~ iNa_2*1
+Na4  ~ iNa_4*1
+Na5  ~ iNa_5*1
+Na7  ~ iNa_7*1
+Na9  ~ iNa_9*1
+Na12 ~ iNa_12*1
+Na13 ~ iNa_13*1
+"
+```
+
+We want to predict each and every parameter in this model using `Age` and `Male`.
+
+* `lSi_1 = lSi0_1 + lSi1_1*Age  + lSi2_1*Male`
+* `lSi_3 = lSi0_3 + lSi1_3*Age  + lSi2_3*Male`
+* ...
+* `iNa_4 = iNa0_4 + iNa1_4*Age  + iNa2_4*Male`
+* ...
+
+With **mxsem**, this can be implemented as follows:
+
+```{r}
+mlnfa_syntax <- "
+==== MNLFA ====
+
+SI =~ {lSi_1  := lSi0_1  + lSi1_1*data.Age  + lSi2_1*data.Male }*Si1  +
+      {lSi_3  := lSi0_3  + lSi1_3*data.Age  + lSi2_3*data.Male }*Si3  +
+      {lSi_6  := lSi0_6  + lSi1_6*data.Age  + lSi2_6*data.Male }*Si6  +
+      {lSi_8  := lSi0_8  + lSi1_8*data.Age  + lSi2_8*data.Male }*Si8  +
+      {lSi_10 := lSi0_10 + lSi1_10*data.Age + lSi2_10*data.Male}*Si10 +
+      {lSi_11 := lSi0_11 + lSi1_11*data.Age + lSi2_11*data.Male}*Si11 +
+      {lSi_14 := lSi0_14 + lSi1_14*data.Age + lSi2_14*data.Male}*Si14
+
+NA =~ {lNa_2  := lNa0_2  + lNa1_2*data.Age  + lNa2_2*data.Male }*Na2  +
+      {lNa_4  := lNa0_4  + lNa1_4*data.Age  + lNa2_4*data.Male }*Na4  +
+      {lNa_5  := lNa0_5  + lNa1_5*data.Age  + lNa2_5*data.Male }*Na5  +
+      {lNa_7  := lNa0_7  + lNa1_7*data.Age  + lNa2_7*data.Male }*Na7  +
+      {lNa_9  := lNa0_9  + lNa1_9*data.Age  + lNa2_9*data.Male }*Na9  +
+      {lNa_12 := lNa0_12 + lNa1_12*data.Age + lNa2_12*data.Male}*Na12 +
+      {lNa_13 := lNa0_13 + lNa1_13*data.Age + lNa2_13*data.Male}*Na13
+
+SI ~~ 1*SI
+NA ~~ 1*NA + {cov := cov0  + cov1*data.Age  + cov2*data.Male }*SI
+
+Si1  ~~ {vSi_1  := exp(vSi0_1  + vSi1_1*data.Age  + vSi2_1*data.Male )}*Si1
+Si3  ~~ {vSi_3  := exp(vSi0_3  + vSi1_3*data.Age  + vSi2_3*data.Male )}*Si3
+Si6  ~~ {vSi_6  := exp(vSi0_6  + vSi1_6*data.Age  + vSi2_6*data.Male )}*Si6
+Si8  ~~ {vSi_8  := exp(vSi0_8  + vSi1_8*data.Age  + vSi2_8*data.Male )}*Si8
+Si10 ~~ {vSi_10 := exp(vSi0_10 + vSi1_10*data.Age + vSi2_10*data.Male)}*Si10
+Si11 ~~ {vSi_11 := exp(vSi0_11 + vSi1_11*data.Age + vSi2_11*data.Male)}*Si11
+Si14 ~~ {vSi_14 := exp(vSi0_14 + vSi1_14*data.Age + vSi2_14*data.Male)}*Si14
+
+Na2  ~~ {vNa_2  := exp(vNa0_2  + vNa1_2*data.Age  + vNa2_2*data.Male )}*Na2
+Na4  ~~ {vNa_4  := exp(vNa0_4  + vNa1_4*data.Age  + vNa2_4*data.Male )}*Na4
+Na5  ~~ {vNa_5  := exp(vNa0_5  + vNa1_5*data.Age  + vNa2_5*data.Male )}*Na5
+Na7  ~~ {vNa_7  := exp(vNa0_7  + vNa1_7*data.Age  + vNa2_7*data.Male )}*Na7
+Na9  ~~ {vNa_9  := exp(vNa0_9  + vNa1_9*data.Age  + vNa2_9*data.Male )}*Na9
+Na12 ~~ {vNa_12 := exp(vNa0_12 + vNa1_12*data.Age + vNa2_12*data.Male)}*Na12
+Na13 ~~ {vNa_13 := exp(vNa0_13 + vNa1_13*data.Age + vNa2_13*data.Male)}*Na13
+
+Si1  ~ {iSi_1  := iSi0_1  + iSi1_1*data.Age  + iSi2_1*data.Male }*1
+Si3  ~ {iSi_3  := iSi0_3  + iSi1_3*data.Age  + iSi2_3*data.Male }*1
+Si6  ~ {iSi_6  := iSi0_6  + iSi1_6*data.Age  + iSi2_6*data.Male }*1
+Si8  ~ {iSi_8  := iSi0_8  + iSi1_8*data.Age  + iSi2_8*data.Male }*1
+Si10 ~ {iSi_10 := iSi0_10 + iSi1_10*data.Age + iSi2_10*data.Male}*1
+Si11 ~ {iSi_11 := iSi0_11 + iSi1_11*data.Age + iSi2_11*data.Male}*1
+Si14 ~ {iSi_14 := iSi0_14 + iSi1_14*data.Age + iSi2_14*data.Male}*1
+
+Na2  ~ {iNa_2  := iNa0_2  + iNa1_2*data.Age  + iNa2_2*data.Male }*1
+Na4  ~ {iNa_4  := iNa0_4  + iNa1_4*data.Age  + iNa2_4*data.Male }*1
+Na5  ~ {iNa_5  := iNa0_5  + iNa1_5*data.Age  + iNa2_5*data.Male }*1
+Na7  ~ {iNa_7  := iNa0_7  + iNa1_7*data.Age  + iNa2_7*data.Male }*1
+Na9  ~ {iNa_9  := iNa0_9  + iNa1_9*data.Age  + iNa2_9*data.Male }*1
+Na12 ~ {iNa_12 := iNa0_12 + iNa1_12*data.Age + iNa2_12*data.Male}*1
+Na13 ~ {iNa_13 := iNa0_13 + iNa1_13*data.Age + iNa2_13*data.Male}*1
+"
+```
+
+Note how each parameter is redefined exactly as outlined above. However, there
+are some important details:
+
+1. The variance parameters (e.g., `vNa_2`), have been transformed with an `exp`-function.
+This exponential function ensures that variances are always positive.
+2. All transformations must be embraced in curly braces. This ensures that **mxsem**
+sees them as algebras and knows how to specify them in **OpenMx**.
+3. The covariates `Age` and `Male` must be specified with the `data.`-prefix to
+let **OpenMx** know that the values can be found in the data set.
+
+Finally, we pass the syntax to the `mxsem()`-function to create an **OpenMx** model:
+
+```{r}
+library(mxsem)
+mlnfa_model <- mxsem(model = mlnfa_syntax,
+                     data = DS14,
+                     # we scaled the latent variables manually,
+                     # so we will set all automatic scalings to FALSE:
+                     scale_loadings = FALSE,
+                     scale_latent_variances = FALSE)
+```
+
+
+## Fitting the model
+
+The model can now be fitted using `mxRun()` or `mxTryHard()`.
+
+```{r, include = FALSE}
+mlnfa_model <- mxRun(mlnfa_model)
+```
+```{r, eval = FALSE}
+mlnfa_model <- mxRun(mlnfa_model)
+summary(mlnfa_model)
+```
+
+<details>
+<summary>Show summary</summary>
+```{r, echo = FALSE}
+summary(mlnfa_model)
+```
+</details>
+
+Checking the regression coefficients `lSi1_1`, `lSi1_2`, ... will tell us if
+there is a linear change across age or if individuals with `Male = 0` differ
+from individuals with `Male = 1`.
+
+## References

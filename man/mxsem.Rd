@@ -63,7 +63,7 @@ make the process easier. The objective of \strong{mxsem} is to provide a similar
 for \strong{OpenMx}. \strong{OpenMx} is a flexible R package for extended SEM. However, note that
 \strong{mxsem} only covers a small part of the \strong{OpenMx} framework by focusing on "standard"
 SEM. Similar to \strong{lavaan}'s \code{sem()}-function, \code{mxsem} tries to set up parts
-of the model automatically (e.g., add variances automatically or scale the
+of the model automatically (e.g., adding variances automatically or scaling the
 latent variables automatically). If you want to unlock
 the full potential of \strong{OpenMx}, \strong{mxsem} may not be the best option.
 
@@ -82,7 +82,8 @@ are supported. In \strong{mxsem} such constraints require algebras (e.g., \verb{
 provides the \code{umxRAM} and \code{umxLav2RAM} functions that can parse single \strong{lavaan}-style
 statements (e.g., \code{eta =~ y1 + y2 + y3})
 or an entire \strong{lavaan} models to \strong{OpenMx} models.
-\item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} (van Lissa, 2023) provides a unified syntax to
+\item \href{https://github.com/cjvanlissa/tidySEM}{\strong{tidySEM}} (van Lissa, 2023) provides the
+\code{as_ram} function to translate \strong{lavaan} syntax to \strong{OpenMx} and also implements a unified syntax to
 specify both, \strong{lavaan} and \strong{OpenMx} models. Additionally, it works well with the
 \strong{tidyverse}.
 \item \href{https://github.com/OpenMx/ezMx}{\strong{ezMx}} (Bates, et al. 2014) simplifies fitting SEM with \strong{OpenMx}

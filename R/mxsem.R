@@ -12,7 +12,7 @@ NULL
 #' for **OpenMx**. **OpenMx** is a flexible R package for extended SEM. However, note that
 #' **mxsem** only covers a small part of the **OpenMx** framework by focusing on "standard"
 #' SEM. Similar to **lavaan**'s `sem()`-function, `mxsem` tries to set up parts
-#' of the model automatically (e.g., add variances automatically or scale the
+#' of the model automatically (e.g., adding variances automatically or scaling the
 #' latent variables automatically). If you want to unlock
 #' the full potential of **OpenMx**, **mxsem** may not be the best option.
 #'
@@ -32,7 +32,8 @@ NULL
 #' provides the `umxRAM` and `umxLav2RAM` functions that can parse single **lavaan**-style
 #' statements (e.g., `eta =~ y1 + y2 + y3`)
 #' or an entire **lavaan** models to **OpenMx** models.
-#' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) (van Lissa, 2023) provides a unified syntax to
+#' - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) (van Lissa, 2023) provides the
+#' `as_ram` function to translate **lavaan** syntax to **OpenMx** and also implements a unified syntax to
 #' specify both, **lavaan** and **OpenMx** models. Additionally, it works well with the
 #' **tidyverse**.
 #' - [**ezMx**](https://github.com/OpenMx/ezMx) (Bates, et al. 2014) simplifies fitting SEM with **OpenMx**
