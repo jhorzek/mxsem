@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Moderated-Nonlinear-Factor-Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\DeclareUnicodeCharacter{2194}{$\leftrightarrow$}
+  %\DeclareUnicodeCharacter{2192}{$\rightarrow$}
 ---
 
 ```{r, include = FALSE}
@@ -31,19 +33,19 @@ MNLFA using the following model:
 ```{r, include = FALSE}
 cfa_syntax <- "
 
-Si =~ lSi_1*Si1  +
-      lSi_3*Si3  +
-      lSi_6*Si6  +
-      lSi_8*Si8  +
+Si =~ lSi_1*Si1   +
+      lSi_3*Si3   +
+      lSi_6*Si6   +
+      lSi_8*Si8   +
       lSi_10*Si10 +
       lSi_11*Si11 +
       lSi_14*Si14
 
-Na =~ lNa_2*Na2  +
-      lNa_4*Na4  +
-      lNa_5*Na5  +
-      lNa_7*Na7  +
-      lNa_9*Na9 +
+Na =~ lNa_2*Na2   +
+      lNa_4*Na4   +
+      lNa_5*Na5   +
+      lNa_7*Na7   +
+      lNa_9*Na9   +
       lNa_12*Na12 +
       lNa_13*Na13
 

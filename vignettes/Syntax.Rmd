@@ -5,6 +5,8 @@ vignette: >
   %\VignetteIndexEntry{Syntax}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\DeclareUnicodeCharacter{2194}{$\leftrightarrow$}
+  %\DeclareUnicodeCharacter{2192}{$\rightarrow$}
 ---
 
 ```{r, include = FALSE}

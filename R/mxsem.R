@@ -193,6 +193,7 @@ NULL
 #' * Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
 #' * van Lissa, C. J. (2023). tidySEM: Tidy Structural Equation Modeling. R package version 0.2.4, https://cjvanlissa.github.io/tidySEM/.
 #'
+#' @encoding UTF-8
 #' @param model model syntax similar to **lavaan**'s syntax
 #' @param data raw data used to fit the model. Alternatively, an object created
 #' with `OpenMx::mxData` can be used (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`).
@@ -286,8 +287,8 @@ mxsem <- function(model,
                   add_exogenous_latent_covariances = TRUE,
                   add_exogenous_manifest_covariances = TRUE,
                   lbound_variances = TRUE,
-                  directed = "\u2192",
-                  undirected = "\u2194",
+                  directed = unicode_directed(),
+                  undirected = unicode_undirected(),
                   return_parameter_table = FALSE){
 
   if(scale_loadings & scale_latent_variances)
