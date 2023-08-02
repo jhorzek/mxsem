@@ -26,10 +26,13 @@ jobs:
         run: |
           sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
           sudo apt install --no-install-recommends r-cran-openmx
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
+          sudo apt install --no-install-recommends r-cran-lavaan
+          sudo apt install --no-install-recommends r-cran-devtools
+          sudo apt install --no-install-recommends r-cran-rmarkdown
+          sudo apt install --no-install-recommends r-cran-knitr
+          sudo apt install --no-install-recommends r-cran-rcpp
+          sudo apt install --no-install-recommends r-cran-testthat
+          sudo apt install --no-install-recommends r-cran-rcmdcheck
       - name: Check
         run: rcmdcheck::rcmdcheck(path = ".", args = "--no-manual", error_on = "warning")
         shell: Rscript {0}
