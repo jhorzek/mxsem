@@ -1,7 +1,10 @@
 test_that("path analysis works", {
 
-  # lavaan model by Rachel E. Dianiska
-  # at https://osf.io/6yxde
+  # The following model is copied from Dianiska, R.E., Swanner, J.K., Brimbal,
+  # L., & Meissner, C.A. (2021, in press). Using disclosure, common ground, and
+  # verification to build rapport and elicit information. Psychology, Public Policy and Law. DOI: 10.1037/law0000313
+  #
+  # lavaan model by Rachel E. Dianiska at https://osf.io/6yxde
 
   library(lavaan)
   library(mxsem)

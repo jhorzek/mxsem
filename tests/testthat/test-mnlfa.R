@@ -4,9 +4,9 @@ test_that("mnlfa works", {
   dataset <- simulate_moderated_nonlinear_factor_analysis(N = 2000)
 
   model <- "
-  xi =~ x1 + x2 + x3
+  xi  =~ x1 + x2 + x3
   eta =~ y1 + y2 + y3
-  eta ~ a*xi
+  eta ~  a*xi
 
   !a0
   !a1
