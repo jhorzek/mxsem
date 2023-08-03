@@ -106,7 +106,7 @@ mxsem(model = model,
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data  = OpenMx::Bollen) |>
+                data  = OpenMx::Bollen) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
@@ -147,10 +147,10 @@ mxsem(model = model,
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data  = OpenMx::Bollen, 
-      # use latent variances to scale the model
-      scale_loadings = FALSE, 
-      scale_latent_variances = TRUE) |>
+                data  = OpenMx::Bollen, 
+                # use latent variances to scale the model
+                scale_loadings         = FALSE, 
+                scale_latent_variances = TRUE) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
@@ -197,7 +197,7 @@ model <- "
   "
 
 mxsem(model = model,
-      data = dataset) |>
+      data  = dataset) |>
   mxTryHard() |>
   summary()
 ```
@@ -207,7 +207,7 @@ mxsem(model = model,
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
@@ -250,7 +250,7 @@ model <- "
 "
 
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 
 summary(fit_mx)
@@ -264,13 +264,14 @@ mxEval(expression = a, model = fit_mx)
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data = dataset) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
 summary(fit_mx)
 # get just the value for parameter a:
-mxEval(expression = a, model = fit_mx)
+mxEval(expression = a, 
+       model      = fit_mx)
 ```
 
 </details>
@@ -288,7 +289,7 @@ model <- "
 "
 
 mxsem(model = model,
-      data = dataset) |>
+      data  = dataset) |>
   mxTryHard() |>
   summary()
 ```
@@ -298,7 +299,7 @@ mxsem(model = model,
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 ```
 ```{r,echo=FALSE}
@@ -311,20 +312,21 @@ You can also provide custom names for the algebra results:
 ```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 model <- "
   # loadings
-     xi =~ x1 + x2 + x3
+     xi  =~ x1 + x2 + x3
      eta =~ y1 + y2 + y3
   # regression
      eta ~ {a := a0 + a1*data.k} * xi
 "
 
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 
 summary(fit_mx)
 
 # get just the value for parameter a:
-mxEval(expression = a, model = fit_mx)
+mxEval(expression = a, 
+       model      = fit_mx)
 ```
 
 <details>
@@ -332,13 +334,15 @@ mxEval(expression = a, model = fit_mx)
 
 ```{r, include=FALSE}
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 ```
+
 ```{r,echo=FALSE}
 summary(fit_mx)
 # get just the value for parameter a:
-mxEval(expression = a, model = fit_mx)
+mxEval(expression = a, 
+       model      = fit_mx)
 ```
 
 </details>
@@ -354,6 +358,45 @@ Sometimes things may go wrong. One way to figure out where **mxsem** messed up
 is to look at the parameter table generated internally. This parameter table
 is not returned by default. See `vignette("create_parameter_table", package = "mxsem")`
 for more details.
+
+Another point of failure are the default labels used by **mxsem** to indicate directed
+and undirected effects. These are based on unicode characters. If you see parameter 
+labels similar to `"eta\u2192y1"` in your output, this indicates that your editor cannot display
+unicode characters. In this case, you can customize the labels as follows:
+
+```{r, eval = TRUE, results = 'hide', message=FALSE, warning=FALSE, message=FALSE, warning=FALSE}
+library(mxsem)
+model <- '
+  # latent variable definitions
+     ind60 =~ x1 + x2 + x3
+     dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
+     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
+'
+
+mxsem(model      = model,
+      data       = OpenMx::Bollen, 
+      directed   = "_TO_", 
+      undirected = "_WITH_") |>
+  mxTryHard() |>
+  summary()
+```
+<details>
+<summary>Show summary</summary>
+
+
+```{r, include=FALSE}
+fit_mx <- mxsem(model = model,
+                data  = OpenMx::Bollen, 
+                directed   = "_TO_", 
+                undirected = "_WITH_") |>
+  mxTryHard()
+```
+```{r,echo=FALSE}
+summary(fit_mx)
+```
+
+</details>
+
 
 
 ## References
