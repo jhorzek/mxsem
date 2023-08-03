@@ -1,5 +1,10 @@
 test_that("indirect and direct effects work", {
 
+  # The following model is copied from Kerry, N., Prokosch, M. L., & Murray, D. R. (2023).
+  # The holy father (and mother)? Multiple tests of the hypothesis that parenthood
+  # and parental care motivation lead to greater religiosity. Personality and
+  # Social Psychology Bulletin, 49(5), 709–726. https://doi.org/10.1177/01461672221076919
+
   # lavaan model by Nicholas Kerry and Marjorie Prokosch
   # at https://osf.io/aqfk3
   library(mxsem)

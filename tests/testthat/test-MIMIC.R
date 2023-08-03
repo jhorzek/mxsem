@@ -3,7 +3,7 @@ test_that("MIMIC works", {
 
   model <- "
   eta =~ y1 + y2 + y3 + y4
-  eta ~ x1 + x2 + x3 + x4 + x5
+  eta ~  x1 + x2 + x3 + x4 + x5
   "
 
   suppressWarnings(data <- lavaan::simulateData(model))

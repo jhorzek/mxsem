@@ -35,7 +35,7 @@ packages:
   **lavaan**-style statements (e.g., `eta =~ y1 + y2 + y3`) or an entire
   **lavaan** models to **OpenMx** models.
 - [**tidySEM**](https://github.com/cjvanlissa/tidySEM) (van Lissa, 2023)
-  provides the `a_ram` function to translate **lavaan** syntax to
+  provides the `as_ram` function to translate **lavaan** syntax to
   **OpenMx** and also implements a unified syntax to specify both,
   **lavaan** and **OpenMx** models. Additionally, it works well with the
   **tidyverse**.
@@ -159,8 +159,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:51 
-    #> Wall clock time: 0.3301728 secs 
+    #> timestamp: 2023-08-03 11:27:39 
+    #> Wall clock time: 0.2723861 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -252,8 +252,8 @@ Show summary
     #> AIC:      1607.0759               3257.076                 3321.691
     #> BIC:      -223.7397               3338.188                 3227.877
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:53 
-    #> Wall clock time: 0.05614996 secs 
+    #> timestamp: 2023-08-03 11:27:40 
+    #> Wall clock time: 0.0548799 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -314,7 +314,7 @@ model <- "
   "
 
 mxsem(model = model,
-      data = dataset) |>
+      data  = dataset) |>
   mxTryHard() |>
   summary()
 ```
@@ -351,8 +351,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:54 
-    #> Wall clock time: 0.261977 secs 
+    #> timestamp: 2023-08-03 11:27:42 
+    #> Wall clock time: 0.2586932 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -403,7 +403,7 @@ model <- "
 "
 
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 
 summary(fit_mx)
@@ -454,8 +454,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:55 
-    #> Wall clock time: 0.0361979 secs 
+    #> timestamp: 2023-08-03 11:27:42 
+    #> Wall clock time: 0.03566003 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -479,7 +479,7 @@ model <- "
 "
 
 mxsem(model = model,
-      data = dataset) |>
+      data  = dataset) |>
   mxTryHard() |>
   summary()
 ```
@@ -526,8 +526,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:55 
-    #> Wall clock time: 0.03823805 secs 
+    #> timestamp: 2023-08-03 11:27:42 
+    #> Wall clock time: 0.03693199 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -539,20 +539,21 @@ You can also provide custom names for the algebra results:
 ``` r
 model <- "
   # loadings
-     xi =~ x1 + x2 + x3
+     xi  =~ x1 + x2 + x3
      eta =~ y1 + y2 + y3
   # regression
      eta ~ {a := a0 + a1*data.k} * xi
 "
 
 fit_mx <- mxsem(model = model,
-      data = dataset) |>
+                data  = dataset) |>
   mxTryHard()
 
 summary(fit_mx)
 
 # get just the value for parameter a:
-mxEval(expression = a, model = fit_mx)
+mxEval(expression = a, 
+       model      = fit_mx)
 ```
 
 <details>
@@ -597,8 +598,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-02 09:41:55 
-    #> Wall clock time: 0.04463887 secs 
+    #> timestamp: 2023-08-03 11:27:43 
+    #> Wall clock time: 0.03773284 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -619,6 +620,94 @@ messed up is to look at the parameter table generated internally. This
 parameter table is not returned by default. See
 `vignette("create_parameter_table", package = "mxsem")` for more
 details.
+
+Another point of failure are the default labels used by **mxsem** to
+indicate directed and undirected effects. These are based on unicode
+characters. If you see parameter labels similar to `"eta\u2192y1"` in
+your output, this indicates that your editor cannot display unicode
+characters. In this case, you can customize the labels as follows:
+
+``` r
+library(mxsem)
+model <- '
+  # latent variable definitions
+     ind60 =~ x1 + x2 + x3
+     dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
+     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
+'
+
+mxsem(model      = model,
+      data       = OpenMx::Bollen, 
+      directed   = "_TO_", 
+      undirected = "_WITH_") |>
+  mxTryHard() |>
+  summary()
+```
+
+<details>
+<summary>
+Show summary
+</summary>
+
+    #> Summary of untitled90 
+    #>  
+    #> free parameters:
+    #>                name matrix   row   col   Estimate  Std.Error A lbound ubound
+    #> 1       ind60_TO_x2      A    x2 ind60 2.18115661 0.13928298                
+    #> 2       ind60_TO_x3      A    x3 ind60 1.81852856 0.15228300                
+    #> 3                a1      A    y2 dem60 1.40364291 0.18389435                
+    #> 4                 b      A    y3 dem60 1.17009128 0.10871690                
+    #> 5                c1      A    y4 dem60 1.34853557 0.14637355                
+    #> 6                a2      A    y6 dem65 1.20074397 0.14854212                
+    #> 7                c2      A    y8 dem65 1.25031700 0.13637267                
+    #> 8        x1_WITH_x1      S    x1    x1 0.08169543 0.01979127    1e-06       
+    #> 9        x2_WITH_x2      S    x2    x2 0.11895803 0.07035983    1e-06       
+    #> 10       x3_WITH_x3      S    x3    x3 0.46715672 0.08931237    1e-06       
+    #> 11       y1_WITH_y1      S    y1    y1 1.96250172 0.40671919    1e-06       
+    #> 12       y2_WITH_y2      S    y2    y2 6.49921810 1.20252769    1e-06       
+    #> 13       y3_WITH_y3      S    y3    y3 5.32558348 0.95890941    1e-06       
+    #> 14       y4_WITH_y4      S    y4    y4 2.87950381 0.63659586    1e-06       
+    #> 15       y5_WITH_y5      S    y5    y5 2.37087652 0.45484953    1e-06       
+    #> 16       y6_WITH_y6      S    y6    y6 4.37312946 0.82257502    1e-06       
+    #> 17       y7_WITH_y7      S    y7    y7 3.56698909 0.68166517    1e-06       
+    #> 18       y8_WITH_y8      S    y8    y8 2.96556937 0.62436037    1e-06       
+    #> 19 ind60_WITH_ind60      S ind60 ind60 0.44829168 0.08674258    1e-06       
+    #> 20 ind60_WITH_dem60      S ind60 dem60 0.63807551 0.19911416                
+    #> 21 dem60_WITH_dem60      S dem60 dem60 4.50351022 1.00587173    1e-06       
+    #> 22 ind60_WITH_dem65      S ind60 dem65 0.81413737 0.21686414                
+    #> 23 dem60_WITH_dem65      S dem60 dem65 4.52637094 0.93201111                
+    #> 24 dem65_WITH_dem65      S dem65 dem65 4.75141774 1.04788975    1e-06       
+    #> 25        one_TO_x1      M     1    x1 5.05438376 0.08406360                
+    #> 26        one_TO_x2      M     1    x2 4.79219456 0.17327235                
+    #> 27        one_TO_x3      M     1    x3 3.55768963 0.16123393                
+    #> 28        one_TO_y1      M     1    y1 5.46466632 0.29362329                
+    #> 29        one_TO_y2      M     1    y2 4.25644402 0.45272824                
+    #> 30        one_TO_y3      M     1    y3 6.56311128 0.39143132                
+    #> 31        one_TO_y4      M     1    y4 4.45253318 0.38417804                
+    #> 32        one_TO_y5      M     1    y5 5.13625219 0.30816376                
+    #> 33        one_TO_y6      M     1    y6 2.97807359 0.38684837                
+    #> 34        one_TO_y7      M     1    y7 6.19626378 0.36646597                
+    #> 35        one_TO_y8      M     1    y8 4.04339038 0.37226405                
+    #> 
+    #> Model Statistics: 
+    #>                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)
+    #>        Model:             35                    790              3131.168
+    #>    Saturated:             77                    748                    NA
+    #> Independence:             22                    803                    NA
+    #> Number of observations/statistics: 75/825
+    #> 
+    #> Information Criteria: 
+    #>       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted
+    #> AIC:      1551.1683               3201.168                 3265.784
+    #> BIC:      -279.6473               3282.280                 3171.970
+    #> To get additional fit indices, see help(mxRefModels)
+    #> timestamp: 2023-08-03 11:27:43 
+    #> Wall clock time: 0.09258008 secs 
+    #> optimizer:  SLSQP 
+    #> OpenMx version number: 2.21.8 
+    #> Need help?  See help(mxSummary)
+
+</details>
 
 ## References
 

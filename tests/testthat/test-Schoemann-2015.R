@@ -1,4 +1,8 @@
 test_that("CFA works", {
+
+  # The following model is copied from Schoemann, A. M. (2015). Structural equation
+  # modeling with R using lavaan. https://osf.io/5mvqt
+  #
   # lavaan model by Alexander M. Schoemann
   # at https://osf.io/ijwtm
   library(lavaan)
