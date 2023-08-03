@@ -10,3 +10,4 @@
 ^.*\.mxsemmd$
 ^LICENSE\.md$
 ^CRAN-SUBMISSION$
+^cran-comments\.md$
