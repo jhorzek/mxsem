@@ -7,7 +7,7 @@
 check_all_fields(parameter_table)
 }
 \arguments{
-\item{pameter_table}{parameter table}
+\item{parameter_table}{parameter table}
 }
 \value{
 nothing

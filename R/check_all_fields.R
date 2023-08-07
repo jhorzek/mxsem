@@ -1,7 +1,7 @@
 #' check_all_fields
 #'
 #' checks all elements of the parameter table
-#' @param pameter_table parameter table
+#' @param parameter_table parameter table
 #' @returns nothing
 #' @keywords internal
 check_all_fields <- function(parameter_table){
