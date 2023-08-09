@@ -5,11 +5,6 @@
 #' @param extracted used in recursive function calls; don't set this manually
 #' @return vector with names of variables and parameters used in the function call
 #' @keywords internal
-#' @examples
-#' library(mxsem)
-#' simple_algebra <- mxAlgebraFromString("exp(b + c)", name = "a")
-#'
-#' mxsem:::extract_algebra_elements(simple_algebra@formula)
 extract_algebra_elements <- function(mxAlgebra_formula, extracted = c()){
 
   for(i in 1:length(mxAlgebra_formula)){

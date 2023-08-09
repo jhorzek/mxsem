@@ -17,10 +17,4 @@ vector with names of variables and parameters used in the function call
 \description{
 extract all variables/parameters from an mxAlgebra
 }
-\examples{
-library(mxsem)
-simple_algebra <- mxAlgebraFromString("exp(b + c)", name = "a")
-
-mxsem:::extract_algebra_elements(simple_algebra@formula)
-}
 \keyword{internal}
