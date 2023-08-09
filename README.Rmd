@@ -58,8 +58,7 @@ Because **mxsem** implements the syntax parser from scratch, it can extend the
 ## Citation
 
 Cite **OpenMx** (Boker et al., 2011) for the modeling and **lavaan** for the 
-syntax (Rosseel, 2012). **mxsem** itself is just a very small package and lets 
-**OpenMx** do all the heavy lifting.
+syntax (Rosseel, 2012). To cite **mxsem**, check `citation("mxsem")`.
 
 ## Installation
 
