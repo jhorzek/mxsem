@@ -1,6 +1,7 @@
 test_that("check all fields", {
   set.seed(123)
   library(mxsem)
+  library(lavaan)
 
   model <- '
   # latent variable definitions
