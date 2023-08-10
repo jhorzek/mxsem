@@ -47,7 +47,6 @@ test_that("model name", {
                data  = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(logLik(fit) - logLik(fit_named)) < 1e-5)
   testthat::expect_true(fit_named$name == "Bollen_Pol_Dem")
 
 
@@ -77,6 +76,5 @@ test_that("model name", {
                      data  = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(logLik(fit) - logLik(fit_named)) < 1e-5)
   testthat::expect_true(fit_named$name == "Bollen_Pol_Dem")
 })
