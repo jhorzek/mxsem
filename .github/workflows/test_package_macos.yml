@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         r-version: ['release']
-        os: ['macos-13','macos-latest']
+        os: ['macos-latest']
     steps:
       - name: get system information
         run:  sysctl -a | grep machdep.cpu
