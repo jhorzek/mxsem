@@ -10,18 +10,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// char_in_string
-bool char_in_string(const char c, const std::string& str);
-RcppExport SEXP _mxsem_char_in_string(SEXP cSEXP, SEXP strSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char >::type c(cSEXP);
-    Rcpp::traits::input_parameter< const std::string& >::type str(strSEXP);
-    rcpp_result_gen = Rcpp::wrap(char_in_string(c, str));
-    return rcpp_result_gen;
-END_RCPP
-}
 // clean_syntax
 std::vector<std::string> clean_syntax(const std::string& syntax);
 RcppExport SEXP _mxsem_clean_syntax(SEXP syntaxSEXP) {
@@ -75,7 +63,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mxsem_char_in_string", (DL_FUNC) &_mxsem_char_in_string, 2},
     {"_mxsem_clean_syntax", (DL_FUNC) &_mxsem_clean_syntax, 1},
     {"_mxsem_find_model_name", (DL_FUNC) &_mxsem_find_model_name, 1},
     {"_mxsem_parameter_table_rcpp", (DL_FUNC) &_mxsem_parameter_table_rcpp, 7},

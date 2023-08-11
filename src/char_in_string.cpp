@@ -7,7 +7,6 @@
 //' @param c character
 //' @param str string
 //' @return bool: true if char is in string
-// [[Rcpp::export]]
 bool char_in_string(const char c, const std::string& str) {
   for(auto&s: str){
     if(s  == c)

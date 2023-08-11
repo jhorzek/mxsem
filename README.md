@@ -57,6 +57,12 @@ the syntax (Rosseel, 2012). To cite **mxsem**, check
 
 ## Installation
 
+**mxsem** is available from CRAN:
+
+``` r
+install.packages("mxsem")
+```
+
 The newest version of the package can be installed from GitHub using the
 following commands in R:
 
@@ -65,6 +71,10 @@ if(!require(devtools)) install.packages("devtools")
 devtools::install_github("jhorzek/mxsem", 
                          ref = "main")
 ```
+
+Because **mxsem** uses Rcpp, you will need a compiler for C++ (e.g., by
+installing Rtools on Windows, Xcode on Mac and build-essential on
+linux).
 
 ## Example
 
@@ -159,8 +169,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:01 
-    #> Wall clock time: 0.3236761 secs 
+    #> timestamp: 2023-08-11 09:04:09 
+    #> Wall clock time: 0.2771828 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -252,8 +262,8 @@ Show summary
     #> AIC:      1607.0759               3257.076                 3321.691
     #> BIC:      -223.7397               3338.188                 3227.877
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:02 
-    #> Wall clock time: 0.053231 secs 
+    #> timestamp: 2023-08-11 09:04:11 
+    #> Wall clock time: 0.0535531 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -351,8 +361,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:04 
-    #> Wall clock time: 0.2974899 secs 
+    #> timestamp: 2023-08-11 09:04:12 
+    #> Wall clock time: 0.2313709 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -454,8 +464,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:04 
-    #> Wall clock time: 0.0394721 secs 
+    #> timestamp: 2023-08-11 09:04:12 
+    #> Wall clock time: 0.04142094 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -526,8 +536,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:04 
-    #> Wall clock time: 0.03983593 secs 
+    #> timestamp: 2023-08-11 09:04:13 
+    #> Wall clock time: 0.0401659 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -598,8 +608,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:05 
-    #> Wall clock time: 0.04041314 secs 
+    #> timestamp: 2023-08-11 09:04:13 
+    #> Wall clock time: 0.03462195 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -701,8 +711,8 @@ Show summary
     #> AIC:      1551.1683               3201.168                 3265.784
     #> BIC:      -279.6473               3282.280                 3171.970
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-09 08:07:05 
-    #> Wall clock time: 0.10127 secs 
+    #> timestamp: 2023-08-11 09:04:13 
+    #> Wall clock time: 0.08833313 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)

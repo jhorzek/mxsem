@@ -28,7 +28,7 @@ with \code{OpenMx::mxData} can be used (e.g., \code{OpenMx::mxData(observed = co
 
 \item{scale_loadings}{should the first loading of each latent variable be used for scaling?}
 
-\item{scale_latent_variances}{should the latent variances be used for scaling}
+\item{scale_latent_variances}{should the latent variances be used for scaling?}
 
 \item{add_intercepts}{should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
 are added, \strong{mxsem} will automatically use just the observed covariances and not the observed means.}
