@@ -198,7 +198,7 @@ NULL
 #' @param data raw data used to fit the model. Alternatively, an object created
 #' with `OpenMx::mxData` can be used (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`).
 #' @param scale_loadings should the first loading of each latent variable be used for scaling?
-#' @param scale_latent_variances should the latent variances be used for scaling
+#' @param scale_latent_variances should the latent variances be used for scaling?
 #' @param add_intercepts should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
 #' are added, **mxsem** will automatically use just the observed covariances and not the observed means.
 #' @param add_variances should variances for manifest and latent variables be added automatically?
