@@ -17,7 +17,8 @@ Depends: OpenMx
 Imports: 
   Rcpp (>= 1.0.10), 
   stats,
-  methods
+  methods,
+  dplyr
 LinkingTo: Rcpp
 RoxygenNote: 7.2.3
 Encoding: UTF-8
