@@ -30,13 +30,11 @@
 #'           verbal  =~ general + paragrap + sentence
 #'           math    =~ numeric + series + arithmet'
 #'
-#' mxModel <- mxsem(model = model,
-#'                  data  = OpenMx::HS.ability.data)
-#'
-#' # we want separate models for all combinations of grades and schools:
-#' mg_model <- mxsem:::group_mxsem_by(mxModel = mxModel,
-#'                                    grouping_variables = c("grade", "school")) |>
-#'   mxRun()
+#' mg_model <- mxsem(model = model,
+#'                   data  = OpenMx::HS.ability.data) |>
+#'   # we want separate models for all combinations of grades and schools:
+#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxTryHard()
 #'
 #' # let's summarize the results:
 #' summarize_multi_group_model(mg_model)
@@ -149,13 +147,14 @@ group_mxsem_by <- function(mxModel,
 #'           verbal  =~ general + paragrap + sentence
 #'           math    =~ numeric + series + arithmet'
 #'
-#' mxModel <- mxsem(model = model,
-#'                  data  = OpenMx::HS.ability.data)
+#' mg_model <- mxsem(model = model,
+#'                   data  = OpenMx::HS.ability.data) |>
+#'   # we want separate models for all combinations of grades and schools:
+#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxTryHard()
 #'
-#' # we want separate models for all combinations of grades and schools:
-#' mg_model <- mxsem:::group_mxsem_by(mxModel = mxModel,
-#'                                    grouping_variables = c("grade", "school")) |>
-#'   mxRun()
+#' # let's summarize the results:
+#' summarize_multi_group_model(mg_model)
 #'
 #' # let's get the groups:
 #' get_groups(mg_model)
@@ -179,13 +178,11 @@ get_groups <- function(multi_group_model){
 #'           verbal  =~ general + paragrap + sentence
 #'           math    =~ numeric + series + arithmet'
 #'
-#' mxModel <- mxsem(model = model,
-#'                  data  = OpenMx::HS.ability.data)
-#'
-#' # we want separate models for all combinations of grades and schools:
-#' mg_model <- mxsem:::group_mxsem_by(mxModel = mxModel,
-#'                                    grouping_variables = c("grade", "school")) |>
-#'   mxRun()
+#' mg_model <- mxsem(model = model,
+#'                   data  = OpenMx::HS.ability.data) |>
+#'   # we want separate models for all combinations of grades and schools:
+#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxTryHard()
 #'
 #' # let's summarize the results:
 #' summarize_multi_group_model(mg_model)

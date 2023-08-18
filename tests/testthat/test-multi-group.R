@@ -1,0 +1,24 @@
+test_that("multiplication works", {
+  library(lavaan)
+  library(mxsem)
+  set.seed(123)
+  HS.model <- 'visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6
+               speed   =~ x7 + x8 + x9'
+
+  fit <- cfa(HS.model,
+             data = HolzingerSwineford1939,
+             group = "school")
+
+  mg_model <- mxsem(model = HS.model,
+                    data  = HolzingerSwineford1939) |>
+    # we want separate models for all combinations of grades and schools:
+    group_mxsem_by(grouping_variables = c("school")) |>
+    mxRun()
+
+  testthat::expect_true(abs(
+    mg_model$fitfunction$result[[1]] -
+      -2*logLik(fit)
+  ) < .1
+  )
+})

@@ -24,13 +24,11 @@ model <- 'spatial =~ visual + cubes + paper
           verbal  =~ general + paragrap + sentence
           math    =~ numeric + series + arithmet'
 
-mxModel <- mxsem(model = model,
-                 data  = OpenMx::HS.ability.data)
-
-# we want separate models for all combinations of grades and schools:
-mg_model <- mxsem:::group_mxsem_by(mxModel = mxModel,
-                                   grouping_variables = c("grade", "school")) |>
-  mxRun()
+mg_model <- mxsem(model = model,
+                  data  = OpenMx::HS.ability.data) |>
+  # we want separate models for all combinations of grades and schools:
+  group_mxsem_by(grouping_variables = "school") |>
+  mxTryHard()
 
 # let's summarize the results:
 summarize_multi_group_model(mg_model)
