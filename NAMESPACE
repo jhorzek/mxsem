@@ -2,8 +2,8 @@
 
 S3method(print,multi_group_parameters)
 export(get_groups)
-export(group_mxsem_by)
 export(mxsem)
+export(mxsem_group_by)
 export(parameters)
 export(set_starting_values)
 export(simulate_latent_growth_curve)

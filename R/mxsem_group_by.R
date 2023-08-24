@@ -1,8 +1,8 @@
-#' group_mxsem_by
+#' mxsem_group_by
 #'
 #' creates a multi-group model from an OpenMx model.
 #'
-#' group_mxsem_by creates a multi-group model by splitting the data found
+#' mxsem_group_by creates a multi-group model by splitting the data found
 #' in an mxModel object using dplyr's group_by function. The general idea is
 #' as follows:
 #'
@@ -33,12 +33,12 @@
 #' mg_model <- mxsem(model = model,
 #'                   data  = OpenMx::HS.ability.data) |>
 #'   # we want separate models for all combinations of grades and schools:
-#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxsem_group_by(grouping_variables = "school") |>
 #'   mxTryHard()
 #'
 #' # let's summarize the results:
 #' summarize_multi_group_model(mg_model)
-group_mxsem_by <- function(mxModel,
+mxsem_group_by <- function(mxModel,
                            grouping_variables,
                            parameters = c(".*"),
                            use_grepl = TRUE){
@@ -135,7 +135,7 @@ group_mxsem_by <- function(mxModel,
 #' get_groups
 #'
 #' returns a list of groups for a multi group model
-#' @param multi_group_model multi group model created with group_mxsem_by
+#' @param multi_group_model multi group model created with mxsem_group_by
 #' @return list with data for each group
 #' @export
 #' @examples
@@ -150,7 +150,7 @@ group_mxsem_by <- function(mxModel,
 #' mg_model <- mxsem(model = model,
 #'                   data  = OpenMx::HS.ability.data) |>
 #'   # we want separate models for all combinations of grades and schools:
-#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxsem_group_by(grouping_variables = "school") |>
 #'   mxTryHard()
 #'
 #' # let's summarize the results:
@@ -165,8 +165,8 @@ get_groups <- function(multi_group_model){
 
 #' summarize_multi_group_model
 #'
-#' summarize the results of a multi group model created with group_mxsem_by
-#' @param multi_group_model multi group model created with group_mxsem_by
+#' summarize the results of a multi group model created with mxsem_group_by
+#' @param multi_group_model multi group model created with mxsem_group_by
 #' @return list with goup specific parameters and common parameters
 #' @export
 #' @examples
@@ -181,7 +181,7 @@ get_groups <- function(multi_group_model){
 #' mg_model <- mxsem(model = model,
 #'                   data  = OpenMx::HS.ability.data) |>
 #'   # we want separate models for all combinations of grades and schools:
-#'   group_mxsem_by(grouping_variables = "school") |>
+#'   mxsem_group_by(grouping_variables = "school") |>
 #'   mxTryHard()
 #'
 #' # let's summarize the results:

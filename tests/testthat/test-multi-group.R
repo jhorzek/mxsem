@@ -13,7 +13,7 @@ test_that("multiplication works", {
   mg_model <- mxsem(model = HS.model,
                     data  = HolzingerSwineford1939) |>
     # we want separate models for all combinations of grades and schools:
-    group_mxsem_by(grouping_variables = c("school")) |>
+    mxsem_group_by(grouping_variables = c("school")) |>
     mxRun()
 
   testthat::expect_true(abs(
@@ -40,7 +40,7 @@ test_that("multiplication works", {
   mg_model <- mxsem(model = HS.model,
                     data  = HolzingerSwineford1939) |>
     # we want separate models for all combinations of grades and schools:
-    group_mxsem_by(grouping_variables = c("school"),
+    mxsem_group_by(grouping_variables = c("school"),
                    parameters = mxsem::unicode_undirected()) |>
     mxTryHard()
 
@@ -63,7 +63,7 @@ test_that("multiplication works", {
   mg_model <- mxsem(model = HS.model,
                     data  = HolzingerSwineford1939) |>
     # we want separate models for all combinations of grades and schools:
-    group_mxsem_by(grouping_variables = c("school"),
+    mxsem_group_by(grouping_variables = c("school"),
                    parameters = c(mxsem::unicode_undirected(),
                                   "one")) |>
     mxTryHard()

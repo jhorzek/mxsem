@@ -1,6 +1,7 @@
 test_that("Political Democracy works", {
   set.seed(123)
   library(lavaan)
+  library(mxsem)
 
   model <- '
   # latent variable definitions
