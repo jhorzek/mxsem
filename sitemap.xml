@@ -43,16 +43,28 @@
     <loc>/reference/find_model_name.html</loc>
   </url>
   <url>
+    <loc>/reference/get_groups.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_individual_algebra_results.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/mxsem.html</loc>
   </url>
   <url>
+    <loc>/reference/mxsem_group_by.html</loc>
+  </url>
+  <url>
     <loc>/reference/parameter_table_rcpp.html</loc>
   </url>
   <url>
     <loc>/reference/parameters.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.multi_group_parameters.html</loc>
   </url>
   <url>
     <loc>/reference/set_starting_values.html</loc>
@@ -65,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/split_string_all.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summarize_multi_group_model.html</loc>
   </url>
   <url>
     <loc>/reference/unicode_directed.html</loc>

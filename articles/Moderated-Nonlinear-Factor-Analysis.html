@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mxsem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,9 +101,6 @@ are taken directly from that script:</p>
 <span><span class="co"># at https://osf.io/527zr</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sites.google.com/a/tilburguniversity.edu/avdrark/mokken" class="external-link">mokken</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: poLCA</span></span>
-<span><span class="co">#&gt; Loading required package: scatterplot3d</span></span>
-<span><span class="co">#&gt; Loading required package: MASS</span></span>
 <span></span>
 <span><span class="co">## Load data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"DS14"</span>, package<span class="op">=</span><span class="st">"mokken"</span><span class="op">)</span></span>
@@ -215,7 +212,7 @@ follows:</p>
 </ul>
 <p>With <strong>mxsem</strong>, this can be implemented as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mlnfa_syntax</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="va">mnlfa_syntax</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">==== MNLFA ====</span></span>
 <span><span class="st"></span></span>
 <span><span class="st">SI =~ {lSi_1  := lSi0_1  + lSi1_1*data.Age  + lSi2_1*data.Male }*Si1  +</span></span>
@@ -287,7 +284,7 @@ set.</li>
 create an <strong>OpenMx</strong> model:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jhorzek.github.io/mxsem/" class="external-link">mxsem</a></span><span class="op">)</span></span>
-<span><span class="va">mlnfa_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxsem.html">mxsem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mlnfa_syntax</span>,</span>
+<span><span class="va">mnlfa_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxsem.html">mxsem</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">mnlfa_syntax</span>,</span>
 <span>                     data <span class="op">=</span> <span class="va">DS14</span>,</span>
 <span>                     <span class="co"># we scaled the latent variables manually,</span></span>
 <span>                     <span class="co"># so we will set all automatic scalings to FALSE:</span></span>
@@ -300,8 +297,8 @@ create an <strong>OpenMx</strong> model:</p>
 <p>The model can now be fitted using <code><a href="https://rdrr.io/pkg/OpenMx/man/mxRun.html" class="external-link">mxRun()</a></code> or
 <code><a href="https://rdrr.io/pkg/OpenMx/man/mxTryHard.html" class="external-link">mxTryHard()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mlnfa_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/OpenMx/man/mxRun.html" class="external-link">mxRun</a></span><span class="op">(</span><span class="va">mlnfa_model</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mlnfa_model</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mnlfa_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/OpenMx/man/mxRun.html" class="external-link">mxRun</a></span><span class="op">(</span><span class="va">mnlfa_model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mnlfa_model</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show summary
 </summary><pre><code><span><span class="co">#&gt; Summary of MNLFA </span></span>
@@ -454,8 +451,8 @@ Show summary
 <span><span class="co">#&gt; RMSEA:  0  [95% CI (NA, NA)]</span></span>
 <span><span class="co">#&gt; Prob(RMSEA &lt;= 0.05): NA</span></span>
 <span><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span><span class="co">#&gt; timestamp: 2023-08-02 17:35:53 </span></span>
-<span><span class="co">#&gt; Wall clock time: 226.1492 secs </span></span>
+<span><span class="co">#&gt; timestamp: 2023-08-25 14:36:18 </span></span>
+<span><span class="co">#&gt; Wall clock time: 292.0618 secs </span></span>
 <span><span class="co">#&gt; optimizer:  SLSQP </span></span>
 <span><span class="co">#&gt; OpenMx version number: 2.21.8 </span></span>
 <span><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre>
@@ -463,6 +460,45 @@ Show summary
 <code>lSi1_2</code>, … will tell us if there is a linear change across
 age or if individuals with <code>Male = 0</code> differ from individuals
 with <code>Male = 1</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="plotting-individual-parameters">Plotting Individual Parameters<a class="anchor" aria-label="anchor" href="#plotting-individual-parameters"></a>
+</h2>
+<p>MNLFA predicts individual parameter values (e.g., <code>lSi_1</code>)
+using definition variables. To get a better picture of the individual
+parameters, <strong>mxsem</strong> provides the
+<code>get_individual_algebra_results</code> function. This function will
+compute for each algebra the individual parameters. Depending on the
+sample size and the number of algebras in the model, this may take some
+time. Therefore, we will only extract the individual parameter values
+for <code>lSi_1</code> as an example.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lSi_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_individual_algebra_results.html">get_individual_algebra_results</a></span><span class="op">(</span>mxModel <span class="op">=</span> <span class="va">mnlfa_model</span>,</span>
+<span>                                        algebra_names <span class="op">=</span> <span class="st">"lSi_1"</span>,</span>
+<span>                                        progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">lSi_1</span><span class="op">$</span><span class="va">lSi_1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   person         Age Male algebra_result</span></span>
+<span><span class="co">#&gt; 1      1  0.03136864    1      0.8699212</span></span>
+<span><span class="co">#&gt; 2      2 -0.44266587    1      0.9246368</span></span>
+<span><span class="co">#&gt; 3      3 -0.82189349    1      0.9684094</span></span>
+<span><span class="co">#&gt; 4      4 -0.63227968    1      0.9465231</span></span>
+<span><span class="co">#&gt; 5      5  0.03136864    1      0.8699212</span></span>
+<span><span class="co">#&gt; 6      6 -0.06343826    0      0.7408356</span></span></code></pre></div>
+<p>The function will return a list with data frames for all requested
+algebras. Here, the list has only one element: <code>lSi_1</code>. The
+data frame will have fields for the person, the definition variables
+used in the algebra (<code>Age</code> and <code>Male</code> in this
+case) and the person specific parameter (<code>algebra_result</code>).
+We can plot these results as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">lSi_1</span><span class="op">$</span><span class="va">lSi_1</span>,</span>
+<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Age</span>,</span>
+<span>           y <span class="op">=</span> <span class="va">algebra_result</span>,</span>
+<span>           color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Male</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Individual Parameter Value for lSi_1"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="figures/mnlfa_lS_1.png"></p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
