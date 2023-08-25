@@ -403,8 +403,8 @@ summary(mnlfa_model)
 #> RMSEA:  0  [95% CI (NA, NA)]
 #> Prob(RMSEA <= 0.05): NA
 #> To get additional fit indices, see help(mxRefModels)
-#> timestamp: 2023-08-25 14:20:14 
-#> Wall clock time: 357.9646 secs 
+#> timestamp: 2023-08-25 14:36:18 
+#> Wall clock time: 292.0618 secs 
 #> optimizer:  SLSQP 
 #> OpenMx version number: 2.21.8 
 #> Need help?  See help(mxSummary)
@@ -456,6 +456,7 @@ ggplot(data = lSi_1$lSi_1,
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25-1.png)
+
+![](figures/mnlfa_lS_1.png)
 
 ## References

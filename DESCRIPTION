@@ -18,7 +18,8 @@ Imports:
   Rcpp (>= 1.0.10), 
   stats,
   methods,
-  dplyr
+  dplyr,
+  utils
 LinkingTo: Rcpp
 RoxygenNote: 7.2.3
 Encoding: UTF-8
