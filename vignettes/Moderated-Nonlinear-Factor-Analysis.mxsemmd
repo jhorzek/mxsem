@@ -359,7 +359,7 @@ ggplot(data = lSi_1$lSi_1,
 
 ```{r, include = FALSE}
 library(ggplot2)
-png(filename = "figures/mnlfa_lS_1.png", width = 5, height = 5, units = "cm", res = 200)
+png(filename = "figures/mnlfa_lS_1.png", width = 10, height = 10, units = "cm", res = 200)
 ggplot(data = lSi_1$lSi_1,
        aes(x = Age,
            y = algebra_result,

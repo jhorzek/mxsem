@@ -40,6 +40,11 @@ as follows:
 in grouping_variables
 3. a separate model is set up for each group. All parameters that match
 those specified in the parameters argument are group specific
+
+**Warning**: The multi-group model may differ from **lavaan**! For instance,
+**lavaan** will automatically set the latent variances for all but the first
+group free if the loadings are fixed to equality. Such automatic procedures
+are not yet implemented in **mxsem**.
 }
 \examples{
 # THE FOLLOWING EXAMPLE IS ADAPTED FROM
