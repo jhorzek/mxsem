@@ -81,10 +81,10 @@ get_individual_algebra_results <- function(mxModel,
         utils::setTxtProgressBar(pb = pb,
                                  value = it)
 
-      algebra_result_i <- mxEvalByName(name = algebra_name,
-                                       model = mxModel,
-                                       compute = TRUE,
-                                       defvar.row = i)
+      algebra_result_i <- OpenMx::mxEvalByName(name = algebra_name,
+                                               model = mxModel,
+                                               compute = TRUE,
+                                               defvar.row = i)
       if((nrow(algebra_result_i) != 1) |
          (ncol(algebra_result_i) != 1))
         stop("This function cannot handle algebras with non-scalar outcomes.")
