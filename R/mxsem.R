@@ -314,7 +314,7 @@ mxsem <- function(model,
     mx_data <- data
   }else{
     if(!add_intercepts){
-      mx_data <- OpenMx::mxData(observed = stats::cov(data),
+      mx_data <- OpenMx::mxData(observed = stats::cov(as.matrix(data[,parameter_table$variables$manifests])),
                                 type = "cov",
                                 numObs = nrow(data))
     }else{

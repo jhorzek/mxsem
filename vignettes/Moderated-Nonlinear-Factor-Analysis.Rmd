@@ -41,9 +41,6 @@ are taken directly from that script:
 # at https://osf.io/527zr
 
 library(mokken)
-#> Loading required package: poLCA
-#> Loading required package: scatterplot3d
-#> Loading required package: MASS
 
 ## Load data
 data("DS14", package="mokken")
@@ -161,7 +158,7 @@ With **mxsem**, this can be implemented as follows:
 
 
 ```r
-mlnfa_syntax <- "
+mnlfa_syntax <- "
 ==== MNLFA ====
 
 SI =~ {lSi_1  := lSi0_1  + lSi1_1*data.Age  + lSi2_1*data.Male }*Si1  +
@@ -232,7 +229,7 @@ Finally, we pass the syntax to the `mxsem()`-function to create an **OpenMx** mo
 
 ```r
 library(mxsem)
-mlnfa_model <- mxsem(model = mlnfa_syntax,
+mnlfa_model <- mxsem(model = mnlfa_syntax,
                      data = DS14,
                      # we scaled the latent variables manually,
                      # so we will set all automatic scalings to FALSE:
@@ -248,8 +245,8 @@ The model can now be fitted using `mxRun()` or `mxTryHard()`.
 
 
 ```r
-mlnfa_model <- mxRun(mlnfa_model)
-summary(mlnfa_model)
+mnlfa_model <- mxRun(mnlfa_model)
+summary(mnlfa_model)
 ```
 
 <details>
@@ -406,8 +403,8 @@ summary(mlnfa_model)
 #> RMSEA:  0  [95% CI (NA, NA)]
 #> Prob(RMSEA <= 0.05): NA
 #> To get additional fit indices, see help(mxRefModels)
-#> timestamp: 2023-08-02 17:35:53 
-#> Wall clock time: 226.1492 secs 
+#> timestamp: 2023-08-25 14:36:18 
+#> Wall clock time: 292.0618 secs 
 #> optimizer:  SLSQP 
 #> OpenMx version number: 2.21.8 
 #> Need help?  See help(mxSummary)
@@ -417,5 +414,49 @@ summary(mlnfa_model)
 Checking the regression coefficients `lSi1_1`, `lSi1_2`, ... will tell us if
 there is a linear change across age or if individuals with `Male = 0` differ
 from individuals with `Male = 1`.
+
+## Plotting Individual Parameters
+
+MNLFA predicts individual parameter values (e.g., `lSi_1`) using definition
+variables. To get a better picture of the individual parameters, **mxsem**
+provides the `get_individual_algebra_results` function. This function will compute
+for each algebra the individual parameters. Depending on the sample size and
+the number of algebras in the model, this may take some time. Therefore, we will
+only extract the individual parameter values for `lSi_1` as an example.
+
+
+```r
+lSi_1 <- get_individual_algebra_results(mxModel = mnlfa_model,
+                                        algebra_names = "lSi_1",
+                                        progress_bar = FALSE)
+head(lSi_1$lSi_1)
+#>   person         Age Male algebra_result
+#> 1      1  0.03136864    1      0.8699212
+#> 2      2 -0.44266587    1      0.9246368
+#> 3      3 -0.82189349    1      0.9684094
+#> 4      4 -0.63227968    1      0.9465231
+#> 5      5  0.03136864    1      0.8699212
+#> 6      6 -0.06343826    0      0.7408356
+```
+
+The function will return a list with data frames for all requested algebras. Here,
+the list has only one element: `lSi_1`. The data frame will have fields for the
+person, the definition variables used in the algebra (`Age` and `Male` in this case)
+and the person specific parameter (`algebra_result`). We can plot these results
+as follows:
+
+
+```r
+library(ggplot2)
+ggplot(data = lSi_1$lSi_1,
+       aes(x = Age,
+           y = algebra_result,
+           color = factor(Male))) +
+  ylab("Individual Parameter Value for lSi_1") +
+  geom_point()
+```
+
+
+![](figures/mnlfa_lS_1.png)
 
 ## References
