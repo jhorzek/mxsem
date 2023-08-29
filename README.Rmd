@@ -15,7 +15,7 @@ library(mxsem)
 set.seed(123)
 ```
 
-# mxsem <img src="man/figures/logo.svg" align="right" height="160" />
+# mxsem <img src="man/figures/logo.svg" align="right" height="139" />
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)
 with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mxsem <img src="man/figures/logo.svg" align="right" height="160" />
+# mxsem <img src="man/figures/logo.svg" align="right" height="139" />
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement
 structural equation models (SEM) with **OpenMx** (Boker et al., 2011).
@@ -169,8 +169,8 @@ Show summary
     #> AIC:      1528.9445               3178.945                 3283.308
     #> BIC:      -287.9662               3273.962                 3144.740
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:19 
-    #> Wall clock time: 0.3142049 secs 
+    #> timestamp: 2023-08-29 10:30:52 
+    #> Wall clock time: 0.2764781 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -262,8 +262,8 @@ Show summary
     #> AIC:      1607.0759               3257.076                 3321.691
     #> BIC:      -223.7397               3338.188                 3227.877
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:21 
-    #> Wall clock time: 0.05594492 secs 
+    #> timestamp: 2023-08-29 10:30:53 
+    #> Wall clock time: 0.05367303 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -361,8 +361,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:22 
-    #> Wall clock time: 0.2738512 secs 
+    #> timestamp: 2023-08-29 10:30:55 
+    #> Wall clock time: 0.250216 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -464,8 +464,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:23 
-    #> Wall clock time: 0.03815317 secs 
+    #> timestamp: 2023-08-29 10:30:55 
+    #> Wall clock time: 0.03712487 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -536,8 +536,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:23 
-    #> Wall clock time: 0.03515697 secs 
+    #> timestamp: 2023-08-29 10:30:55 
+    #> Wall clock time: 0.03465915 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -608,8 +608,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:23 
-    #> Wall clock time: 0.03778315 secs 
+    #> timestamp: 2023-08-29 10:30:56 
+    #> Wall clock time: 0.03825903 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
@@ -711,8 +711,8 @@ Show summary
     #> AIC:      1551.1683               3201.168                 3265.784
     #> BIC:      -279.6473               3282.280                 3171.970
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2023-08-29 10:27:24 
-    #> Wall clock time: 0.08818889 secs 
+    #> timestamp: 2023-08-29 10:30:56 
+    #> Wall clock time: 0.08869696 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.8 
     #> Need help?  See help(mxSummary)
