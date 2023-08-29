@@ -15,7 +15,7 @@ library(mxsem)
 set.seed(123)
 ```
 
-# mxsem
+# mxsem <img src="man/figures/logo.svg" align="right" height="160" />
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)
 with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with
@@ -415,3 +415,7 @@ OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychome
 * Cheung, M. W.-L. (2015). metaSEM: An R package for meta-analysis using structural equation modeling. Frontiers in Psychology, 5. https://doi.org/10.3389/fpsyg.2014.01521
 * Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. Journal of Statistical Software, 48(2), 1–36. https://doi.org/10.18637/jss.v048.i02
 * van Lissa, C. J. (2023). tidySEM: Tidy Structural Equation Modeling. R package version 0.2.4, https://cjvanlissa.github.io/tidySEM/.
+
+## Logo
+
+The **mxsem** logo was generated with bing image creator and modified with Inkscape.
