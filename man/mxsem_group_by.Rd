@@ -20,7 +20,7 @@ mxsem_group_by(
 all parameters are group specific.}
 
 \item{use_grepl}{if set to TRUE, grepl is used to check which parameters are
-group-specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
+group specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
 whose label contains the letter "a" will be group specific. If use_grep = FALSE
 only the parameter that has the label "a" is group specific.}
 }
