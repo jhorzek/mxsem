@@ -17,6 +17,10 @@ set.seed(123)
 
 # mxsem
 
+<!-- badges: start -->
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mxssem)](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)
+<!-- badges: end -->
+
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)
 with **OpenMx** (Boker et al., 2011). The objective is to simplify fitting basic SEM with
 **OpenMx**, while also unlocking some very useful advanced features. For instance, 
