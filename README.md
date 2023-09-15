@@ -4,7 +4,7 @@
 # mxsem
 
 <!-- badges: start -->
-[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mxssem)](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)
 <!-- badges: end -->
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement
