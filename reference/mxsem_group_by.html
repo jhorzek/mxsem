@@ -76,7 +76,7 @@ all parameters are group specific.</p></dd>
 
 <dt>use_grepl</dt>
 <dd><p>if set to TRUE, grepl is used to check which parameters are
-group-specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
+group specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
 whose label contains the letter "a" will be group specific. If use_grep = FALSE
 only the parameter that has the label "a" is group specific.</p></dd>
 
@@ -118,6 +118,7 @@ are not yet implemented in **mxsem**.</p>
 <span class="r-in"><span>  <span class="co"># we want separate models for all combinations of grades and schools:</span></span></span>
 <span class="r-in"><span>  <span class="fu">mxsem_group_by</span><span class="op">(</span>grouping_variables <span class="op">=</span> <span class="st">"school"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/OpenMx/man/mxTryHard.html" class="external-link">mxTryHard</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This function is very experimental and may not yet work properly. Use with caution.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters will be the same across groups: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters will be group specific: spatial→cubes, spatial→paper, verbal→paragrap, verbal→sentence, math→series, math→arithmet, visual↔visual, cubes↔cubes, paper↔paper, general↔general, paragrap↔paragrap, sentence↔sentence, numeric↔numeric, series↔series, arithmet↔arithmet, spatial↔spatial, spatial↔verbal, verbal↔verbal, spatial↔math, verbal↔math, math↔math, one→visual, one→cubes, one→paper, one→general, one→paragrap, one→sentence, one→numeric, one→series, one→arithmet</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running untitled27 with 60 parameters</span>
