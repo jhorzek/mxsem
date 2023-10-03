@@ -35,7 +35,7 @@ test_that("implicit transformations", {
   "
 
   mod_implicit <- mxsem(model = model_implicit,
-               data = dataset) |>
+                        data = dataset) |>
     mxTryHard()
 
   omxGetParameters(mod_implicit)
@@ -165,7 +165,7 @@ test_that("implicit transformations", {
 '
 
   fit1 <- mxsem(model = model1,
-               data  = OpenMx::Bollen) |>
+                data  = OpenMx::Bollen) |>
     mxTryHard()
 
   model2 <- '
@@ -176,9 +176,53 @@ test_that("implicit transformations", {
 '
 
   fit2 <- mxsem(model = model2,
-               data  = OpenMx::Bollen) |>
+                data  = OpenMx::Bollen) |>
     mxTryHard()
 
   testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
+
+  model1 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := exp(1 + lv_1 * data.x1)} * dem60
+'
+
+  fit1 <- mxsem(model = model1,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  model2 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := exp(lv_0 + lv_1 * data.x1)} * dem60
+'
+
+  fit2 <- mxsem(model = model2,
+                data  = OpenMx::Bollen) |>
+    omxSetParameters(labels = "lv_0", free = FALSE, values = 1) |>
+    mxTryHard()
+
+  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
+  testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
+
+
+  model3 <- '
+     !a
+     a := 0
+     l_0 := exp(a)
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := exp(l_0 + lv_1 * data.x1)} * dem60
+
+'
+
+  fit3 <- mxsem(model = model3,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit3)["lv_1"]) < 1e-4)
+  testthat::expect_true(abs(logLik(fit1) - logLik(fit3)) < 1e-4)
 })
