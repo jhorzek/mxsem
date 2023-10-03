@@ -90,13 +90,26 @@ check_modifier_for_algebra <- function(parameter_table,
       # check if this is a definition variable
       if(grepl(pattern = "^data\\.", x = tmp_elem))
         next
+
       # check if this is already another parameter label; in this case we can
       # just skip and go to the next element
       if(tmp_elem %in% parameter_table$parameter_table$modifier)
         next
+
       # check if this parameter was already added
       if(tmp_elem %in% parameter_table$new_parameters)
         next
+
+      # check if this parameter is referring to a matrix in the model (e.g., A[1,1])
+      if(tmp_elem %in% c("A", "S", "M")){
+        warning("Using A, S, or M in your algebras provides direct access to the ",
+                "A (directed effects), S (undirected effects), and M (intercepts) ",
+                "matrices of your model. For instance, A[1,1] allows direct access to the ",
+                "element in row 1, column 1 of the A matrix. If you did want to create a new ",
+                "parameter called A, S, or M please rename the parameter.")
+        next
+      }
+
       parameter_table$new_parameters <- c(parameter_table$new_parameters,
                                           tmp_elem)
       parameter_table$new_parameters_free <- c(

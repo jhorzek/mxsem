@@ -253,4 +253,31 @@ test_that("implicit transformations", {
     mxTryHard()
   testthat::expect_true(abs(omxGetParameters(fit4)["lv_1"] -omxGetParameters(fit5)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit4) - logLik(fit5)) < 1e-4)
+
+  # check direct access to matrix elements
+  model6 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := 1 - 1/(A[1,1] + lv_1 * data.x1 + 1)} * dem60
+'
+
+  fit6 <- mxsem(model = model6,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  # check direct access to matrix elements
+  model7 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := 1 - 1/(0 + lv_1 * data.x1 + 1)} * dem60
+'
+
+  fit7 <- mxsem(model = model7,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  testthat::expect_true(abs(omxGetParameters(fit6)["lv_1"] -omxGetParameters(fit7)["lv_1"]) < 1e-4)
+  testthat::expect_true(abs(logLik(fit6) - logLik(fit7)) < 1e-4)
 })
