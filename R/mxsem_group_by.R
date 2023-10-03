@@ -23,7 +23,7 @@
 #' @param parameters the parameters that should be group specific. By default
 #' all parameters are group specific.
 #' @param use_grepl if set to TRUE, grepl is used to check which parameters are
-#' group-specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
+#' group specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
 #' whose label contains the letter "a" will be group specific. If use_grep = FALSE
 #' only the parameter that has the label "a" is group specific.
 #' @return mxModel with multiple groups. Use get_groups to extract the groups
@@ -49,6 +49,7 @@ mxsem_group_by <- function(mxModel,
                            grouping_variables,
                            parameters = c(".*"),
                            use_grepl = TRUE){
+  warning("This function is very experimental and may not yet work properly. Use with caution.")
 
   if(!is(mxModel, "MxRAMModel"))
     stop("mxModel must be of class MxRAMModel.")

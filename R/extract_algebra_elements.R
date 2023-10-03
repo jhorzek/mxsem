@@ -15,6 +15,8 @@ extract_algebra_elements <- function(mxAlgebra_formula, extracted = c()){
       if(as.character(potential_element) %in% OpenMx::omxSymbolTable$R.name)
         next
       extracted <- c(extracted, as.character(potential_element))
+    }else if(is(mxAlgebra_formula[[i]], "numeric")){
+      extracted <- c(extracted, mxAlgebra_formula[[i]])
     }else{
       stop("Unknown element in Algebra: ", mxAlgebra_formula[[i]])
     }

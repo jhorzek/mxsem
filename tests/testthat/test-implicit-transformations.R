@@ -155,4 +155,30 @@ test_that("implicit transformations", {
   testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
                               sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])) < 1e-4)
 
+
+  # test numeric values in transformations
+  model1 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := exp(0.0 + lv_1 * data.x1)} * dem60
+'
+
+  fit1 <- mxsem(model = model1,
+               data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  model2 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := exp(lv_1 * data.x1)} * dem60
+'
+
+  fit2 <- mxsem(model = model2,
+               data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
+  testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
 })

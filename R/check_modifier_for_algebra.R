@@ -83,6 +83,10 @@ check_modifier_for_algebra <- function(parameter_table,
 
     for(tmp_elem in tmp_algebra_elements){
 
+      # check if this is a numeric value
+      if(grepl(pattern = "^[0-9\\.]+$", x = tmp_elem))
+        next
+
       # check if this is a definition variable
       if(grepl(pattern = "^data\\.", x = tmp_elem))
         next
