@@ -8,11 +8,13 @@
 extract_algebra_elements <- function(mxAlgebra_formula, extracted = c()){
 
   for(i in 1:length(mxAlgebra_formula)){
-    if(is(mxAlgebra_formula[[i]], "call")){
+    if(is(mxAlgebra_formula[[i]], "call") |
+       # terms in rounded brackets are of class "(" and must be parsed further
+       is(mxAlgebra_formula[[i]], "(")){
       extracted <- extract_algebra_elements(mxAlgebra_formula[[i]], extracted)
     }else if(is(mxAlgebra_formula[[i]], "name")){
       potential_element <- mxAlgebra_formula[[i]]
-      if(as.character(potential_element) %in% OpenMx::omxSymbolTable$R.name)
+      if(as.character(potential_element) %in% c(OpenMx::omxSymbolTable$R.name, "(", ")"))
         next
       extracted <- c(extracted, as.character(potential_element))
     }else if(is(mxAlgebra_formula[[i]], "numeric")){

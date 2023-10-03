@@ -1,4 +1,5 @@
 test_that("multiplication works", {
+  testthat::skip_on_cran()
   library(lavaan)
   library(mxsem)
   set.seed(123)
