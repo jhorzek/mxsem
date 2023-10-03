@@ -225,4 +225,32 @@ test_that("implicit transformations", {
     mxTryHard()
   testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit3)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit1) - logLik(fit3)) < 1e-4)
+
+  # test more complex transformation mapping [-infinity, infinity] in [0, 1]
+  # https://math.stackexchange.com/questions/3200746/map-0-infinity-to-0-1
+  model4 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := 1 - 1/(lv_par + 1)} * dem60
+     !lv_0; !lv_1
+     lv_par := lv_0 + lv_1 * data.x1
+'
+
+  fit4 <- mxsem(model = model4,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+
+  model5 <- '
+  # latent variable definitions
+     dem60 =~ y1 + y2 + y3 + y4
+  # predict the latent variance with an intercept and a slope using x1
+     dem60 ~~ {latent_var := 1 - 1/(lv_0 + lv_1 * data.x1 + 1)} * dem60
+'
+
+  fit5 <- mxsem(model = model5,
+                data  = OpenMx::Bollen) |>
+    mxTryHard()
+  testthat::expect_true(abs(omxGetParameters(fit4)["lv_1"] -omxGetParameters(fit5)["lv_1"]) < 1e-4)
+  testthat::expect_true(abs(logLik(fit4) - logLik(fit5)) < 1e-4)
 })
