@@ -205,6 +205,7 @@ test_that("implicit transformations", {
     omxSetParameters(labels = "lv_0", free = FALSE, values = 1) |>
     mxTryHard()
 
+  testthat::expect_true(abs(mxEval(latent_var, fit1) - exp(1 + omxGetParameters(fit1)["lv_1"]*OpenMx::Bollen[1,"x1"])) < 1e-4)
   testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
 
@@ -223,6 +224,8 @@ test_that("implicit transformations", {
   fit3 <- mxsem(model = model3,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
+
+  testthat::expect_true(abs(mxEval(latent_var, fit3) - exp(1 + omxGetParameters(fit3)["lv_1"]*OpenMx::Bollen[1,"x1"])) < 1e-4)
   testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit3)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit1) - logLik(fit3)) < 1e-4)
 
@@ -240,6 +243,7 @@ test_that("implicit transformations", {
   fit4 <- mxsem(model = model4,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
+  testthat::expect_true(abs(mxEval(latent_var, fit4) - (1 - 1/(omxGetParameters(fit4)["lv_0"] + omxGetParameters(fit4)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
 
   model5 <- '
   # latent variable definitions
@@ -251,6 +255,7 @@ test_that("implicit transformations", {
   fit5 <- mxsem(model = model5,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
+  testthat::expect_true(abs(mxEval(latent_var, fit5) - (1 - 1/(omxGetParameters(fit5)["lv_0"] + omxGetParameters(fit5)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
   testthat::expect_true(abs(omxGetParameters(fit4)["lv_1"] -omxGetParameters(fit5)["lv_1"]) < 1e-4)
   testthat::expect_true(abs(logLik(fit4) - logLik(fit5)) < 1e-4)
 
@@ -265,7 +270,7 @@ test_that("implicit transformations", {
   fit6 <- mxsem(model = model6,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
-
+  testthat::expect_true(abs(mxEval(latent_var, fit6) - (1 - 1/(fit6$A$values[1,1] + omxGetParameters(fit6)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
   # check direct access to matrix elements
   model7 <- '
   # latent variable definitions
