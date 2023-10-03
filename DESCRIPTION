@@ -1,8 +1,8 @@
 Package: mxsem
 Type: Package
 Title: Specify 'OpenMx' Models with a 'lavaan'-Style Syntax
-Version: 0.0.7
-Date: 2023-07-12
+Version: 0.0.8
+Date: 2023-10-03
 Authors@R: c(person(given   = "Jannik H.", family = "Orzek",
                     role    = c("aut", "cre", "cph"),
                     email   = "jannik.orzek@mailbox.org",
