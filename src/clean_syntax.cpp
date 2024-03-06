@@ -21,9 +21,13 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
     // check for curly braces:
     switch(c){
     case '{':
+      if(is_comment)
+        break;
       n_curly_open++;
       break;
     case '}':
+      if(is_comment)
+        break;
       n_curly_open--;
       if(n_curly_open < 0){
         Rcpp::stop("Error parsing the syntax: Found a closing curly brace } without an opening curly brance {. The last line was "  +

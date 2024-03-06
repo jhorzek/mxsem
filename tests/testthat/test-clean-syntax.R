@@ -16,6 +16,8 @@ test_that("cleaning syntax works", {
       dem60 ~ ind60
     dem65 ~ ind60 + dem60
 
+    # {commented algebra}
+#no space after comment
   # residual correlations
     y1 ~~ y5
     y2 ~~ y4 + y6;  y3 ~
