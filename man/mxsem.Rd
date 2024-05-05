@@ -288,7 +288,7 @@ model_transformations <- '
   # latent variable definitions
      ind60 =~ x1 + x2 + x3
      dem60 =~ y1 + a1*y2 + b1*y3 + c1*y4
-     dem65 =~ y5 + a2*y6 + b2*y7 + c2*y8
+     dem65 =~ y5 + {a2 := a1 + delta_a}*y6 + {b2 := b1 + delta_b}*y7 + c2*y8
 
   # regressions
     dem60 ~ ind60
@@ -300,16 +300,6 @@ model_transformations <- '
     y3 ~~ y7
     y4 ~~ y8
     y6 ~~ y8
-
-# create new parameters:
-!delta_a
-!delta_b
-
-# use the model parameters and the new parameters for transformations:
-a2 := a1 + delta_a
-# let us also add an overly complicated equality constraint...
-delta_b := 0
-b2 := b1 + delta_b
 '
 
 fit <- mxsem(model = model_transformations,
