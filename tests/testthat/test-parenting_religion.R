@@ -34,16 +34,16 @@ direct:=c'
 
   testthat::expect_true(length(coef(fit_lavaan)) == length(omxGetParameters(fit_mx)))
 
-  testthat::expect_true(abs(-2*logLik(fit_lavaan) -
-                              fit_mx$fitfunction$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(-2*logLik(fit_lavaan) -
+                            fit_mx$fitfunction$result[[1]]), 1e-4)
 
   summary_lavaan <- lavaan::summary(fit_lavaan)
 
-  testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
-                              fit_mx$direct$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
+                            fit_mx$direct$result[[1]]), 1e-4)
 
-  testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "ef"] -
-                              fit_mx$ef$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "ef"] -
+                            fit_mx$ef$result[[1]]), 1e-4)
 
 
   #Model 1b with nonsignificant 'n' and 'j' paths dropped
@@ -84,14 +84,14 @@ direct:=l'
 
   testthat::expect_true(length(coef(fit_lavaan)) == length(omxGetParameters(fit_mx)))
 
-  testthat::expect_true(abs(-2*logLik(fit_lavaan) -
-                              fit_mx$fitfunction$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(-2*logLik(fit_lavaan) -
+                            fit_mx$fitfunction$result[[1]]), 1e-4)
 
   summary_lavaan <- lavaan::summary(fit_lavaan)
 
-  testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
-                              fit_mx$direct$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "direct"] -
+                            fit_mx$direct$result[[1]]), 1e-4)
 
-  testthat::expect_true(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "ef"] -
-                              fit_mx$ef$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(summary_lavaan$pe$est[summary_lavaan$pe$lhs == "ef"] -
+                            fit_mx$ef$result[[1]]), 1e-4)
 })

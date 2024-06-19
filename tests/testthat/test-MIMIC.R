@@ -20,6 +20,6 @@ test_that("MIMIC works", {
 
   testthat::expect_true(length(unique(names(coef(fit_lavaan)))) == length(omxGetParameters(fit_mx)))
 
-  testthat::expect_true(abs(-2*logLik(fit_lavaan) -
-                              fit_mx$fitfunction$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(-2*logLik(fit_lavaan) -
+                            fit_mx$fitfunction$result[[1]]), 1e-4)
 })

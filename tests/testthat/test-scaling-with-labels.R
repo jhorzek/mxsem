@@ -50,7 +50,7 @@ test_that("scaling with variables", {
 
   # all fits should be identical (the last model is not identified which basically
   # here results in the same fit)
-  testthat::expect_true(all(abs(fits - fits[1]) < 1e-4))
+  testthat::expect_lt(all(abs(fits - fits[1]), 1e-4))
 
   # automatic scaling using variance
   # automatic scaling
