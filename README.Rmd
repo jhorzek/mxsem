@@ -19,6 +19,8 @@ set.seed(123)
 
 <!-- badges: start -->
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)
+[![R-CMD-check](https://github.com/jhorzek/mxsem/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jhorzek/mxsem/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/jhorzek/mxsem/branch/main/graph/badge.svg)](https://app.codecov.io/gh/jhorzek/mxsem?branch=main)
 <!-- badges: end -->
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement structural equation models (SEM)

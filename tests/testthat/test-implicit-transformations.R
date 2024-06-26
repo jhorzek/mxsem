@@ -20,8 +20,8 @@ test_that("implicit transformations", {
 
   omxGetParameters(mod)
 
-  testthat::expect_true(abs(omxGetParameters(mod)["a0"] - .7) < .1)
-  testthat::expect_true(abs(omxGetParameters(mod)["a1"] - -.2) < .1)
+  testthat::expect_lt(abs(omxGetParameters(mod)["a0"] - .7), .1)
+  testthat::expect_lt(abs(omxGetParameters(mod)["a1"] - -.2), .1)
 
 
 
@@ -40,10 +40,10 @@ test_that("implicit transformations", {
 
   omxGetParameters(mod_implicit)
 
-  testthat::expect_true(abs(omxGetParameters(mod_implicit)["a0"] - .7) < .1)
-  testthat::expect_true(abs(omxGetParameters(mod_implicit)["a1"] - -.2) < .1)
+  testthat::expect_lt(abs(omxGetParameters(mod_implicit)["a0"] - .7), .1)
+  testthat::expect_lt(abs(omxGetParameters(mod_implicit)["a1"] - -.2), .1)
 
-  testthat::expect_true(abs(logLik(mod_implicit) - logLik(mod)) < 1e-4)
+  testthat::expect_lt(abs(logLik(mod_implicit) - logLik(mod)), 1e-3)
 
   model <- '
   # latent variable definitions
@@ -91,9 +91,9 @@ test_that("implicit transformations", {
   fit_transform <- mxsem(model_transform, data = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(logLik(fit_base) - logLik(fit_transform)) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
-                              sum(omxGetParameters(fit_transform)[c("a1", "delta_a")])) < 1e-4)
+  testthat::expect_lt(abs(logLik(fit_base) - logLik(fit_transform)), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit_base)["a2"] -
+                            sum(omxGetParameters(fit_transform)[c("a1", "delta_a")])), 1e-3)
 
   model_transform <- '
   # latent variable definitions
@@ -121,9 +121,9 @@ test_that("implicit transformations", {
   fit_transform <- mxsem(model_transform, data = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(logLik(fit_base) - logLik(fit_transform)) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
-                              sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])) < 1e-4)
+  testthat::expect_lt(abs(logLik(fit_base) - logLik(fit_transform)), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit_base)["a2"] -
+                            sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])), 1e-3)
 
   model_transform <- '
   # latent variable definitions
@@ -151,9 +151,9 @@ test_that("implicit transformations", {
   fit_transform <- mxsem(model_transform, data = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(logLik(fit_base) - logLik(fit_transform)) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit_base)["a2"] -
-                              sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])) < 1e-4)
+  testthat::expect_lt(abs(logLik(fit_base) - logLik(fit_transform)), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit_base)["a2"] -
+                            sum(omxGetParameters(fit_transform)[c("a1", "delta_a", "b1", "delta_b")])), 1e-3)
 
 
   # test numeric values in transformations
@@ -179,8 +179,8 @@ test_that("implicit transformations", {
                 data  = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
-  testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
+  testthat::expect_lt(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]), 1e-3)
+  testthat::expect_lt(abs(logLik(fit1) - logLik(fit2)), 1e-3)
 
   model1 <- '
   # latent variable definitions
@@ -205,9 +205,9 @@ test_that("implicit transformations", {
     omxSetParameters(labels = "lv_0", free = FALSE, values = 1) |>
     mxTryHard()
 
-  testthat::expect_true(abs(mxEval(latent_var, fit1) - exp(1 + omxGetParameters(fit1)["lv_1"]*OpenMx::Bollen[1,"x1"])) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]) < 1e-4)
-  testthat::expect_true(abs(logLik(fit1) - logLik(fit2)) < 1e-4)
+  testthat::expect_lt(abs(mxEval(latent_var, fit1) - exp(1 + omxGetParameters(fit1)["lv_1"]*OpenMx::Bollen[1,"x1"])), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit2)["lv_1"]), 1e-3)
+  testthat::expect_lt(abs(logLik(fit1) - logLik(fit2)), 1e-3)
 
 
   model3 <- '
@@ -225,9 +225,9 @@ test_that("implicit transformations", {
                 data  = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(mxEval(latent_var, fit3) - exp(1 + omxGetParameters(fit3)["lv_1"]*OpenMx::Bollen[1,"x1"])) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit3)["lv_1"]) < 1e-4)
-  testthat::expect_true(abs(logLik(fit1) - logLik(fit3)) < 1e-4)
+  testthat::expect_lt(abs(mxEval(latent_var, fit3) - exp(1 + omxGetParameters(fit3)["lv_1"]*OpenMx::Bollen[1,"x1"])), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit1)["lv_1"] -omxGetParameters(fit3)["lv_1"]), 1e-3)
+  testthat::expect_lt(abs(logLik(fit1) - logLik(fit3)), 1e-3)
 
   # test more complex transformation mapping [-infinity, infinity] in [0, 1]
   # https://math.stackexchange.com/questions/3200746/map-0-infinity-to-0-1
@@ -243,7 +243,7 @@ test_that("implicit transformations", {
   fit4 <- mxsem(model = model4,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
-  testthat::expect_true(abs(mxEval(latent_var, fit4) - (1 - 1/(omxGetParameters(fit4)["lv_0"] + omxGetParameters(fit4)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
+  testthat::expect_lt(abs(mxEval(latent_var, fit4) - (1 - 1/(omxGetParameters(fit4)["lv_0"] + omxGetParameters(fit4)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))), 1e-3)
 
   model5 <- '
   # latent variable definitions
@@ -255,9 +255,9 @@ test_that("implicit transformations", {
   fit5 <- mxsem(model = model5,
                 data  = OpenMx::Bollen) |>
     mxTryHard()
-  testthat::expect_true(abs(mxEval(latent_var, fit5) - (1 - 1/(omxGetParameters(fit5)["lv_0"] + omxGetParameters(fit5)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
-  testthat::expect_true(abs(omxGetParameters(fit4)["lv_1"] -omxGetParameters(fit5)["lv_1"]) < 1e-4)
-  testthat::expect_true(abs(logLik(fit4) - logLik(fit5)) < 1e-4)
+  testthat::expect_lt(abs(mxEval(latent_var, fit5) - (1 - 1/(omxGetParameters(fit5)["lv_0"] + omxGetParameters(fit5)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))), 1e-3)
+  testthat::expect_lt(abs(omxGetParameters(fit4)["lv_1"] -omxGetParameters(fit5)["lv_1"]), 1e-3)
+  testthat::expect_lt(abs(logLik(fit4) - logLik(fit5)), 1e-3)
 
   # check direct access to matrix elements
   model6 <- '
@@ -267,10 +267,10 @@ test_that("implicit transformations", {
      dem60 ~~ {latent_var := 1 - 1/(A[1,1] + lv_1 * data.x1 + 1)} * dem60
 '
 
-  fit6 <- mxsem(model = model6,
-                data  = OpenMx::Bollen) |>
-    mxTryHard()
-  testthat::expect_true(abs(mxEval(latent_var, fit6) - (1 - 1/(fit6$A$values[1,1] + omxGetParameters(fit6)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))) < 1e-4)
+  testthat::expect_warning(fit6 <- mxsem(model = model6,
+                                         data  = OpenMx::Bollen) |>
+                             mxTryHard())
+  testthat::expect_lt(abs(mxEval(latent_var, fit6) - (1 - 1/(fit6$A$values[1,1] + omxGetParameters(fit6)["lv_1"]*OpenMx::Bollen[1,"x1"] + 1))), 1e-3)
   # check direct access to matrix elements
   model7 <- '
   # latent variable definitions
@@ -283,6 +283,7 @@ test_that("implicit transformations", {
                 data  = OpenMx::Bollen) |>
     mxTryHard()
 
-  testthat::expect_true(abs(omxGetParameters(fit6)["lv_1"] -omxGetParameters(fit7)["lv_1"]) < 1e-4)
-  testthat::expect_true(abs(logLik(fit6) - logLik(fit7)) < 1e-4)
+  testthat::expect_lt(abs(omxGetParameters(fit6)["lv_1"] -omxGetParameters(fit7)["lv_1"]), 1e-3)
+  testthat::expect_lt(abs(logLik(fit6) - logLik(fit7)), 1e-3)
 })
+

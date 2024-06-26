@@ -31,7 +31,7 @@ rotate =~ rotate_3 + rotate_4 + rotate_6 + rotate_8
     mxTryHard()
 
 
-  testthat::expect_true(abs(-2*logLik(fitCat) -
-                              fit_mx$fitfunction$result[[1]]) < 1e-4)
+  testthat::expect_lt(abs(-2*logLik(fitCat) -
+                            fit_mx$fitfunction$result[[1]]), 1e-4)
 
 })
