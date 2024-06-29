@@ -28,5 +28,6 @@ Suggests:
     knitr,
     rmarkdown
 Config/testthat/edition: 3
-URL: https://jhorzek.github.io/mxsem/
+URL: https://jhorzek.github.io/mxsem/, https://github.com/jhorzek/mxsem/
+BugReports: https://github.com/jhorzek/mxsem/issues
 VignetteBuilder: knitr
