@@ -58,7 +58,7 @@ jobs:
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: Install mxsem
-        run:
+        run: |
           install.packages("devtools")
           devtools::install(pkg = ".")
         shell: Rscript {0}
