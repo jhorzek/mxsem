@@ -8,8 +8,6 @@
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)](https://cranlogs.r-pkg.org/badges/grand-total/mxsem)
 [![R-CMD-check](https://github.com/jhorzek/mxsem/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jhorzek/mxsem/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/jhorzek/mxsem/branch/main/graph/badge.svg)](https://app.codecov.io/gh/jhorzek/mxsem?branch=main)
 <!-- badges: end -->
 
 **mxsem** provides a **lavaan**-like (Rosseel, 2012) syntax to implement
@@ -178,8 +176,8 @@ Show summary
     #> AIC:       1706.152               3356.152                 3460.515
     #> BIC:       -110.759               3451.169                 3321.947
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:23 
-    #> Wall clock time: 0.1138363 secs 
+    #> timestamp: 2024-07-21 20:44:38 
+    #> Wall clock time: 0.1139431 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -271,8 +269,8 @@ Show summary
     #> AIC:      1550.9954               3200.995                 3265.611
     #> BIC:      -279.8202               3282.107                 3171.797
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:25 
-    #> Wall clock time: 0.2250204 secs 
+    #> timestamp: 2024-07-21 20:44:40 
+    #> Wall clock time: 0.2327423 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -370,8 +368,8 @@ Show summary
     #> AIC:       821.2609               861.2609                 863.7328
     #> BIC:       795.2092               887.3126                 855.7301
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:27 
-    #> Wall clock time: 0.4517224 secs 
+    #> timestamp: 2024-07-21 20:44:41 
+    #> Wall clock time: 0.4582329 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -473,8 +471,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:27 
-    #> Wall clock time: 0.07100892 secs 
+    #> timestamp: 2024-07-21 20:44:42 
+    #> Wall clock time: 0.07763433 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -545,8 +543,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:28 
-    #> Wall clock time: 0.06678343 secs 
+    #> timestamp: 2024-07-21 20:44:42 
+    #> Wall clock time: 0.0693748 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -617,8 +615,8 @@ Show summary
     #> AIC:       461.3822               515.3822                 526.0151
     #> BIC:       443.1460               567.4856                 504.3206
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:28 
-    #> Wall clock time: 0.06837726 secs 
+    #> timestamp: 2024-07-21 20:44:43 
+    #> Wall clock time: 0.0685575 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)
@@ -720,8 +718,8 @@ Show summary
     #> AIC:      1551.1683               3201.168                 3265.784
     #> BIC:      -279.6473               3282.280                 3171.970
     #> To get additional fit indices, see help(mxRefModels)
-    #> timestamp: 2024-06-26 21:59:29 
-    #> Wall clock time: 0.1718066 secs 
+    #> timestamp: 2024-07-21 20:44:44 
+    #> Wall clock time: 0.1770966 secs 
     #> optimizer:  SLSQP 
     #> OpenMx version number: 2.21.11 
     #> Need help?  See help(mxSummary)

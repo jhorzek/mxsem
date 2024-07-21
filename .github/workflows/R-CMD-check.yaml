@@ -56,3 +56,18 @@ jobs:
         with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+
+      - name: testmxsem
+        run: |
+          cd ..
+          mkdir testmxsem
+          cd testmxsem
+      - uses: actions/checkout@v2
+        with:
+          repository: 'jhorzek/testmxsem'
+          ref: 'main'
+      - name: Extended tests
+        run: |
+          devtools::build(pkg = ".", binary = TRUE)
+          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning")
+        shell: Rscript {0}
