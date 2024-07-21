@@ -57,6 +57,12 @@ jobs:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
+      - name: Install mxsem
+        run:
+          install.packages("devtools")
+          devtools::install(pkg = ".")
+        shell: Rscript {0}
+
       - name: testmxsem
         run: |
           cd ..
@@ -68,7 +74,6 @@ jobs:
           ref: 'main'
       - name: Extended tests
         run: |
-          install.packages("devtools")
           devtools::build(pkg = ".", binary = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning")
         shell: Rscript {0}
