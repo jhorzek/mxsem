@@ -60,6 +60,7 @@ jobs:
       - name: Install mxsem
         run: |
           install.packages("devtools")
+          devtools::install_deps(".")
           devtools::install(pkg = ".")
         shell: Rscript {0}
 
