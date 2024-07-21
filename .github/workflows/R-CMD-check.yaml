@@ -75,6 +75,7 @@ jobs:
           ref: 'main'
       - name: Extended tests
         run: |
+          devtools::install_deps(".")
           devtools::build(pkg = ".", binary = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning")
         shell: Rscript {0}
