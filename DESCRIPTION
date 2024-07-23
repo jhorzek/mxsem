@@ -1,7 +1,7 @@
 Package: mxsem
 Type: Package
 Title: Specify 'OpenMx' Models with a 'lavaan'-Style Syntax
-Version: 0.0.9
+Version: 0.0.10
 Authors@R: c(person(given   = "Jannik H.", family = "Orzek",
                     role    = c("aut", "cre", "cph"),
                     email   = "jannik.orzek@mailbox.org",
@@ -22,11 +22,8 @@ Imports:
 LinkingTo: Rcpp
 RoxygenNote: 7.2.3
 Encoding: UTF-8
-Suggests: 
-    testthat (>= 3.0.0),
-    lavaan,
+Suggests:
     knitr,
     rmarkdown
-Config/testthat/edition: 3
 URL: https://jhorzek.github.io/mxsem/
 VignetteBuilder: knitr
