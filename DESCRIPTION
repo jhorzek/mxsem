@@ -25,5 +25,6 @@ Encoding: UTF-8
 Suggests:
     knitr,
     rmarkdown
-URL: https://jhorzek.github.io/mxsem/
+URL: https://jhorzek.github.io/mxsem/, https://github.com/jhorzek/mxsem/
+BugReports: https://github.com/jhorzek/mxsem/issues
 VignetteBuilder: knitr
