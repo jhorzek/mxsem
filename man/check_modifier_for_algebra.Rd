@@ -14,7 +14,7 @@ check_modifier_for_algebra(parameter_table, directed, undirected)
 \item{undirected}{symbol used to indicate undirected effects (variances and covariances)}
 }
 \value{
-parameter_table
+data.frame with parameters (parameter table)
 }
 \description{
 takes in the parameter table and checks if any of the modifiers therein

@@ -11,6 +11,9 @@
 
 \item{...}{not used}
 }
+\value{
+nothing
+}
 \description{
 print the multi_group_parameters
 }

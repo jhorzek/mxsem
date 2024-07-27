@@ -26,7 +26,7 @@
 #' group specific. For instance, if parameters = "a" and use_grepl = TRUE, all parameters
 #' whose label contains the letter "a" will be group specific. If use_grep = FALSE
 #' only the parameter that has the label "a" is group specific.
-#' @return mxModel with multiple groups. Use get_groups to extract the groups
+#' @returns mxModel with multiple groups. Use get_groups to extract the groups
 #' @export
 #' @examples
 #' # THE FOLLOWING EXAMPLE IS ADAPTED FROM
@@ -144,7 +144,7 @@ mxsem_group_by <- function(mxModel,
 #'
 #' returns a list of groups for a multi group model
 #' @param multi_group_model multi group model created with mxsem_group_by
-#' @return list with data for each group
+#' @returns list with data for each group
 #' @export
 #' @examples
 #' # THE FOLLOWING EXAMPLE IS ADAPTED FROM
@@ -228,6 +228,7 @@ summarize_multi_group_model <- function(multi_group_model){
 #' @param x object from summarize_multi_group_model
 #' @param ... not used
 #' @method print multi_group_parameters
+#' @returns nothing
 #' @export
 print.multi_group_parameters <- function(x, ...){
   console_width <- getOption("width")
