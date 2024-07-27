@@ -211,7 +211,7 @@ NULL
 #' @param undirected symbol used to indicate undirected effects (variances and covariances)
 #' @param return_parameter_table if set to TRUE, the internal parameter table is returend
 #' together with the mxModel
-#' @return mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
+#' @returns mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
 #' is TRUE, a list with the mxModel and the parameter table is returned.
 #' @export
 #' @import OpenMx

@@ -4,7 +4,7 @@
 #' omxSetParameters.
 #' @param mx_model model of class mxModel
 #' @param values vector with labeled parameter values
-#' @return mxModel with changed parameter values
+#' @returns mxModel with changed parameter values
 #' @export
 #' @examples
 #' library(mxsem)

@@ -6,7 +6,7 @@
 #' @param parameter_table parameter table
 #' @param directed symbol used to indicate directed effects (regressions and loadings)
 #' @param undirected symbol used to indicate undirected effects (variances and covariances)
-#' @return parameter_table
+#' @returns data.frame with parameters (parameter table)
 #' @keywords internal
 check_modifier_for_algebra <- function(parameter_table,
                                        directed,

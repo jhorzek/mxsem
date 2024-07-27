@@ -4,7 +4,7 @@
 #' simulate data for a latent growth curve model with five measurement occasions.
 #' The time-distance between these occasions differs between subjects.
 #' @param N sample size
-#' @return data set with columns y1-y5 (observations) and t_1-t_5 (time of
+#' @returns data set with columns y1-y5 (observations) and t_1-t_5 (time of
 #' observation)
 #' @export
 #' @importFrom stats rnorm
@@ -51,7 +51,7 @@ simulate_latent_growth_curve <- function(N = 100){
 #'
 #' simulate data for a moderated nonlinear factor analysis.
 #' @param N sample size
-#' @return data set with variables x1-x3 and y1-y3 representing repeated measurements
+#' @returns data set with variables x1-x3 and y1-y3 representing repeated measurements
 #' of an affect measure. It is assumed that the autoregressive effect is different
 #' depending on covariate k
 #' @export
