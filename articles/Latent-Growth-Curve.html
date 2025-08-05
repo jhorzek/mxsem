@@ -8,8 +8,8 @@
 <title>Latent-Growth-Curve • mxsem</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Latent-Growth-Curve">
 </head>
 <body>
@@ -120,7 +120,7 @@ for the first person, but
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1.2</mn></mrow><annotation encoding="application/x-tex">-1.2</annotation></semantics></math>
 for the second. SEMs allow us to capture these assumptions in a single
 model:</p>
-<p><img src="figures%2Flatent_growth_curve.png"></p>
+<p><img src="figures/latent_growth_curve.png"></p>
 <p>In the Figure shown above, blue paths denote estimated parameters and
 gray paths are fixed to specific values. Note that the paths of the
 latent intercept
@@ -269,20 +269,20 @@ the <code>t_1</code> variable located in <code>lgc_dat</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Model Statistics: </span></span>
 <span><span class="co">#&gt;                |  Parameters  |  Degrees of Freedom  |  Fit (-2lnL units)</span></span>
-<span><span class="co">#&gt;        Model:             10                     10              846.5694</span></span>
-<span><span class="co">#&gt;    Saturated:             20                      0                    NA</span></span>
-<span><span class="co">#&gt; Independence:             10                     10                    NA</span></span>
-<span><span class="co">#&gt; Number of observations/statistics: 100/20</span></span>
+<span><span class="co">#&gt;        Model:             10                    490              846.5694</span></span>
+<span><span class="co">#&gt;    Saturated:             20                    480                    NA</span></span>
+<span><span class="co">#&gt; Independence:             10                    490                    NA</span></span>
+<span><span class="co">#&gt; Number of observations/statistics: 100/500</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Information Criteria: </span></span>
 <span><span class="co">#&gt;       |  df Penalty  |  Parameters Penalty  |  Sample-Size Adjusted</span></span>
-<span><span class="co">#&gt; AIC:       826.5694               866.5694                 869.0413</span></span>
-<span><span class="co">#&gt; BIC:       800.5177               892.6211                 861.0386</span></span>
+<span><span class="co">#&gt; AIC:      -133.4306               866.5694                 869.0413</span></span>
+<span><span class="co">#&gt; BIC:     -1409.9640               892.6211                 861.0386</span></span>
 <span><span class="co">#&gt; To get additional fit indices, see help(mxRefModels)</span></span>
-<span><span class="co">#&gt; timestamp: 2024-11-16 20:14:31 </span></span>
-<span><span class="co">#&gt; Wall clock time: 0.3763041 secs </span></span>
+<span><span class="co">#&gt; timestamp: 2025-08-05 20:16:10 </span></span>
+<span><span class="co">#&gt; Wall clock time: 0.4504347 secs </span></span>
 <span><span class="co">#&gt; optimizer:  SLSQP </span></span>
-<span><span class="co">#&gt; OpenMx version number: 2.21.13 </span></span>
+<span><span class="co">#&gt; OpenMx version number: 2.22.7 </span></span>
 <span><span class="co">#&gt; Need help?  See help(mxSummary)</span></span></code></pre></div>
 </div>
 <div class="section level2 unnumbered">
@@ -329,7 +329,7 @@ Modeling: A Multidisciplinary Journal</em>, <em>21</em>(4), 630–647. <a href="
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

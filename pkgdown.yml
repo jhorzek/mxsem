@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   create_parameter_table: create_parameter_table.html
   Latent-Growth-Curve: Latent-Growth-Curve.html
   Moderated-Nonlinear-Factor-Analysis: Moderated-Nonlinear-Factor-Analysis.html
   Syntax: Syntax.html
-last_built: 2024-11-16T20:13Z
+last_built: 2025-08-05T20:15Z
