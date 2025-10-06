@@ -197,6 +197,11 @@ NULL
 #' @param model model syntax similar to **lavaan**'s syntax
 #' @param data raw data used to fit the model. Alternatively, an object created
 #' with `OpenMx::mxData` can be used (e.g., `OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")`).
+#' @param ordered vector with names of the items that are ordered
+#' @param ordered_parameterization One of 'theta' or 'none'. When set to 'theta' (default), *residual* variances of the latent factors
+#' underlying each ordered variable will be constrained to 1 and the means to 0. To freely estimate a residual variance, you have to give the
+#' parameter a name in the syntax (e.g., `z1 ~~ var_z1*z1`). When set to 'none', no scaling will be automatically implemented.
+#' @param fitfunction one of the fit functions provided by OpenMx. Defaults to DWLS for ordered data and ML for everything else.
 #' @param scale_loadings should the first loading of each latent variable be used for scaling?
 #' @param scale_latent_variances should the latent variances be used for scaling?
 #' @param add_intercepts should intercepts for manifest variables be added automatically? If set to false, intercepts must be added manually. If no intercepts
@@ -209,8 +214,6 @@ NULL
 #' @param lbound_variances should the lower bound for variances be set to 0.000001?
 #' @param directed symbol used to indicate directed effects (regressions and loadings)
 #' @param undirected symbol used to indicate undirected effects (variances and covariances)
-#' @param return_parameter_table if set to TRUE, the internal parameter table is returend
-#' together with the mxModel
 #' @returns mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
 #' is TRUE, a list with the mxModel and the parameter table is returned.
 #' @export
@@ -268,250 +271,51 @@ NULL
 #'             data  = OpenMx::Bollen) |>
 #'   mxTryHard()
 #' omxGetParameters(fit)
-mxsem <- function(model,
-                  data,
-                  scale_loadings = TRUE,
-                  scale_latent_variances = FALSE,
-                  add_intercepts = TRUE,
-                  add_variances = TRUE,
-                  add_exogenous_latent_covariances = TRUE,
-                  add_exogenous_manifest_covariances = TRUE,
-                  lbound_variances = TRUE,
-                  directed = unicode_directed(),
-                  undirected = unicode_undirected(),
-                  return_parameter_table = FALSE){
-
-  if(scale_loadings & scale_latent_variances)
-    warning("Set either scale_loadings OR scale_latent_variances to TRUE. Setting both to TRUE is not necessary.")
-
-  # split the string into pre-processing, model name, and model syntax
-  splitted_syntax <- find_model_name(syntax = model)
-
-  parameter_table <- parameter_table_rcpp(syntax = splitted_syntax$model_syntax,
-                                          add_intercept = add_intercepts,
-                                          add_variance = add_variances,
-                                          add_exogenous_latent_covariances = add_exogenous_latent_covariances,
-                                          add_exogenous_manifest_covariances = add_exogenous_manifest_covariances,
-                                          scale_latent_variance = scale_latent_variances,
-                                          scale_loading = scale_loadings)
-
-  check_all_fields(parameter_table)
-  parameter_table <- check_modifier_for_algebra(parameter_table = parameter_table,
-                                                directed = directed,
-                                                undirected = undirected)
-
-  if(is(data, "MxDataStatic")){
-    mx_data <- data
-  }else{
-    if(!add_intercepts){
-      mx_data <- OpenMx::mxData(observed = stats::cov(as.matrix(data[,parameter_table$variables$manifests])),
-                                type = "cov",
-                                numObs = nrow(data))
-    }else{
-      mx_data <- OpenMx::mxData(data, type = "raw")
-    }
-  }
-
-  mxMod <- OpenMx::mxModel(
-    model = ifelse(test = splitted_syntax$model_name == "",
-                   NA,
-                   splitted_syntax$model_name),
-    type = "RAM",
-    manifestVars = parameter_table$variables$manifests,
-    latentVars = parameter_table$variables$latents,
-    mx_data)
-
-  mxMod <- add_path(mxMod,
-                    parameter_table,
-                    lbound_variances,
-                    directed,
-                    undirected)
-  mxMod <- add_algebra(mxMod,
-                       parameter_table = parameter_table,
-                       parameter_table$algebras,
-                       parameter_table$new_parameters,
-                       parameter_table$new_parameters_free)
-
-  # add user defined elements
-  if(length(parameter_table$user_defined) != 0)
-    warning("User defined elements using curly braces can be problematic. Make sure to check the model thoroughly")
-  for(user_def in parameter_table$user_defined)
-    mxMod <- mxModel(
-      mxMod,
-      eval(parse(text = user_def))
-    )
-
-  if(!return_parameter_table)
-    return(mxMod)
-
-  return(
-    list(
-      model = mxMod,
-      parameter_table = parameter_table
-    )
+mxsem <- function(
+  model,
+  data,
+  ordered = NULL,
+  ordered_parameterization = "theta",
+  fitfunction = "auto",
+  scale_loadings = TRUE,
+  scale_latent_variances = FALSE,
+  add_intercepts = TRUE,
+  add_variances = TRUE,
+  add_exogenous_latent_covariances = TRUE,
+  add_exogenous_manifest_covariances = TRUE,
+  lbound_variances = TRUE,
+  directed = unicode_directed(),
+  undirected = unicode_undirected()
+) {
+  parameter_table <- create_parameter_table(
+    model = model,
+    ordered = ordered,
+    ordered_parameterization = ordered_parameterization,
+    scale_loadings = scale_loadings,
+    scale_latent_variances = scale_latent_variances,
+    add_intercepts = add_intercepts,
+    add_variances = add_variances,
+    add_exogenous_latent_covariances = add_exogenous_latent_covariances,
+    add_exogenous_manifest_covariances = add_exogenous_manifest_covariances,
+    lbound_variances = lbound_variances,
+    directed = directed,
+    undirected = undirected
   )
 
-}
+  check_data(data = data, ordered = ordered)
+  mx_data <- get_mx_data(
+    data = data,
+    add_intercepts = add_intercepts,
+    parameter_table = parameter_table
+  )
 
-add_path <- function(mxMod,
-                     parameter_table,
-                     lbound_variances,
-                     directed,
-                     undirected){
-  pt <- parameter_table$parameter_table
-  for(i in 1:nrow(pt)){
-
-    if(pt$op[i] %in% c("=~", "~~", "~")){
-      # directed effect
-      if(pt$op[i]  == "~"){
-        from <- pt$rhs[i]
-        to <- pt$lhs[i]
-
-        if(from == "1"){
-          from <- "one"
-        }
-
-      }else{
-        from <- pt$lhs[i]
-        to <- pt$rhs[i]
-      }
-
-      if(pt$op[i] == "~~"){
-        arrows <- 2
-      }else{
-        arrows <- 1
-      }
-
-      parameter_setting <- parse_modifier(pt$modifier[i],
-                                          pt$free[i])
-      free <- parameter_setting$free
-      value <- parameter_setting$value
-      label <- parameter_setting$label
-      lbound <- parse_bounds(pt$lbound[i])
-      ubound <- parse_bounds(pt$ubound[i])
-
-      if((from == to) &&
-         (arrows == 2) &&
-         free){
-        # is variance
-        # starting value for variances
-        if(is.na(value))
-          value <- .1
-
-        if(lbound_variances && is.na(lbound))
-          lbound <- 0.000001
-      }
-
-      if(is.na(label)){
-        if(arrows == 1){
-          label <- paste0(from, directed, to)
-        }else{
-          label <- paste0(from, undirected, to)
-        }
-      }
-
-      mxMod <- OpenMx::mxModel(mxMod,
-                               OpenMx::mxPath(from = from,
-                                              to = to,
-                                              arrows = arrows,
-                                              free = free,
-                                              values = value,
-                                              labels = label,
-                                              lbound = lbound,
-                                              ubound = ubound
-                               ))
-    }
-
-  }
-  return(mxMod)
-}
-
-parse_modifier <- function(modifier, free){
-
-  parameter_setting <- data.frame(label = NA,
-                                  value = NA,
-                                  free  = NA)
-  if(free == "FALSE"){
-    parameter_setting$free <- FALSE
-  }else{
-    parameter_setting$free <- TRUE
-  }
-
-  if(modifier == ""){
-    return(parameter_setting)
-  }
-  if(grepl(pattern = "^[0-9\\.-]+$", x = modifier)){
-    # the modifier is a parameter value
-    parameter_setting$value <- as.numeric(modifier)
-    parameter_setting$free  <- FALSE
-    return(parameter_setting)
-  }
-
-  if(grepl(pattern = "^data\\.+[a-zA-Z0-9\\.-_]+$", x = modifier)){
-    # the modifier is a definition variable
-    parameter_setting$label <- modifier
-    parameter_setting$free  <- FALSE
-    return(parameter_setting)
-  }
-
-  if(grepl(pattern = "^[a-zA-Z]+[a-zA-Z0-9\\.-_]*$", x = modifier)){
-    # the modifier is a label
-    parameter_setting$label <- modifier
-    return(parameter_setting)
-  }
-
-  stop("The following modifier is not allowed: ", modifier)
-}
-
-parse_bounds <- function(bound){
-  if(bound == "")
-    return(NA)
-
-  if(grepl(pattern = "^[0-9\\.-]+$", x = bound)){
-    # the modifier is a parameter value
-    return(as.numeric(bound))
-  }
-
-  stop("Invalid bound", bound)
-}
-
-
-add_algebra <- function(mxMod,
-                        parameter_table,
-                        algebras,
-                        new_parameters,
-                        new_parameters_free){
-
-  if(nrow(algebras) == 0)
-    return(mxMod)
-
-  if(length(new_parameters) > 0){
-    # add the new parameters:
-    labels <- new_parameters
-    labels[new_parameters_free != "TRUE"] <- paste0(labels[new_parameters_free != "TRUE"], "[1,1]")
-    mxMod <- OpenMx::mxModel(mxMod,
-                             mxMatrix(type = "Full",
-                                      values = rep(.01, length(new_parameters)),
-                                      nrow = 1,
-                                      ncol = length(new_parameters),
-                                      free = new_parameters_free == "TRUE",
-                                      labels = labels,
-                                      name = "new_parameters"))
-
-  }
-
-  for(i in 1:nrow(algebras)){
-    mxMod$A$labels[mxMod$A$labels == algebras$lhs[i]] <- paste0(algebras$lhs[i], "[1,1]")
-    mxMod$S$labels[mxMod$S$labels == algebras$lhs[i]] <- paste0(algebras$lhs[i], "[1,1]")
-    mxMod$M$labels[mxMod$M$labels == algebras$lhs[i]] <- paste0(algebras$lhs[i], "[1,1]")
-    if(!is.null(mxMod$new_parameters)){
-      mxMod$new_parameters$free[mxMod$new_parameters$labels == algebras$lhs[i]] <- FALSE
-      mxMod$new_parameters$labels[mxMod$new_parameters$labels == algebras$lhs[i]] <- paste0(algebras$lhs[i], "[1,1]")
-    }
-    mxMod <- OpenMx::mxModel(mxMod,
-                             OpenMx::mxAlgebraFromString(algString = algebras$rhs[i],
-                                                         name = algebras$lhs[i]))
-  }
+  mxMod <- create_mxmodel_from_parameter_table(
+    parameter_table = parameter_table,
+    mx_data = mx_data,
+    directed = directed,
+    undirected = undirected,
+    fitfunction = fitfunction
+  )
 
   return(mxMod)
 }

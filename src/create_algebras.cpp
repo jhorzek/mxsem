@@ -43,9 +43,9 @@ void make_algebras(const std::vector<std::string>& equations,
       // remove exclamation mark
       eq.erase(eq.begin());
       // check_lhs can be used to check for disallowed elements:
-      check_lhs(eq, "!+*=~: ");
+      check_lhs(eq, "!+*=~:| ");
       alg.new_parameters.push_back(eq);
-      alg.new_parameters_free.push_back("TRUE");
+      alg.new_parameters_free.push_back(true);
     }
   }
 
@@ -78,11 +78,11 @@ void make_algebras(const std::vector<std::string>& equations,
         // If an element is on the left hand side of an equation, it is no longer free:
         for(unsigned int i = 0; i < pt.modifier.size(); i++){
           if(pt.modifier.at(i).compare(eq_elem.lhs) == 0)
-            pt.free.at(i) = "FALSE";
+            pt.free.at(i) = false;
         }
         for(unsigned int i = 0; i < alg.new_parameters_free.size(); i++){
           if(alg.new_parameters.at(i).compare(eq_elem.lhs) == 0)
-            alg.new_parameters_free.at(i) = "FALSE";
+            alg.new_parameters_free.at(i) = false;
         }
 
         // we don't check the subsequent elements

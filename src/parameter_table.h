@@ -4,19 +4,20 @@
 
 struct algebra{
   std::vector<std::string> new_parameters;
-  std::vector<std::string> new_parameters_free;
+  std::vector<bool> new_parameters_free;
   std::vector<std::string> lhs, op, rhs;
 };
 
 struct variables{
-  std::vector<std::string> manifests;
-  std::vector<std::string> latents;
+  std::set<std::string> manifests;
+  std::set<std::string> latents;
 };
 
 class parameter_table{
 public:
-  std::vector<std::string> lhs, op, rhs, modifier, lbound, ubound, free;
+  std::vector<std::string> lhs, op, rhs, modifier, lbound, ubound;
   std::vector<std::string> user_defined;
+  std::vector<bool> free, user;
   algebra alg;
   variables vars;
 
@@ -27,7 +28,8 @@ public:
     modifier.push_back("");
     lbound.push_back("");
     ubound.push_back("");
-    free.push_back("TRUE");
+    free.push_back(true);
+    user.push_back(false);
   }
 };
 

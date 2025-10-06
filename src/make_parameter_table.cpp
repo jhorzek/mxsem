@@ -33,7 +33,7 @@ void add_effects(const std::vector<std::string>& equations,
     if(eq[0] == '{')
       continue;
 
-    std::vector<std::string> check_for = {"=~", "~~", "~"};
+    std::vector<std::string> check_for = {"=~", "~~", "~*~", "~", "|"};
 
     for(std::string c_for: check_for){
 
@@ -55,7 +55,7 @@ void add_effects(const std::vector<std::string>& equations,
           pt.modifier.at(pt.lhs.size()-1) = rhs_elem.modifier;
           pt.op.at(pt.lhs.size()-1) = c_for;
           pt.rhs.at(pt.lhs.size()-1) = rhs_elem.rhs;
-
+          pt.user.at(pt.lhs.size()-1) = true;
         }
         // we don't check the subsequent elements
         break;
@@ -166,11 +166,6 @@ parameter_table make_parameter_table(const std::string& syntax,
   make_algebras(equations,
                 pt);
 
-  // clean user defined elements: remove outer braces
-  // bool has_curly = pt_remove_outer_braces(pt);
-  // if(has_curly)
-  //   Rcpp::warning("Found curly braces in the model syntax. This is extremely experimental and highly discouraged! Please make sure to thoroughly check the model returend by mxsem!");
-
   pt.vars = find_variables(pt);
 
   // automatically add some elements:
@@ -227,7 +222,8 @@ Rcpp::List parameter_table_rcpp(const std::string& syntax,
                                                      Rcpp::Named("modifier") = pt.modifier,
                                                      Rcpp::Named("lbound") = pt.lbound,
                                                      Rcpp::Named("ubound") = pt.ubound,
-                                                     Rcpp::Named("free") = pt.free);
+                                                     Rcpp::Named("free") = pt.free,
+                                                     Rcpp::Named("user") = pt.user);
    Rcpp::DataFrame pt_algebras = Rcpp::DataFrame::create(Rcpp::Named("lhs") = pt.alg.lhs,
                                                          Rcpp::Named("op") = pt.alg.op,
                                                          Rcpp::Named("rhs") = pt.alg.rhs);
@@ -235,7 +231,7 @@ Rcpp::List parameter_table_rcpp(const std::string& syntax,
                                                 Rcpp::Named("latents") = pt.vars.latents);
 
    Rcpp::List combined = Rcpp::List::create(
-     Rcpp::Named("parameter_table") = pt_Rcpp,
+     Rcpp::Named("parameters") = pt_Rcpp,
      Rcpp::Named("user_defined") = pt.user_defined,
      Rcpp::Named("algebras") = pt_algebras,
      Rcpp::Named("variables") = pt_variables,

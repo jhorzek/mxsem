@@ -14,7 +14,8 @@ bool check_equation_chars(const std::string& equation){
     '*',
     '+',
     '-',
-    '.'
+    '.',
+    '|'
   };
 
   for(char c: equation){

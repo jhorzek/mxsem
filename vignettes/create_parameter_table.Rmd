@@ -23,8 +23,7 @@ library(mxsem)
 The core function of **mxsem** is to create a parameter table, where all loadings,
 regressions, and (co-)variances are specified. This parameter table is then used
 to set up an **mxModel** with the `mxPath`-function. It can be useful to
-visually inspect the parameter table created by **mxsem**. To this end, set
-the `return_parameter_table`-argument to `TRUE`:
+visually inspect the parameter table created by **mxsem**. To this end, use the `create_parameter_table`-function:
 
 ```{r}
 library(mxsem)
@@ -33,7 +32,7 @@ model <- '
   # latent variable definitions
      ind60 =~ x1 + x2 + x3
      dem60 =~ y1 + a1*y2 + b*y3 + c1*y4
-     dem65 =~ y5 + a2*y6 + b*y7 + c2*y8
+     dem65 =~ y5 + {a2 := a1 + delta_a}*y6 + b*y7 + c2*y8
 
   # regressions
     dem60 ~ g1*ind60
@@ -45,21 +44,15 @@ model <- '
     y3 ~~ y7
     y4 ~~ y8
     y6 ~~ y8
-    
-! delta_a
+
 ! g1g3
-a2   := a1 + delta_a
 g1g3 := g1*g3
 '
 
-model_list <- mxsem(model = model,
-                    data  = OpenMx::Bollen,
-                    return_parameter_table = TRUE)
-
-print(model_list$parameter_table)
+pt <- create_parameter_table(model = model)
 ```
 
-The element `parameter_table$parameter_table` specifies all loadings (`op` is `=~`),
+The element `parameter_table$parameters` specifies all loadings (`op` is `=~`),
 regressions (`op` is `~`), and (co-)variances (`op` is `~~`). The `modifier` specifies
 parameter labels, `lbound` is the lower bound and `ubound` is the upper bound for
 parameters. Finally, `free` specifies if a parameter is estimated (`TRUE`) or 
@@ -73,3 +66,12 @@ specifies for each of these new parameters if they are free or fixed. In this ca
 
 The `variables` specify which of the variables are manifest (observed) and which
 are latent (unobserved). Each manifest variable must also be found in the data set.
+
+You can also pass the parameter table to mxsem instead of the model syntax:
+
+```{r}
+fit <- mxsem(model = pt,
+             data = OpenMx::Bollen) |> 
+  OpenMx::mxTryHard()
+summary(fit)
+```

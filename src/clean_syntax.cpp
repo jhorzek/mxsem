@@ -81,7 +81,7 @@ std::vector<std::string> clean_syntax(const std::string& syntax) {
     default:
         if(is_comment)
           break;
-        if(char_in_string(c, "+*=~:")){
+        if(char_in_string(c, "+*=~:|")){
           // is_open allows for line breaks.
           is_open = true;
         }else{

@@ -2,9 +2,8 @@
 #include "string_operations.h"
 
 void scale_latent_variances(parameter_table& pt){
-  std::vector<std::string> latents = pt.vars.latents;
 
-  for(std::string& latent: latents){
+  for(const std::string& latent: pt.vars.latents){
 
     for(unsigned int i = 0; i < pt.lhs.size(); i++){
 
@@ -33,8 +32,7 @@ void scale_latent_variances(parameter_table& pt){
 }
 
 void scale_loadings(parameter_table& pt){
-  std::vector<std::string> latents = pt.vars.latents;
-  for(std::string& latent: latents){
+  for(const std::string& latent: pt.vars.latents){
 
     bool was_scaled = false; // set to true if the latent variable was already
     // scaled manually by the user

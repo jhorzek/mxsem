@@ -1,6 +1,6 @@
 #include "add_elements.h"
 
-void add_covariances(std::vector<std::string> variables,
+void add_covariances(std::set<std::string> variables,
                      parameter_table& pt){
 
   std::vector<std::string> exogenous;

@@ -4,7 +4,7 @@
 
 void add_intercepts(parameter_table& pt){
 
-  std::vector<std::string> manifests = pt.vars.manifests;
+  std::vector<std::string> manifests = std::vector<std::string>(pt.vars.manifests.begin(), pt.vars.manifests.end());
 
   bool has_intercept = false;
   for(unsigned int i = 0; i < manifests.size(); i++){

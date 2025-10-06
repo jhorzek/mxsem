@@ -3,34 +3,33 @@
 variables find_variables(const parameter_table& pt){
 
   variables vars;
-  std::vector<std::string> all_variables;
-  add_unique(all_variables, pt.lhs);
-  add_unique(all_variables, pt.rhs);
-  std::vector<std::string> manifests;
-  std::vector<std::string> latents;
-
+  
+  // We have to first find all latent variables to be able
+  // to skip those when looking at the other variables
   for(unsigned int i = 0; i < pt.op.size(); i++){
     if(pt.op.at(i).compare("=~") == 0){
-      latents.push_back(pt.lhs.at(i));
+      vars.latents.insert(pt.lhs.at(i));
     }
-  }
-  // all variables that are not latent are manifest.
-  for(std::string av: all_variables){
-    if(av.compare("1") == 0)
-      continue; // skip intercepts
-    bool is_manifest = true;
-    for(std::string lv: latents){
-      if(av.compare(lv) == 0){
-        is_manifest = false;
-        break;
-      }
-    }
-    if(is_manifest)
-      manifests.push_back(av);
   }
 
-  add_unique(vars.manifests, manifests);
-  add_unique(vars.latents, latents);
+  // now we iterate over everything to find the manifest variables
+  for(unsigned int i = 0; i < pt.op.size(); i++){
+    if(pt.op.at(i).compare("|") == 0){
+      // skip thresholds
+     continue;
+    }
+
+    std::set<std::string> current_variables;
+    current_variables.insert(pt.rhs.at(i));
+    current_variables.insert(pt.lhs.at(i));
+    for(auto var: current_variables){
+      if(var.compare("1") == 0)
+        continue; // skip intercepts
+      if(vars.latents.contains(var))
+        continue;
+      vars.manifests.insert(var);
+    }
+  }
 
   return(vars);
 }

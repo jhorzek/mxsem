@@ -8,6 +8,9 @@
 mxsem(
   model,
   data,
+  ordered = NULL,
+  ordered_parameterization = "theta",
+  fitfunction = "auto",
   scale_loadings = TRUE,
   scale_latent_variances = FALSE,
   add_intercepts = TRUE,
@@ -16,8 +19,7 @@ mxsem(
   add_exogenous_manifest_covariances = TRUE,
   lbound_variances = TRUE,
   directed = unicode_directed(),
-  undirected = unicode_undirected(),
-  return_parameter_table = FALSE
+  undirected = unicode_undirected()
 )
 }
 \arguments{
@@ -25,6 +27,14 @@ mxsem(
 
 \item{data}{raw data used to fit the model. Alternatively, an object created
 with \code{OpenMx::mxData} can be used (e.g., \code{OpenMx::mxData(observed = cov(OpenMx::Bollen), means = colMeans(OpenMx::Bollen), numObs = nrow(OpenMx::Bollen), type = "cov")}).}
+
+\item{ordered}{vector with names of the items that are ordered}
+
+\item{ordered_parameterization}{One of 'theta' or 'none'. When set to 'theta' (default), \emph{residual} variances of the latent factors
+underlying each ordered variable will be constrained to 1 and the means to 0. To freely estimate a residual variance, you have to give the
+parameter a name in the syntax (e.g., \code{z1 ~~ var_z1*z1}). When set to 'none', no scaling will be automatically implemented.}
+
+\item{fitfunction}{one of the fit functions provided by OpenMx. Defaults to DWLS for ordered data and ML for everything else.}
 
 \item{scale_loadings}{should the first loading of each latent variable be used for scaling?}
 
@@ -46,9 +56,6 @@ added automatically?}
 \item{directed}{symbol used to indicate directed effects (regressions and loadings)}
 
 \item{undirected}{symbol used to indicate undirected effects (variances and covariances)}
-
-\item{return_parameter_table}{if set to TRUE, the internal parameter table is returend
-together with the mxModel}
 }
 \value{
 mxModel object that can be fitted with mxRun or mxTryHard. If return_parameter_table
